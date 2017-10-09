@@ -36,7 +36,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename=""/>
+                    <mesh filename="package://copernicus_description/meshes/chassis.stl"/>
                 </geometry>
             </visual>
             <collision>
@@ -59,7 +59,7 @@
         <joint name="base_footprint_joint" type="fixed">
             <origin xyz="0 0 ${ wheel_joint_z - wheel_radius }" rpy="0 0 0" />
             <parent link="base_link" />
-            <child link="base_footprint" />
+            <child link="footprint" />
         </joint>
 
         <!-- Wheel -->
