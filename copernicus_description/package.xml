@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>copernicus_description</name>
+  <version>0.0.0</version>
+  <description>The copernicus_description package</description>
+  <license>BSD2</license>
+
+  <maintainer email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</maintainer>
+  <author email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</author>
+
+  <url type="repository">https://bitbucket.org/botsync/copernicus</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+</package>
