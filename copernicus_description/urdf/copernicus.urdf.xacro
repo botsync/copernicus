@@ -8,18 +8,23 @@
     <!-- xacro properties -->
     <xacro:property name="PI" value="3.14159"/>
 
-    <xacro:property name="base_mass" value="27.2155"/>
+    <xacro:property name="chassis_mass" value="48.00"/>
 
-    <xacro:property name="base_l" value="0.74"/>
-    <xacro:property name="base_w" value="0.42"/>
-    <xacro:property name="base_h" value="0.32"/>
+    <xacro:property name="chassis_l" value="0.75"/>
+    <xacro:property name="chassis_w" value="0.42"/>
+    <xacro:property name="chassis_h" value="0.23042"/>
+    <xacro:property name="chassis_h_no_susp" value="0.14"/>
+    <xacro:property name="chassis_t" value="0.003"/>
 
-    <xacro:property name="wheel_length" value="0.1143" />
+    <xacro:property name="body_mass" value="11.869"/>
+    <xacro:property name="body_h" value="0.15"/>
+
+    <xacro:property name="wheel_width" value="0.1143" />
     <xacro:property name="wheel_radius" value="0.16" />
 
-    <xacro:property name="wheel_joint_x" value="0.26" />
-    <xacro:property name="wheel_joint_y" value="0.21" />
-    <xacro:property name="wheel_joint_z" value="0.16" />
+    <xacro:property name="wheel_joint_x" value="0.02" />
+    <xacro:property name="wheel_joint_y" value="0.11233" />
+    <xacro:property name="wheel_joint_z" value="-0.04295" />
 
     <xacro:property name="dummy_inertia" value="1e-09"/>
 
@@ -31,52 +36,81 @@
 
     <xacro:macro name="copernicus_robot">
 
-        <!-- Base link -->
+        <!-- Chassis aka base link -->
         <link name="base_link">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://copernicus_description/meshes/chassis.stl"/>
+                    <mesh filename="package://copernicus_description/meshes/chassis.STL"/>
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0 0 ${base_h/4}" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <box size="${base_l} ${base_w} ${base_h/2}"/>
+                    <box size="${chassis_l} ${chassis_w} ${chassis_h}"/>
                 </geometry>
             </collision>
-            <collision>
-                <origin xyz="0 0 ${base_h*3/4}" rpy="0 0 0" />
-                <geometry>
-                    <box size="${base_l*4/5} ${base_w} ${base_h/2}"/>
-                </geometry>
-            </collision>
+	    <inertial>
+	    	<mass value="${chassis_mass}"/>
+		<inertia ixx="2.762187" ixy="-1.06570" ixz="-0.87376" iyy="0.99303" iyz="0.15602" izz="3.65234"/>
+	    </inertial>
         </link>
+
+	<!-- Body assembly -->
+	<link name="body">
+		<visual>
+			<geometry>
+				<mesh filename="package://copernicus_description/meshes/body.STL"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="${chassis_l} ${chassis_w} ${body_h}"/>
+			</geometry>
+			<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+		</collision> 
+		<inertial>
+			<mass value="${body_mass}"/>
+			<inertia ixx="3.076852" ixy="-0.33079" ixz="0.1645412" iyy="0.82521" iyz="-0.95871" izz="2.42356"/>
+		</inertial>
+	</link>
 
         <!-- Footprint -->
         <link name="footprint"/>
 
+
+	<!-- Joints -->
+
+	<!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${ wheel_joint_z - wheel_radius }" rpy="0 0 0" />
+            <origin xyz="0 0 ${-wheel_radius+wheel_joint_z}" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="footprint" />
         </joint>
 
+	<!-- Joint between chassis and body -->
+	<joint name="chassis_body_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="body"/>
+		<origin xyz="${-2*chassis_t} 0 ${chassis_h_no_susp}" rpy="0 0 0"/>
+	</joint>
+
         <!-- Wheel -->
         <xacro:copernicus_wheel wheel_prefix="front_left">
-            <origin xyz="${wheel_joint_x} ${wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${wheel_joint_x+wheel_width} ${wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="front_right">
-            <origin xyz="${wheel_joint_x} ${-wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${-(wheel_joint_x+chassis_w)} ${wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="back_left">
-            <origin xyz="${-wheel_joint_x} ${wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${wheel_joint_x+wheel_width} ${chassis_l-wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="back_right">
-            <origin xyz="${-wheel_joint_x} ${-wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${-(wheel_joint_x+chassis_w)} ${chassis_l-wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 	
         <!-- LIDAR -->
