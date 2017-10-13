@@ -22,9 +22,9 @@
     <xacro:property name="wheel_width" value="0.1143" />
     <xacro:property name="wheel_radius" value="0.16" />
 
-    <xacro:property name="wheel_joint_x" value="0.02" />
-    <xacro:property name="wheel_joint_y" value="0.11233" />
-    <xacro:property name="wheel_joint_z" value="-0.04295" />
+    <xacro:property name="wheel_joint_x_abs" value="0.28908" />
+    <xacro:property name="wheel_joint_y_abs" value="0.26267" />
+    <xacro:property name="wheel_joint_z_abs" value="0.04795" />
 
     <xacro:property name="dummy_inertia" value="1e-09"/>
 
@@ -33,6 +33,18 @@
     <xacro:arg name="imu_enabled" default="false"/>
     <xacro:arg name="gps_enabled" default="false"/>
     <xacro:arg name="camera_enabled" default="false"/>
+
+    <material name="blue">
+	<color rgba="0 0 0.8 1"/>
+    </material>
+
+    <material name="white">
+	<color rgba="1 1 1 1"/>
+    </material>
+
+    <material name="gray">
+	<color rgba="0.5 0.5 0.5 1"/>
+    </material>
 
     <xacro:macro name="copernicus_robot">
 
@@ -43,11 +55,12 @@
                 <geometry>
                     <mesh filename="package://copernicus_description/meshes/chassis.STL"/>
                 </geometry>
+		<material name="gray"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <box size="${chassis_l} ${chassis_w} ${chassis_h}"/>
+			<mesh filename="package://copernicus_description/meshes/chassis.STL"/>
                 </geometry>
             </collision>
 	    <inertial>
@@ -62,13 +75,14 @@
 			<geometry>
 				<mesh filename="package://copernicus_description/meshes/body.STL"/>
 			</geometry>
-			<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<material name="white"/>
 		</visual>
 		<collision>
 			<geometry>
-				<box size="${chassis_l} ${chassis_w} ${body_h}"/>
+				<mesh filename="package://copernicus_description/meshes/body.STL"/>
 			</geometry>
-			<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 		</collision> 
 		<inertial>
 			<mass value="${body_mass}"/>
@@ -84,7 +98,7 @@
 
 	<!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${-wheel_radius+wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="0 0 ${-((wheel_joint_z_abs-chassis_h_no_susp)+2*wheel_radius)}" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="footprint" />
         </joint>
@@ -93,24 +107,24 @@
 	<joint name="chassis_body_joint" type="fixed">
 		<parent link="base_link"/>
 		<child link="body"/>
-		<origin xyz="${-2*chassis_t} 0 ${chassis_h_no_susp}" rpy="0 0 0"/>
+		<origin xyz="0 0 ${chassis_h_no_susp-0.005}" rpy="0 0 0"/>
 	</joint>
 
         <!-- Wheel -->
         <xacro:copernicus_wheel wheel_prefix="front_left">
-            <origin xyz="${wheel_joint_x+wheel_width} ${wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="front_right">
-            <origin xyz="${-(wheel_joint_x+chassis_w)} ${wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="back_left">
-            <origin xyz="${wheel_joint_x+wheel_width} ${chassis_l-wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="back_right">
-            <origin xyz="${-(wheel_joint_x+chassis_w)} ${chassis_l-wheel_joint_y} ${wheel_joint_z}" rpy="0 0 0" />
+            <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 	
         <!-- LIDAR -->
