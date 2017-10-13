@@ -126,6 +126,21 @@
         <xacro:copernicus_wheel wheel_prefix="back_right">
             <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
+
+        <gazebo>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+                <robotNamespace>/</robotNamespace>
+            </plugin>
+
+            <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
+                <robotNamespace>/</robotNamespace>
+                <commandTopic>cmd_vel</commandTopic>
+                <odometryTopic>odometry/wheel</odometryTopic>
+                <odometryFrame>odom</odometryFrame>
+                <odometryRate>30.0</odometryRate>
+                <robotBaseFrame>footprint</robotBaseFrame>
+            </plugin>
+        </gazebo>
 	
         <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
