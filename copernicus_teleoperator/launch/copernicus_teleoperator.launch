@@ -1,8 +1,15 @@
 <?xml version="1.0"?>
 <launch>
-    <rosparam command="load" file="$(find copernicus_teleoperator)/config/joy.yaml" />
+    <arg name="keyboard" default="true" />
 
-    <node pkg="joy" type="joy_node" name="joy_node" />
-    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy"/>
+    <rosparam command="load" file="$(find copernicus_teleoperator)/config/joy.yaml" unless="$(arg keyboard)" />
+
+    <node pkg="joy" type="joy_node" name="joy_node" unless="$(arg keyboard)" />
+    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" unless="$(arg keyboard)">
+    </node>
+
+    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" if="$(arg keyboard)">
+        <remap from="/cmd_vel" to="/copernicus_velocity_controller/cmd_vel"/>
+    </node>
 
 </launch>
