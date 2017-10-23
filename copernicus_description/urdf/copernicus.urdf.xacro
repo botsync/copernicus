@@ -69,61 +69,61 @@
 	    </inertial>
         </link>
 
-	<!-- Body assembly -->
-	<link name="body">
-		<visual>
-			<geometry>
-				<mesh filename="package://copernicus_description/meshes/body.STL"/>
-			</geometry>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<material name="white"/>
-		</visual>
-		<collision>
-			<geometry>
-				<mesh filename="package://copernicus_description/meshes/body.STL"/>
-			</geometry>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-		</collision> 
-		<inertial>
-			<mass value="${body_mass}"/>
-			<inertia ixx="3.076852" ixy="-0.33079" ixz="0.1645412" iyy="0.82521" iyz="-0.95871" izz="2.42356"/>
-		</inertial>
-	</link>
+        <!-- Body assembly -->
+        <link name="body">
+            <visual>
+                <geometry>
+                    <mesh filename="package://copernicus_description/meshes/body.STL"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://copernicus_description/meshes/body.STL"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+            </collision> 
+            <inertial>
+                <mass value="${body_mass}"/>
+                <inertia ixx="3.076852" ixy="-0.33079" ixz="0.1645412" iyy="0.82521" iyz="-0.95871" izz="2.42356"/>
+            </inertial>
+        </link>
 
         <!-- Footprint -->
         <link name="footprint"/>
 
 
-	<!-- Joints -->
+        <!-- Joints -->
 
-	<!-- Joint from footprint to base link(chassis) -->
+        <!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
             <origin xyz="0 0 ${-((wheel_joint_z_abs-chassis_h_no_susp)+2*wheel_radius)}" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="footprint" />
         </joint>
 
-	<!-- Joint between chassis and body -->
-	<joint name="chassis_body_joint" type="fixed">
-		<parent link="base_link"/>
-		<child link="body"/>
-		<origin xyz="0 0 ${chassis_h_no_susp-0.005}" rpy="0 0 0"/>
-	</joint>
+        <!-- Joint between chassis and body -->
+        <joint name="chassis_body_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="body"/>
+            <origin xyz="0 0 ${chassis_h_no_susp-0.005}" rpy="0 0 0"/>
+        </joint>
 
         <!-- Wheel -->
-        <xacro:copernicus_wheel wheel_prefix="front_left">
+        <xacro:copernicus_wheel wheel_prefix="front_right">
             <origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
-        <xacro:copernicus_wheel wheel_prefix="front_right">
+        <xacro:copernicus_wheel wheel_prefix="back_right">
             <origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
-        <xacro:copernicus_wheel wheel_prefix="back_left">
+        <xacro:copernicus_wheel wheel_prefix="front_left">
             <origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
-        <xacro:copernicus_wheel wheel_prefix="back_right">
+        <xacro:copernicus_wheel wheel_prefix="back_left">
             <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
@@ -131,17 +131,8 @@
             <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
                 <robotNamespace>/</robotNamespace>
             </plugin>
-
-            <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
-                <robotNamespace>/</robotNamespace>
-                <commandTopic>cmd_vel</commandTopic>
-                <odometryTopic>odometry/wheel</odometryTopic>
-                <odometryFrame>odom</odometryFrame>
-                <odometryRate>30.0</odometryRate>
-                <robotBaseFrame>footprint</robotBaseFrame>
-            </plugin>
         </gazebo>
-	
+
         <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
             <xacro:lidar></xacro:lidar>

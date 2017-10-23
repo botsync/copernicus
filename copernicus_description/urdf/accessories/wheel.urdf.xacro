@@ -14,9 +14,9 @@
                 <material name="black"/>
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+                <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
                 <geometry>
-			<mesh filename="package://copernicus_description/meshes/wheel.STL"/>
+                    <cylinder length="${wheel_width}" radius="${wheel_radius+0.01}" />
                 </geometry>
             </collision>
             <inertial>
@@ -30,9 +30,6 @@
             <material>Gazebo/Black</material>
             <mu1 value="1.0"/>
             <mu2 value="1.0"/>
-            <kp value="10000000.0" />
-            <kd value="1.0" />
-            <fdir1 value="1 0 0"/>
         </gazebo>
 
         <!-- Wheel Joint -->
@@ -47,7 +44,7 @@
         <transmission name="${wheel_prefix}_wheel_transmission">
             <type>transmission_interface/SimpleTransmission</type>
             <joint name="${wheel_prefix}_wheel_joint">
-                <hardwareInterface>VelocityJointInterface</hardwareInterface>
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
             </joint>
             <actuator name="${wheel_prefix}_motor">
                 <hardwareInterface>EffortJointInterface</hardwareInterface>
