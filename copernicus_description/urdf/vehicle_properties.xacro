@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<robot name="copernicus_robot" xmlns:xacro="https://ros.org/wiki/xacro">
+    <xacro:property name="chassis_mass" value="5.674"/>
+
+    <xacro:property name="chassis_l" value="0.75"/>
+    <xacro:property name="chassis_w" value="0.42"/>
+    <xacro:property name="chassis_h" value="0.23042"/>
+    <xacro:property name="chassis_h_no_susp" value="0.14"/>
+    <xacro:property name="chassis_t" value="0.003"/>
+    <xacro:property name="chassis_ixx" value="0.16120241795"/>
+    <xacro:property name="chassis_ixy" value="0.00001185952"/>
+    <xacro:property name="chassis_ixz" value="0.00001811354"/>
+    <xacro:property name="chassis_iyy" value="0.32866531087"/>
+    <xacro:property name="chassis_iyz" value="-0.000092298"/>
+    <xacro:property name="chassis_izz" value="0.449900533"/>
+
+    <xacro:property name="body_mass" value="10.7832"/>
+    <xacro:property name="body_h" value="0.15"/>
+    <xacro:property name="body_ixx" value="0.28969954739"/>
+    <xacro:property name="body_ixy" value="0.00014451398"/>
+    <xacro:property name="body_ixz" value="-0.02490442357"/>
+    <xacro:property name="body_iyy" value="0.4846882478"/>
+    <xacro:property name="body_iyz" value="0.0000035777"/>
+    <xacro:property name="body_izz" value="0.72198943224"/>
+
+    <xacro:property name="wheel_width" value="0.1143" />
+    <xacro:property name="wheel_radius" value="0.16938" />
+    <xacro:property name="wheel_joint_x_abs" value="0.28908" />
+    <xacro:property name="wheel_joint_y_abs" value="0.28858" />
+    <xacro:property name="wheel_joint_z_abs" value="0.04295" />
+    <xacro:property name="wheel_ixx" value="0.036351442"/>
+    <xacro:property name="wheel_ixy" value="0.000001230"/>
+    <xacro:property name="wheel_ixz" value="0.0"/>
+    <xacro:property name="wheel_iyy" value="0.021626014"/>
+    <xacro:property name="wheel_iyz" value="0.0"/>
+    <xacro:property name="wheel_izz" value="0.02162601213"/>
+
+    <xacro:property name="dummy_inertia" value="1e-09"/>
+</robot>

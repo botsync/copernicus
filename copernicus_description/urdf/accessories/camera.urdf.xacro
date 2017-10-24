@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
+    <xacro:macro name="camera" params="frame:=camera topic:=camera info_topic:=camera_info update_rate:=50 robot_namespace:=/">
+        <link name="${frame}">
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://copernicus_description/meshes/logitech_c910.stl"/>
+                </geometry>
+            </collision>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.07 0.09 0.07"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <inertial>
+                <mass value="0.162"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+            </inertial>
+        </link>
+
+        <joint name="base_to_camera" type="fixed">
+            <parent link="base_link"/>
+            <child link="${frame}"/>
+            <origin xyz="${ 0.0 } ${ 0.0 } ${ 0.0 }"/>
+        </joint>
+
+        <gazebo reference="${frame}">
+            <material>Gazebo/Blue</material>
+            <sensor type="camera" name="camera">
+                <update_rate>${update_rate}</update_rate>
+                <camera name="head">
+                    <horizontal_fov>1.3962634</horizontal_fov>
+                    <image>
+                        <width>1080</width>
+                        <height>720</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                    <near>0.02</near>
+                    <far>300</far>
+                    </clip>
+                </camera>
+                <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                    <robotNamespace>${robot_namespace}</robotNamespace>
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>${update_rate}</updateRate>
+                    <cameraName>${frame}</cameraName>
+                    <imageTopicName>${topic}</imageTopicName>
+                    <cameraInfoTopicName>${info_topic}</cameraInfoTopicName>
+                    <frameName>${frame}</frameName>
+                    <hackBaseline>0.07</hackBaseline>
+                    <distortionK1>0.0</distortionK1>
+                    <distortionK2>0.0</distortionK2>
+                    <distortionK3>0.0</distortionK3>
+                    <distortionT1>0.0</distortionT1>
+                    <distortionT2>0.0</distortionT2>
+                </plugin>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>

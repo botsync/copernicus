@@ -16,13 +16,13 @@
             <collision>
                 <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
                 <geometry>
-                    <cylinder length="${wheel_width}" radius="${wheel_radius+0.01}" />
+                    <cylinder length="${wheel_width}" radius="${wheel_radius}" />
                 </geometry>
             </collision>
             <inertial>
                 <mass value="2.637" />
                 <origin xyz="0 0 0" />
-                <inertia  ixx="0.036351442" ixy="0.000001230" ixz="0" iyy="0.021626014" iyz="0" izz="0.02162601213" />
+                <inertia  ixx="${wheel_ixx}" ixy="${wheel_ixy}" ixz="${wheel_ixz}" iyy="${wheel_iyy}" iyz="${wheel_iyz}" izz="${wheel_izz}" />
             </inertial>
         </link>
 

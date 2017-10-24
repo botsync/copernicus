@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
+    <xacro:macro name="imu" params="frame:=imu topic:=imu/data update_rate:=50 robot_namespace:=/">
+        <link name="${frame}">
+            <inertial>
+                <mass value="0.001"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
+            </inertial>
+        </link>
+
+        <joint name="${frame}_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="${frame}" />
+        </joint>
+
+        <gazebo reference="${frame}">
+            <plugin name="imu_plugin" filename="libhector_gazebo_ros_imu.so">
+                <robotNamespace>${robot_namespace}</robotNamespace>
+                <updateRate>${update_rate}</updateRate>
+                <bodyName>${frame}</bodyName>
+                <frameId>${frame}</frameId>
+                <topicName>${topic}</topicName>
+                <accelDrift>0.005 0.005 0.005</accelDrift>
+                <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+                <rateDrift>0.005 0.005 0.005 </rateDrift>
+                <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+                <headingDrift>0.005</headingDrift>
+                <headingGaussianNoise>0.005</headingGaussianNoise>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>

@@ -2,31 +2,11 @@
 
 <robot name="copernicus_robot" xmlns:xacro="https://ros.org/wiki/xacro">
     <!-- xacro includes -->
-    <xacro:include filename="$(find copernicus_description)/urdf/accessories/wheel.urdf.xacro"/>
-    <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
+    <xacro:include filename="$(find copernicus_description)/urdf/vehicle_properties.xacro"/>
+    <xacro:include filename="$(find copernicus_description)/urdf/components/wheel.urdf.xacro"/>
 
     <!-- xacro properties -->
     <xacro:property name="PI" value="3.14159"/>
-
-    <xacro:property name="chassis_mass" value="5.674"/>
-
-    <xacro:property name="chassis_l" value="0.75"/>
-    <xacro:property name="chassis_w" value="0.42"/>
-    <xacro:property name="chassis_h" value="0.23042"/>
-    <xacro:property name="chassis_h_no_susp" value="0.14"/>
-    <xacro:property name="chassis_t" value="0.003"/>
-
-    <xacro:property name="body_mass" value="10.7832"/>
-    <xacro:property name="body_h" value="0.15"/>
-
-    <xacro:property name="wheel_width" value="0.1143" />
-    <xacro:property name="wheel_radius" value="0.16938" />
-
-    <xacro:property name="wheel_joint_x_abs" value="0.28908" />
-    <xacro:property name="wheel_joint_y_abs" value="0.28858" />
-    <xacro:property name="wheel_joint_z_abs" value="0.04295" />
-
-    <xacro:property name="dummy_inertia" value="1e-09"/>
 
     <!-- xacro args -->
     <xacro:arg name="lidar_enabled" default="false"/>
@@ -35,20 +15,29 @@
     <xacro:arg name="camera_enabled" default="false"/>
 
     <material name="blue">
-	<color rgba="0 0 0.8 1"/>
+        <color rgba="0 0 0.8 1"/>
     </material>
 
     <material name="white">
-	<color rgba="1 1 1 1"/>
+       <color rgba="1 1 1 1"/>
     </material>
 
     <material name="gray">
-	<color rgba="0.5 0.5 0.5 1"/>
+        <color rgba="0.5 0.5 0.5 1"/>
     </material>
 
     <xacro:macro name="copernicus_robot">
+        <!-- Footprint -->
+        <link name="footprint"/>
 
-        <!-- Chassis aka base link -->
+        <!-- Joint from footprint to base link(chassis) -->
+        <joint name="base_footprint_joint" type="fixed">
+            <origin xyz="0 0 ${-(wheel_joint_z_abs+wheel_radius)}" rpy="0 0 0" />
+            <parent link="base_link" />
+            <child link="footprint" />
+        </joint>
+
+        <!-- Chassis a.k.a base_link -->
         <link name="base_link">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
@@ -64,10 +53,17 @@
                 </geometry>
             </collision>
             <inertial>
-                <mass value="${chassis_mass}"/>
-                <inertia ixx="0.16120241795" ixy="0.00001185952" ixz="0.00001811354" iyy="0.32866531087" iyz="-0.000092298" izz="0.449900533"/>
+                <mass value="${ chassis_mass }"/>
+                <inertia ixx="${chassis_ixx}" ixy="${chassis_ixy}" ixz="${chassis_ixz}" iyy="${chassis_iyy}" iyz="${chassis_iyz}" izz="${chassis_izz}"/>
             </inertial>
         </link>
+
+        <!-- Joint between chassis and body -->
+        <joint name="chassis_body_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="body"/>
+            <origin xyz="0 0 ${chassis_h_no_susp-0.005}" rpy="0 0 0"/>
+        </joint>
 
         <!-- Body assembly -->
         <link name="body">
@@ -86,29 +82,9 @@
             </collision> 
             <inertial>
                 <mass value="${body_mass}"/>
-                <inertia ixx="0.28969954739" ixy="0.00014451398" ixz="-0.02490442357" iyy="0.4846882478" iyz="0.0000035777" izz="0.72198943224"/>
+                <inertia ixx="${body_ixx}" ixy="${body_ixy}" ixz="${body_ixz}" iyy="${body_iyy}" iyz="${body_iyz}" izz="${body_izz}"/>
             </inertial>
         </link>
-
-        <!-- Footprint -->
-        <link name="footprint"/>
-
-
-        <!-- Joints -->
-
-        <!-- Joint from footprint to base link(chassis) -->
-        <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${-(wheel_joint_z_abs+wheel_radius)}" rpy="0 0 0" />
-            <parent link="base_link" />
-            <child link="footprint" />
-        </joint>
-
-        <!-- Joint between chassis and body -->
-        <joint name="chassis_body_joint" type="fixed">
-            <parent link="base_link"/>
-            <child link="body"/>
-            <origin xyz="0 0 ${chassis_h_no_susp-0.005}" rpy="0 0 0"/>
-        </joint>
 
         <!-- Wheel -->
         <xacro:copernicus_wheel wheel_prefix="front_right">
@@ -135,134 +111,26 @@
 
         <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
             <xacro:lidar></xacro:lidar>
         </xacro:if>
 
         <!-- IMU -->
         <xacro:if value="$(arg imu_enabled)">
-            <link name="imu">
-                <inertial>
-                    <mass value="0.001"/>
-                    <origin xyz="0 0 0" rpy="0 0 0"/>
-                    <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
-                </inertial>
-            </link>
-
-            <joint name="imu_joint" type="fixed">
-                <parent link="base_link" />
-                <child link="imu" />
-            </joint>
-
-            <gazebo reference="imu">
-                <plugin name="imu_plugin" filename="libhector_gazebo_ros_imu.so">
-                    <robotNamespace>copernicus</robotNamespace>
-                    <updateRate>50.0</updateRate>
-                    <bodyName>imu</bodyName>
-                    <frameId>imu</frameId>
-                    <topicName>imu/data</topicName>
-                    <accelDrift>0.005 0.005 0.005</accelDrift>
-                    <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
-                    <rateDrift>0.005 0.005 0.005 </rateDrift>
-                    <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
-                    <headingDrift>0.005</headingDrift>
-                    <headingGaussianNoise>0.005</headingGaussianNoise>
-                </plugin>
-            </gazebo>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/imu.urdf.xacro"/>
+            <xacro:imu></xacro:imu>
         </xacro:if>
 
         <!-- GPS -->
         <xacro:if value="$(arg gps_enabled)">
-            <link name="gps">
-                <inertial>
-                    <mass value="0.001"/>
-                    <origin xyz="0 0 0" rpy="0 0 0"/>
-                    <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
-                </inertial>
-            </link>
-
-            <joint name="gps_joint" type="fixed">
-                <parent link="base_link" />
-                <child link="gps" />
-            </joint>
-
-            <gazebo reference="gps">
-                <plugin name="gps_plugin" filename="libhector_gazebo_ros_gps.so">
-                    <robotNamespace>copernicus</robotNamespace>
-                    <updateRate>40.0</updateRate>
-                    <bodyName>gps</bodyName>
-                    <frameId>gps</frameId>
-                    <topicName>gps/fix</topicName>
-                    <velocityTopicName>gps/fix_vel</velocityTopicName>
-                    <driftFrequency>10.0 10.0 10.0</driftFrequency>
-                    <drift>0.001 0.001 0.001</drift>
-                    <referenceLatitude>1.345490</referenceLatitude>
-                    <referenceLongitude>103.682360</referenceLongitude>
-                </plugin>
-            </gazebo>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/gps.urdf.xacro"/>
+            <xacro:gps></xacro:gps>
         </xacro:if>
 
         <!-- Camera -->
         <xacro:if value="$(arg camera_enabled)">
-            <joint name="base_to_camera" type="fixed">
-                <parent link="base_link"/>
-                <child link="camera"/>
-                <origin xyz="${ 0.0 } ${ 0.0 } ${ 0.0 }"/>
-            </joint>
-
-            <link name="camera">
-                <collision>
-                    <origin xyz="0 0 0" rpy="0 0 0"/>
-                    <geometry>
-                        <mesh filename="$(find copernicus_description)/meshes/logitech_c910.stl"/>
-                    </geometry>
-                </collision>
-                <visual>
-                    <origin xyz="0 0 0" rpy="0 0 0"/>
-                    <geometry>
-                        <box size="0.07 0.09 0.07"/>
-                    </geometry>
-                    <material name="black"/>
-                </visual>
-                <inertial>
-                    <mass value="0.162"/>
-                    <origin xyz="0 0 0" rpy="0 0 0"/>
-                    <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
-                </inertial>
-            </link>
-
-            <gazebo reference="camera">
-                <material>Gazebo/Blue</material>
-                <sensor type="camera" name="camera">
-                    <update_rate>30.0</update_rate>
-                    <camera name="head">
-                        <horizontal_fov>1.3962634</horizontal_fov>
-                        <image>
-                            <width>1080</width>
-                            <height>720</height>
-                            <format>R8G8B8</format>
-                        </image>
-                        <clip>
-                        <near>0.02</near>
-                        <far>300</far>
-                        </clip>
-                    </camera>
-                    <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-                        <robotNamespace>holobot</robotNamespace>
-                        <alwaysOn>true</alwaysOn>
-                        <updateRate>0.0</updateRate>
-                        <cameraName>camera</cameraName>
-                        <imageTopicName>image_raw</imageTopicName>
-                        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-                        <frameName>/camera</frameName>
-                        <hackBaseline>0.07</hackBaseline>
-                        <distortionK1>0.0</distortionK1>
-                        <distortionK2>0.0</distortionK2>
-                        <distortionK3>0.0</distortionK3>
-                        <distortionT1>0.0</distortionT1>
-                        <distortionT2>0.0</distortionT2>
-                    </plugin>
-                </sensor>
-            </gazebo>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
+            <xacro:camera></xacro:camera>
         </xacro:if>
     </xacro:macro>
 </robot>
