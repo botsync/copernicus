@@ -8,7 +8,7 @@
     <!-- xacro properties -->
     <xacro:property name="PI" value="3.14159"/>
 
-    <xacro:property name="chassis_mass" value="48.00"/>
+    <xacro:property name="chassis_mass" value="5.674"/>
 
     <xacro:property name="chassis_l" value="0.75"/>
     <xacro:property name="chassis_w" value="0.42"/>
@@ -16,15 +16,15 @@
     <xacro:property name="chassis_h_no_susp" value="0.14"/>
     <xacro:property name="chassis_t" value="0.003"/>
 
-    <xacro:property name="body_mass" value="11.869"/>
+    <xacro:property name="body_mass" value="10.7832"/>
     <xacro:property name="body_h" value="0.15"/>
 
     <xacro:property name="wheel_width" value="0.1143" />
-    <xacro:property name="wheel_radius" value="0.16" />
+    <xacro:property name="wheel_radius" value="0.16938" />
 
     <xacro:property name="wheel_joint_x_abs" value="0.28908" />
-    <xacro:property name="wheel_joint_y_abs" value="0.26267" />
-    <xacro:property name="wheel_joint_z_abs" value="0.04795" />
+    <xacro:property name="wheel_joint_y_abs" value="0.28858" />
+    <xacro:property name="wheel_joint_z_abs" value="0.04295" />
 
     <xacro:property name="dummy_inertia" value="1e-09"/>
 
@@ -55,18 +55,18 @@
                 <geometry>
                     <mesh filename="package://copernicus_description/meshes/chassis.STL"/>
                 </geometry>
-		<material name="gray"/>
+                <material name="gray"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-			<mesh filename="package://copernicus_description/meshes/chassis.STL"/>
+                    <mesh filename="package://copernicus_description/meshes/chassis.STL"/>
                 </geometry>
             </collision>
-	    <inertial>
-	    	<mass value="${chassis_mass}"/>
-		<inertia ixx="2.762187" ixy="-1.06570" ixz="-0.87376" iyy="0.99303" iyz="0.15602" izz="3.65234"/>
-	    </inertial>
+            <inertial>
+                <mass value="${chassis_mass}"/>
+                <inertia ixx="0.16120241795" ixy="0.00001185952" ixz="0.00001811354" iyy="0.32866531087" iyz="-0.000092298" izz="0.449900533"/>
+            </inertial>
         </link>
 
         <!-- Body assembly -->
@@ -86,7 +86,7 @@
             </collision> 
             <inertial>
                 <mass value="${body_mass}"/>
-                <inertia ixx="3.076852" ixy="-0.33079" ixz="0.1645412" iyy="0.82521" iyz="-0.95871" izz="2.42356"/>
+                <inertia ixx="0.28969954739" ixy="0.00014451398" ixz="-0.02490442357" iyy="0.4846882478" iyz="0.0000035777" izz="0.72198943224"/>
             </inertial>
         </link>
 
@@ -98,7 +98,7 @@
 
         <!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${-((wheel_joint_z_abs-chassis_h_no_susp)+2*wheel_radius)}" rpy="0 0 0" />
+            <origin xyz="0 0 ${-(wheel_joint_z_abs+wheel_radius)}" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="footprint" />
         </joint>

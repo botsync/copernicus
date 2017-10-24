@@ -22,7 +22,7 @@
             <inertial>
                 <mass value="2.637" />
                 <origin xyz="0 0 0" />
-                <inertia  ixx="0.02467" ixy="0" ixz="0" iyy="0.04411" iyz="0" izz="0.02467" />
+                <inertia  ixx="0.036351442" ixy="0.000001230" ixz="0" iyy="0.021626014" iyz="0" izz="0.02162601213" />
             </inertial>
         </link>
 
@@ -30,6 +30,7 @@
             <material>Gazebo/Black</material>
             <mu1 value="1.0"/>
             <mu2 value="1.0"/>
+            <fdir1 value="1 0 0"/>
         </gazebo>
 
         <!-- Wheel Joint -->
