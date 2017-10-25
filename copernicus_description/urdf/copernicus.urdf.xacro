@@ -112,7 +112,7 @@
         <gazebo>
             <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
                 <robotNamespace>/</robotNamespace>
-                <commandTopic>/copernicus_base_controller/cmd_vel</commandTopic>
+                <commandTopic>/cmd_vel</commandTopic>
                 <odometryTopic>odometry/wheel</odometryTopic>
                 <odometryFrame>odom</odometryFrame>
                 <odometryRate>30.0</odometryRate>
