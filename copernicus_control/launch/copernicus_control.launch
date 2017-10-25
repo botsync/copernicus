@@ -2,6 +2,6 @@
 <launch>
     <rosparam command="load" file="$(find copernicus_control)/config/control.yaml" />
 
-    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="copernicus_joint_publisher copernicus_velocity_controller --shutdown-timeout 3">
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="copernicus_base_controller --shutdown-timeout 3">
     </node>
 </launch>

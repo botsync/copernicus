@@ -9,7 +9,7 @@
     <xacro:property name="PI" value="3.14159"/>
 
     <!-- xacro args -->
-    <xacro:arg name="lidar_enabled" default="false"/>
+    <xacro:arg name="lidar_enabled" default="true"/>
     <xacro:arg name="imu_enabled" default="false"/>
     <xacro:arg name="gps_enabled" default="false"/>
     <xacro:arg name="camera_enabled" default="false"/>
@@ -103,9 +103,20 @@
             <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
-        <gazebo>
+        <!-- <gazebo>
             <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
                 <robotNamespace>/</robotNamespace>
+            </plugin>
+        </gazebo> -->
+
+        <gazebo>
+            <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
+                <robotNamespace>/</robotNamespace>
+                <commandTopic>/copernicus_base_controller/cmd_vel</commandTopic>
+                <odometryTopic>odometry/wheel</odometryTopic>
+                <odometryFrame>odom</odometryFrame>
+                <odometryRate>30.0</odometryRate>
+                <robotBaseFrame>base_link</robotBaseFrame>
             </plugin>
         </gazebo>
 
