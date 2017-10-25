@@ -1,0 +1,39 @@
+# Refer to this document for tuning this file - http://wiki.ros.org/navigation/Tutorials/Navigation%20Tuning%20Guide#The_Local_Planner
+controller_frequency: 5.0
+recovery_behaviour_enabled: true
+
+DWAPlannerROS:
+  acc_lim_x: 1.9
+  acc_lim_y: 0
+  acc_lim_th: 0.63
+
+  max_vel_x: 0.5
+  min_vel_x: -0.05
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+
+  max_trans_vel: 0.5
+  min_trans_vel: -0.05
+  max_rot_vel: 0.3
+  min_rot_vel: 0.0
+
+  yaw_goal_tolerance: 0.1
+  xy_goal_tolerance: 0.2
+  latch_xy_goal_tolerance: false
+
+  sim_time: 2.0
+  sim_granularity: 0.02
+  vx_samples: 10
+  vy_samples: 0
+  vtheta_samples: 20
+
+  penalize_negative_x: true
+  path_distance_bias: 26.0
+  goal_distance_bias: 24.0
+  occdist_scale: 0.1
+  forward_point_distance: 0.325
+  stop_time_buffer: 0.2
+  scaling_speed: 0.2
+  max_scaling_factor: 0.1
+
+  oscillation_reset_dist: 0.05

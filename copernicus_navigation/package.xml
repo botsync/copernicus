@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>copernicus_navigation</name>
+  <version>0.0.0</version>
+  <description>The copernicus_navigation package</description>
+
+  <maintainer email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</maintainer>
+  <author email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</author>
+
+  <url type="repository">https://bitbucket.org/botsync/copernicus</url>
+  
+  <license>BSD2</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>amcl</build_depend>
+  <build_depend>move_base</build_depend>
+  <build_depend>gmapping</build_depend>
+  <run_depend>amcl</run_depend>
+  <run_depend>move_base</run_depend>
+  <run_depend>gmapping</run_depend>
+  <run_depend>dwa_local_planner</run_depend>
+
+  <export>
+  </export>
+</package>
