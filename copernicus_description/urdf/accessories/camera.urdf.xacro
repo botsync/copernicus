@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
 Copyright (c) 2017, Botsync Pte. Ltd.
@@ -26,25 +27,28 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-
-<?xml version="1.0"?>
-
+<!-- TODO: Camera Mesh, Mount and Origin -->
 <robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
-    <xacro:macro name="camera" params="frame:=camera topic:=camera info_topic:=camera_info update_rate:=50 robot_namespace:=/">
+    <xacro:macro name="camera_" params="frame:=camera topic:=camera info_topic:=camera_info update_rate:=50 robot_namespace:=/">
+        <joint name="base_to_camera" type="fixed">
+            <parent link="base_link"/>
+            <child link="${frame}"/>
+            <origin xyz="0 0 ${chassis_h}"/>
+        </joint>
+
         <link name="${frame}">
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                    <mesh filename="package://copernicus_description/meshes/logitech_c910.stl"/>
-                </geometry>
-            </collision>
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
                     <box size="0.07 0.09 0.07"/>
                 </geometry>
-                <material name="black"/>
             </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.07 0.09 0.07"/>
+                </geometry>
+            </collision>
             <inertial>
                 <mass value="0.162"/>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -52,14 +56,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </inertial>
         </link>
 
-        <joint name="base_to_camera" type="fixed">
-            <parent link="base_link"/>
-            <child link="${frame}"/>
-            <origin xyz="${ 0.0 } ${ 0.0 } ${ 0.0 }"/>
-        </joint>
-
         <gazebo reference="${frame}">
-            <material>Gazebo/Blue</material>
             <sensor type="camera" name="camera">
                 <update_rate>${update_rate}</update_rate>
                 <camera name="head">
@@ -73,6 +70,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <near>0.02</near>
                     <far>300</far>
                     </clip>
+                    <noise>
+                      <type>gaussian</type>
+                      <mean>0.0</mean>
+                      <stddev>0.007</stddev>
+                    </noise>
                 </camera>
                 <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
                     <robotNamespace>${robot_namespace}</robotNamespace>

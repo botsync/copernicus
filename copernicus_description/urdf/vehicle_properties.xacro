@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
 Copyright (c) 2017, Botsync Pte. Ltd.
@@ -27,9 +28,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
 
-<?xml version="1.0"?>
-
 <robot name="copernicus_robot" xmlns:xacro="https://ros.org/wiki/xacro">
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
+
+    <material name="white">
+       <color rgba="1 1 1 1"/>
+    </material>
+
+    <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+
     <xacro:property name="chassis_mass" value="5.674"/>
 
     <xacro:property name="chassis_l" value="0.75"/>

@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
 Copyright (c) 2017, Botsync Pte. Ltd.
@@ -27,24 +28,23 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
 
-<?xml version="1.0"?>
-
 <robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
     <xacro:macro name="imu" params="frame:=imu topic:=imu/data update_rate:=50 robot_namespace:=/">
+        <joint name="${frame}_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="${frame}" />
+            <origin xyz="0 0 ${chassis_h_no_susp/2}" rpy="0 0 0" />
+        </joint>
+
         <link name="${frame}">
             <inertial>
                 <mass value="0.001"/>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
-                <inertia ixx="${dummy_inertia}" ixy="0.0" ixz="0.0" iyy="${dummy_inertia}" iyz="0.0" izz="${dummy_inertia}"/>
+                <inertia ixx="1e-09" ixy="0.0" ixz="0.0" iyy="1e-09" iyz="0.0" izz="1e-09"/>
             </inertial>
         </link>
 
-        <joint name="${frame}_joint" type="fixed">
-            <parent link="base_link" />
-            <child link="${frame}" />
-        </joint>
-
-        <gazebo reference="${frame}">
+        <gazebo>
             <plugin name="imu_plugin" filename="libhector_gazebo_ros_imu.so">
                 <robotNamespace>${robot_namespace}</robotNamespace>
                 <updateRate>${update_rate}</updateRate>
@@ -54,7 +54,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <accelDrift>0.005 0.005 0.005</accelDrift>
                 <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
                 <rateDrift>0.005 0.005 0.005 </rateDrift>
-                <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+                <rateGaussianNoise>0.005 0.005 0.005</rateGaussianNoise>
                 <headingDrift>0.005</headingDrift>
                 <headingGaussianNoise>0.005</headingGaussianNoise>
             </plugin>

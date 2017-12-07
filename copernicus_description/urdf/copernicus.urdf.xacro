@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
 Copyright (c) 2017, Botsync Pte. Ltd.
@@ -27,8 +28,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
 
-<?xml version="1.0"?>
-
 <robot name="copernicus_robot" xmlns:xacro="https://ros.org/wiki/xacro">
     <!-- xacro includes -->
     <xacro:include filename="$(find copernicus_description)/urdf/vehicle_properties.xacro"/>
@@ -39,21 +38,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- xacro args -->
     <xacro:arg name="lidar_enabled" default="true"/>
-    <xacro:arg name="imu_enabled" default="false"/>
+    <xacro:arg name="imu_enabled" default="true"/>
     <xacro:arg name="gps_enabled" default="false"/>
+
+    <!-- TODO: Camera Mesh, Mount and Origin -->
     <xacro:arg name="camera_enabled" default="false"/>
-
-    <material name="blue">
-        <color rgba="0 0 0.8 1"/>
-    </material>
-
-    <material name="white">
-       <color rgba="1 1 1 1"/>
-    </material>
-
-    <material name="gray">
-        <color rgba="0.5 0.5 0.5 1"/>
-    </material>
 
     <xacro:macro name="copernicus_robot">
         <!-- Footprint -->
@@ -149,16 +138,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </plugin>
         </gazebo>
 
-        <!-- LIDAR -->
-        <xacro:if value="$(arg lidar_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
-            <xacro:lidar></xacro:lidar>
-        </xacro:if>
-
         <!-- IMU -->
         <xacro:if value="$(arg imu_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/imu.urdf.xacro"/>
             <xacro:imu></xacro:imu>
+        </xacro:if>
+
+        <!-- LIDAR -->
+        <xacro:if value="$(arg lidar_enabled)">
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
+            <xacro:lidar></xacro:lidar>
         </xacro:if>
 
         <!-- GPS -->
@@ -168,9 +157,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </xacro:if>
 
         <!-- Camera -->
+        <!-- TODO: Camera Mesh, Mount and Origin -->
         <xacro:if value="$(arg camera_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
-            <xacro:camera></xacro:camera>
+            <xacro:camera_></xacro:camera_>
         </xacro:if>
     </xacro:macro>
 </robot>

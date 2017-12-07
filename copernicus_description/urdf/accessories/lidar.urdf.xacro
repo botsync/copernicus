@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
 
 Copyright (c) 2017, Botsync Pte. Ltd.
@@ -26,8 +27,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-
-<?xml version="1.0"?>
 
 <robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
   <xacro:macro name="lidar" params="frame:=lidar topic:=scan sample_size:=720 update_rate:=50
@@ -91,7 +90,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
       <gazebo reference="${frame}">
-        <turnGravityOff>true</turnGravityOff>
         <sensor type="ray" name="${frame}">
           <pose>0 0 0 0 0 0</pose>
           <visualize>false</visualize>
