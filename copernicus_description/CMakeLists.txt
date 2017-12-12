@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   roslaunch
   urdf
   xacro
+  hector_gazebo_plugins
 )
 
 catkin_package()
