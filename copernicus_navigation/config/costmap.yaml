@@ -1,36 +1,21 @@
-# Robot base footprint
 footprint: [[-0.375, -0.3243], [-0.375, 0.3243], [0.375, 0.3243], [0.375, -0.3243]]
-footprint_padding: 0.01
-
-# Base frame is set to base_link instead of footprint. Issue - No transform from footprint to base_link
+footprint_padding: 0.2
 robot_base_frame: base_link
-
-# Map update rate - reduce if computer has low processing power, however reducing to very low makes the system less responsive to obstacles.
 update_frequency: 5.0
-# Map publish rate - Useful to visualize map in rviz. However, for large global maps, this factor may slow down the system. Turn down the rate for large costmaps.
 publish_frequency: 2.0
-# Transform tolerance for robot_base_frame to map. Check tf_monitor to check for delay for the system and set conservatively.
 transform_tolerance: 1.0
-
-# Publish voxel grid
 publish_voxel_map: true
-
-# Lower resolution requires a lot of computational power, however the map will be very correct and allows robot to navigate tight spaces.
 resolution: 0.05
 
 obstacle_range: 5.5
 raytrace_range: 6.0
-
-#layer definitions
 static:
     map_topic: /map
     subscribe_to_updates: true
 
 obstacles_laser:
     observation_sources: laser
-    # Marking and clearing refer to marking and clearing obstacles in the costmap.
     laser: {data_type: LaserScan, clearing: true, marking: true, topic: /scan, inf_is_valid: true}
 
 inflation:
-    # Adjust inflation radius here to enable robot to navigate tight spaces
-    inflation_radius: 0.5
+    inflation_radius: 1.0

@@ -15,10 +15,12 @@
   <build_depend>amcl</build_depend>
   <build_depend>move_base</build_depend>
   <build_depend>gmapping</build_depend>
+  <build_depend>global_planner</build_depend>
   <run_depend>amcl</run_depend>
   <run_depend>move_base</run_depend>
   <run_depend>gmapping</run_depend>
   <run_depend>dwa_local_planner</run_depend>
+  <run_depend>global_planner</run_depend>
 
   <export>
   </export>
