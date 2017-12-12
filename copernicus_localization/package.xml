@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>copernicus_localization</name>
+  <version>0.0.0</version>
+  <description>The copernicus_localization package</description>
+
+  <maintainer email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</maintainer>
+  <license>BSD</license>
+
+  <url type="repository">http://bitbucket.org/botsync/copernicus_localization</url>
+
+  <author email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>robot_localization</build_depend>
+  <build_export_depend>robot_localization</build_export_depend>
+  <exec_depend>robot_localization</exec_depend>
+</package>
