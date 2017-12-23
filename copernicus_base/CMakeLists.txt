@@ -12,5 +12,5 @@ find_package(catkin REQUIRED COMPONENTS
   tf)
 
 include_directories(${catkin_INCLUDE_DIRS})
-add_executable(copernicus_base src/copernicus_base.cpp)
-target_link_libraries(copernicus_base ${catkin_LIBRARIES})
+add_executable(copernicus_base_node src/copernicus_base_node.cpp)
+target_link_libraries(copernicus_base_node ${catkin_LIBRARIES})

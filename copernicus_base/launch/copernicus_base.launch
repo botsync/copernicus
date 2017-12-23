@@ -5,7 +5,6 @@
       <param name="baud" value="57600" />
     </node>
 
-    <node name="copernicus_base" pkg="copernicus_base" type="copernicus_base">
-        <remap from="odom" to="/holobot/odometry/wheel"/>
+    <node name="copernicus_base_node" pkg="copernicus_base" type="copernicus_base_node">
     </node>
 </launch>
