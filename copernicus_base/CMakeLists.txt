@@ -4,12 +4,14 @@ project(copernicus_base)
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   ros_arduino_msgs
-  roscpp 
+  roscpp
   rospy
   rosserial_python
   sensor_msgs
   std_msgs
   tf)
+
+catkin_package()
 
 include_directories(${catkin_INCLUDE_DIRS})
 add_executable(copernicus_base_node src/copernicus_base_node.cpp)
