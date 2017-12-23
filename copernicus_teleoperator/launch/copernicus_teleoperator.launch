@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="keyboard" default="true" />
+    <arg name="keyboard" default="false" />
 
     <rosparam command="load" file="$(find copernicus_teleoperator)/config/joy.yaml" unless="$(arg keyboard)" />
 
