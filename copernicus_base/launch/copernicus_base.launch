@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="SerialComm" pkg="rosserial_python" type="serial_node.py">
+      <param name="port" value="/dev/ttyACM0" />
+      <param name="baud" value="57600" />
+    </node>
+
+    <node name="copernicus_base" pkg="copernicus_base" type="copernicus_base">
+        <remap from="odom" to="/holobot/odometry/wheel"/>
+    </node>
+</launch>

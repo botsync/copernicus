@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.8.3)
+project(copernicus_base)
+
+find_package(catkin REQUIRED COMPONENTS
+  geometry_msgs
+  ros_arduino_msgs
+  roscpp 
+  rospy
+  rosserial_python
+  sensor_msgs
+  std_msgs
+  tf)
+
+include_directories(${catkin_INCLUDE_DIRS})
+add_executable(copernicus_base src/copernicus_base.cpp)
+target_link_libraries(copernicus_base ${catkin_LIBRARIES})
