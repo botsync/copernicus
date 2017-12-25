@@ -5,4 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   amcl
   move_base
   gmapping
+  map_server
+  dwa_local_planner
+  global_planner
 )

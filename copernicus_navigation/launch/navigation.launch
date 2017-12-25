@@ -2,8 +2,18 @@
     <arg name="odom_topic" default="/odom"/>
     <arg name="gmapping" default="true"/>
     <arg name="scan_topic" default="/scan" />
+    <arg name="use_map_topic" default="true"/>
+    <arg name="map_file" default="$(find copernicus_navigation)/maps/map.yaml"/>
     <arg name="base_global" default="global_planner/GlobalPlanner"/>
     <arg name="base_local" default="dwa_local_planner/DWAPlannerROS"/>
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" unless="$(arg gmapping)"/>
+
+    <node pkg="amcl" type="amcl" name="amcl" unless="$(arg gmapping)">
+        <rosparam file="$(find copernicus_navigation)/config/amcl.yaml" command="load"/>
+        <param name="use_map_topic" value="$(arg use_map_topic)"/>
+        <remap from="scan" to="$(arg scan_topic)"/>
+    </node>
 
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/gmapping.yaml" command="load"/>
