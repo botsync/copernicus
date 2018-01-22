@@ -9,7 +9,10 @@ find_package(catkin REQUIRED COMPONENTS
   rosserial_python
   sensor_msgs
   std_msgs
-  tf)
+  tf
+  um7
+  imu_transformer
+  imu_filter_madgwick)
 
 catkin_package()
 
