@@ -1,0 +1,6 @@
+bool E_STOP_FLAG_HW
+bool E_STOP_FLAG_SW
+bool LOAD_SW_FLAG
+bool CHG_FLAG_HW
+bool CHG_FLAG_SW
+bool PC_ON_FLAG
