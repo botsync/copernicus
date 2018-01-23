@@ -43,10 +43,17 @@
   <build_depend>controller_manager</build_depend>
   <build_depend>diff_drive_controller</build_depend>
   <build_depend>joint_state_controller</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>copernicus_msgs</build_depend>
   <run_depend>controller_manager</run_depend>
   <run_depend>diff_drive_controller</run_depend>
   <run_depend>joint_state_controller</run_depend>
-
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>copernicus_msgs</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
