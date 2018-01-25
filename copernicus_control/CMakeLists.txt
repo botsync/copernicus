@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   copernicus_msgs
+  twist_mux
 )
 
 generate_dynamic_reconfigure_options(

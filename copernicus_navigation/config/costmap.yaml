@@ -1,5 +1,7 @@
 footprint: [[-0.45, -0.35], [-0.45, 0.35], [0.45, 0.35], [0.45, -0.35]]
 footprint_padding: 0.05
+# footprint: [[-0.375, -0.3243], [-0.375, 0.3243], [0.375, 0.3243], [0.375, -0.3243]]
+# footprint_padding: 0.2
 robot_base_frame: base_link
 update_frequency: 5.0
 publish_frequency: 2.0
@@ -19,3 +21,4 @@ obstacles_laser:
 
 inflation:
     inflation_radius: 0.1
+    # inflation_radius: 0.5

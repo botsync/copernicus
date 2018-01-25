@@ -22,6 +22,7 @@
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <remap from="/odom" to="$(arg odom_topic)" />
+        <remap from="/cmd_vel" to="nav/cmd_vel" />
 
         <param name="base_global_planner" value="$(arg base_global)"/>
         <param name="base_local_planner" value="$(arg base_local)"/>
