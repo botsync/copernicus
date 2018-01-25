@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <node name="SerialComm" pkg="rosserial_python" type="serial_node.py">
-      <param name="port" value="/dev/ttyACM0" />
+      <param name="port" value="/dev/ttyACM1" />
       <param name="baud" value="57600" />
     </node>
 
@@ -41,6 +41,13 @@
             </rosparam>
         </node>
 
+    </group>
+
+    <group>
+        <node pkg="lms1xx" name="lms1xx" type="LMS1xx_node">
+	    <param name="host" value="10.0.1.11" />
+	    <param name="frame_id" value="lidar" />
+	</node>
     </group>
 
 </launch>
