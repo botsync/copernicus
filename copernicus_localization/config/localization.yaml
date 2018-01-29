@@ -11,11 +11,12 @@ ekf_se_odom:
   odom_frame: odom
   base_link_frame: footprint
   world_frame: odom
+  publish_tf: false
 
-  odom0: /odometry/wheel
-  odom0_config: [true,  true, false,
-                 false, false, true,
-                 true,  true,  false,
+  odom0: /odom
+  odom0_config: [false,  false, false,
+                 false, false, false,
+                 true,  true,  true,
                  false, false, true,
                  false, false, false]
   odom0_queue_size: 10
@@ -25,12 +26,12 @@ ekf_se_odom:
 
   imu0: /imu/data
   imu0_config: [false, false, false,
-                false,  false,  true,
+                true,  true,  true,
                 false, false, false,
-                false,  false,  true,
+                true,  true,  true,
                 false,  false,  false]
   imu0_nodelay: false
-  imu0_differential: false
+  imu0_differential: true
   imu0_relative: false
   imu0_queue_size: 10
   imu0_remove_gravitational_acceleration: true

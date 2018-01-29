@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 <launch>
-    
-
     <node pkg="twist_mux" type="twist_mux" name="twist_mux" output="screen">
         <remap from="cmd_vel_out" to="cmd_vel" />
         <rosparam command="load" file="$(find copernicus_control)/config/twist_mux.yaml" />

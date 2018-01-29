@@ -12,7 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   um7
   imu_transformer
-  imu_filter_madgwick)
+  imu_filter_madgwick
+  mavros)
 
 catkin_package()
 

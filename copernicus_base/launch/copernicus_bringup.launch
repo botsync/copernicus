@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+    <group>
+        <node name="SerialComm" pkg="rosserial_python" type="serial_node.py">
+          <param name="port" value="/dev/ttyACM0" />
+          <param name="baud" value="57600" />
+        </node>
+
+        <node name="PB" pkg="rosserial_python" type="serial_node.py">
+          <param name="port" value="/dev/ttyACM1" />
+          <param name="baud" value="57600" />
+        </node>
+    </group>
+
+    <group>
+        <include file="$(find copernicus_control)/launch/control.launch">
+        </include>
+
+        <include file="$(find copernicus_teleoperator)/launch/copernicus_teleoperator.launch">
+        </include>
+    </group>
+</launch>

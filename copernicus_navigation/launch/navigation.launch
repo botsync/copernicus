@@ -3,7 +3,7 @@
     <arg name="gmapping" default="true"/>
     <arg name="scan_topic" default="/scan" />
     <arg name="use_map_topic" default="true"/>
-    <arg name="map_file" default="$(find copernicus_navigation)/maps/map.yaml"/>
+    <arg name="map_file" default="$(find copernicus_navigation)/maps/0202.yaml"/>
     <arg name="base_global" default="global_planner/GlobalPlanner"/>
     <arg name="base_local" default="dwa_local_planner/DWAPlannerROS"/>
 
