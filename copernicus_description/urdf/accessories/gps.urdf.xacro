@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
-    <xacro:macro name="gps" params="frame:=gps topic:=gps/fix update_rate:=50 robot_namespace:=/ refLat:=1.345490 refLong:=103.682360">
+    <xacro:macro name="gps" params="frame:=gps topic:=gps/fix update_rate:=50 robot_namespace:=/ refLat:=1.3558320252002594 refLong:=103.6922425031662">
         <link name="${frame}">
             <inertial>
                 <mass value="0.001"/>
