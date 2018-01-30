@@ -13,10 +13,10 @@ angularUpdate: 0.5
 temporalUpdate: 2.0
 resampleThreshold: 0.5
 
-xmin: -10.0
-ymin: -10.0
-xmax: 10.0
-ymax: 10.0
+xmin: -30.0
+ymin: -30.0
+xmax: 30.0
+ymax: 30.0
 delta: 0.05
 
 sigma: 0.05

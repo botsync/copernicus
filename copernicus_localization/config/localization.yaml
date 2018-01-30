@@ -78,6 +78,7 @@ ekf_se_map:
   transform_timeout: 0.0
   print_diagnostics: true
   debug: false
+  publish_tf: false
 
   map_frame: map
   odom_frame: odom
