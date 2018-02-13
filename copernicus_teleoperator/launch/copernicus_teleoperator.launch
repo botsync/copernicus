@@ -4,9 +4,9 @@
 
     <rosparam command="load" file="$(find copernicus_teleoperator)/config/joy.yaml" unless="$(arg keyboard)" />
 
-    <node pkg="joy" type="joy_node" name="joy_node" unless="$(arg keyboard)" />
-    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" unless="$(arg keyboard)">
-        <remap from="/cmd_vel" to="joy/cmd_vel"/>
+    <node pkg="joy" type="joy_node" name="joy_node" args="_dev:=/dev/input/js1" unless="$(arg keyboard)" />
+
+    <node pkg="copernicus_teleoperator" type="joy_teleop_node" name="joy_teleop" unless="$(arg keyboard)">
     </node>
 
     <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" if="$(arg keyboard)">

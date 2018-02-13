@@ -4,6 +4,28 @@ project(copernicus_teleoperator)
 find_package(catkin REQUIRED COMPONENTS
   teleop_twist_joy
   teleop_twist_keyboard
+  sensor_msgs
+  geometry_msgs
+  copernicus_msgs
+  actionlib_msgs
 )
 
-catkin_package()
+catkin_package(
+  INCLUDE_DIRS
+    include
+  LIBRARIES
+    joy_teleop
+)
+
+include_directories(
+    include
+    ${catkin_INCLUDE_DIRS}
+)
+
+add_library(joy_teleop src/joy_teleop.cpp)
+
+add_dependencies(joy_teleop copernicus_teleoperator_gencpp)
+
+add_executable(joy_teleop_node src/joy_teleop_node.cpp)
+
+target_link_libraries(joy_teleop_node joy_teleop ${catkin_LIBRARIES})

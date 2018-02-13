@@ -156,10 +156,12 @@ ekf_se_map:
 navsat_transform:
   frequency: 30
   delay: 3.0
-  magnetic_declination_radians: 0.002268928
-  yaw_offset: 0.0
+  # magnetic_declination_radians: 0.002268928
+  # yaw_offset: 0.0
+  # datum: [latitude, longitude, orientation in ENU format, map frame, robot frame]
+  datum: [1.355841, 103.692354, 0.0, 0.0, map, base_link]
   zero_altitude: true
   broadcast_utm_transform: true
   publish_filtered_gps: true
   use_odometry_yaw: true
-  wait_for_datum: false
+  wait_for_datum: true

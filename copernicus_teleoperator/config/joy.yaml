@@ -1,11 +1,19 @@
-teleop_twist_joy:
-  enable_button: 1
-  axis_linear: 1
-  scale_linear: 0.6
-  
-  axis_angular: 0
-  scale_angular: 0.8
+enable_button: 1
+stop_button: 2
+e_stop_button: 3
+linear_speed_axis: 1
+angular_speed_axis: 0
 
-  enable_turbo_button: 2
-  scale_linear_turbo: 1.8
-  scale_angular_turbo: 1.8
+max_linear_speed: 0.5
+max_angular_speed: 0.5
+
+enable_holonomic_movement: 0
+sideways_speed_axis: -1
+
+enable_e_stop: 0
+
+cmd_vel_topic: /joy/cmd_vel
+e_stop_pub_topic: /subsPBFlags
+
+e_stop_sub_topic: /PBFlags
+joy_topic: /joy

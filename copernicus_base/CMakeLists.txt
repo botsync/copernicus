@@ -13,7 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   um7
   imu_transformer
   imu_filter_madgwick
-  mavros)
+  mavros
+  laser_filters)
 
 catkin_package()
 
