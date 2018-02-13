@@ -1,4 +1,3 @@
-#include <ros/ros.h>
 #include <copernicus_teleoperator/joy_teleop.h>
 
 int main(int argc, char** argv) {
@@ -25,17 +24,19 @@ int main(int argc, char** argv) {
     nh.param<std::string>("cmd_vel_topic", cmd_vel_topic, "/cmd_vel");
     nh.param<std::string>("e_stop_pub_topic", e_stop_pub_topic, "/subsPBFlags");
 
-    nh.param<std::string>("e_stop_sub_topic", e_stop_pub_topic, "/PBFlags");
+    nh.param<std::string>("e_stop_sub_topic", e_stop_sub_topic, "/PBFlags");
     nh.param<std::string>("joy_topic", joy_topic, "/joy");
 
     cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1); 
     stop_pub = nh.advertise<actionlib_msgs::GoalID>("/move_base/cancel", 1);
 
     ros::Subscriber joy_subscriber = nh.subscribe(joy_topic, 1, joy_callback);
-
+    ros::Subscriber pb_flags_subscriber;
+	
     if (enable_e_stop) {
+    	ROS_INFO("Enable e-stop: %d", enable_e_stop);
         e_stop_pub = nh.advertise<copernicus_msgs::SubsPBFlags>(e_stop_pub_topic, 1);
-        ros::Subscriber pb_flags_subscriber = nh.subscribe(e_stop_sub_topic, 1, pb_flags_callback);
+        pb_flags_subscriber = nh.subscribe(e_stop_sub_topic, 1, pb_flags_callback);
     }
 
     ros::spin();    

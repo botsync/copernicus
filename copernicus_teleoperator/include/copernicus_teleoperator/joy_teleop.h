@@ -4,17 +4,18 @@
 #include <copernicus_msgs/PBFlags.h>
 #include <copernicus_msgs/SubsPBFlags.h>
 #include <actionlib_msgs/GoalID.h>
+#include "std_msgs/Bool.h"
 
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy);
-void pb_flags_callback(const copernicus_msgs::PBFlags::ConstPtr& pb_flags);
+void pb_flags_callback(const copernicus_msgs::PBFlags pb_flags);
 
 ros::Subscriber joy_sub;
 ros::Publisher cmd_vel_pub;
 ros::Publisher e_stop_pub;
 ros::Publisher stop_pub;
 
-bool software_e_stop_state;
-bool hardware_e_stop_state;
+bool software_e_stop_state = false;
+bool hardware_e_stop_state = true;
 
 int enable_button;
 int stop_button;

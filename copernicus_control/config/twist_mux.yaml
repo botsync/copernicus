@@ -20,10 +20,3 @@ topics:
   timeout : 0.5
   priority: 60
 
-
-locks:
--
-  name    : estop
-  topic   : PBFlags
-  timeout : 0.0
-  priority: 100
