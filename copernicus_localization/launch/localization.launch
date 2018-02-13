@@ -2,7 +2,7 @@
 
 <launch>
 
-    <arg name="gps" default="false"/>
+    <arg name="gps" default="true"/>
 
     <rosparam command="load" file="$(find copernicus_localization)/config/localization.yaml" />
     

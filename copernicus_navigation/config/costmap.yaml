@@ -1,4 +1,4 @@
-footprint: [[-0.45, -0.35], [-0.45, 0.35], [0.45, 0.35], [0.45, -0.35]]
+footprint: [[-0.5, -0.35], [-0.5, 0.35], [0.5, 0.35], [0.5, -0.35]]
 footprint_padding: 0.05
 # footprint: [[-0.375, -0.3243], [-0.375, 0.3243], [0.375, 0.3243], [0.375, -0.3243]]
 # footprint_padding: 0.2
@@ -17,7 +17,7 @@ static:
 
 obstacles_laser:
     observation_sources: laser
-    laser: {data_type: LaserScan, clearing: true, marking: true, topic: /scan, inf_is_valid: true}
+    laser: {data_type: LaserScan, clearing: true, marking: true, topic: /scan_filtered, inf_is_valid: true}
 
 inflation:
     inflation_radius: 0.1

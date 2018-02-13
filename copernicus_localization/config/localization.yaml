@@ -157,7 +157,7 @@ navsat_transform:
   frequency: 30
   delay: 3.0
   magnetic_declination_radians: 0.002268928
-  yaw_offset: 1.570796327
+  yaw_offset: 0.0
   zero_altitude: true
   broadcast_utm_transform: true
   publish_filtered_gps: true

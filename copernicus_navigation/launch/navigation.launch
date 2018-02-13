@@ -1,7 +1,7 @@
 <launch>
     <arg name="odom_topic" default="/odom"/>
     <arg name="gmapping" default="true"/>
-    <arg name="scan_topic" default="/scan" />
+    <arg name="scan_topic" default="/scan_filtered" />
     <arg name="use_map_topic" default="true"/>
     <arg name="map_file" default="$(find copernicus_navigation)/maps/0202.yaml"/>
     <arg name="base_global" default="global_planner/GlobalPlanner"/>
