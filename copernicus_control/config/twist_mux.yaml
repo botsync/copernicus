@@ -19,4 +19,8 @@ topics:
   topic   : website/cmd_vel
   timeout : 0.5
   priority: 60
-
+-
+  name    : voice
+  topic   : voice/cmd_vel
+  timeout : 0.5
+  priority: 50
