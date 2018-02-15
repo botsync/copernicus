@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <robot name="copernicus_robot" xmlns:xacro="https://ros.org/wiki/xacro">
     <!-- xacro includes -->
-    <xacro:include filename="$(find copernicus_description)/urdf/vehicle_properties.xacro"/>
+    <xacro:include filename="$(find copernicus_description)/urdf/vehicle_properties_v2.xacro"/>
     <xacro:include filename="$(find copernicus_description)/urdf/components/wheel.urdf.xacro"/>
 
     <!-- xacro properties -->
@@ -40,19 +40,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:arg name="lidar_enabled" default="true"/>
     <xacro:arg name="imu_enabled" default="true"/>
     <xacro:arg name="gps_enabled" default="true"/>
-    <xacro:arg name="dock_enabled" default="true"/>
 
     <!-- TODO: Camera Mesh, Mount and Origin -->
     <xacro:arg name="camera_enabled" default="false"/>
 
-    <xacro:macro name="copernicus_base">
+    <xacro:macro name="copernicus_robot">
         <!-- Footprint -->
         <link name="footprint"/>
+
         <!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${-base_underside_h}" rpy="0 0 0" />
-            <parent link="base_link" />
-            <child link="footprint" />
+            <origin xyz="0 0 0.11457" rpy="0 0 0" />
+            <parent link="footprint" />
+            <child link="base_link" />
         </joint>
 
         <!-- Chassis a.k.a base_link -->
@@ -71,29 +71,29 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </geometry>
             </collision>
             <inertial>
-                <mass value="${ chassis_mass }"/>
-                <inertia ixx="${chassis_ixx}" ixy="${chassis_ixy}" ixz="${chassis_ixz}" iyy="${chassis_iyy}" iyz="${chassis_iyz}" izz="${chassis_izz}"/>
+                <mass value="${base_mass }"/>
+                <inertia ixx="${base_ixx}" ixy="${base_ixy}" ixz="${base_ixz}" iyy="${base_iyy}" iyz="${base_iyz}" izz="${base_izz}"/>
             </inertial>
         </link>
 
+
         <!-- Wheel -->
         <xacro:copernicus_wheel wheel_prefix="front_right">
-            <origin xyz="${wheel_front_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
+            <origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="back_right">
-            <origin xyz="${-wheel_back_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
+            <origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="front_left">
-            <origin xyz="${wheel_front_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
+            <origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
         <xacro:copernicus_wheel wheel_prefix="back_left">
-            <origin xyz="${-wheel_back_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
+            <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
-        <!-- FIX: Gazebo differential drive plugin not working -->
         <!-- <gazebo>
             <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
                 <robotNamespace>/</robotNamespace>
@@ -113,34 +113,26 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- IMU -->
         <xacro:if value="$(arg imu_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/imu.urdf.xacro"/>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories_v2/imu.urdf.xacro"/>
             <xacro:imu></xacro:imu>
         </xacro:if>
 
         <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories_v2/lidar.urdf.xacro"/>
             <xacro:lidar></xacro:lidar>
         </xacro:if>
 
         <!-- GPS -->
         <xacro:if value="$(arg gps_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/gps.urdf.xacro"/>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories_v2/gps.urdf.xacro"/>
             <xacro:gps></xacro:gps>
         </xacro:if>
 
         <!-- Camera -->
         <!-- TODO: Camera Mesh, Mount and Origin -->
         <xacro:if value="$(arg camera_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
-            <xacro:camera_></xacro:camera_>
-        </xacro:if>
-
-        <!-- Dock -->
-        <xacro:if value="$(arg dock_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/dock.urdf.xacro"/>
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
-            <xacro:dock></xacro:dock>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories_v2/camera.urdf.xacro"/>
             <xacro:camera_></xacro:camera_>
         </xacro:if>
     </xacro:macro>
