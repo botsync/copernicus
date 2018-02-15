@@ -41,34 +41,26 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <color rgba="0.5 0.5 0.5 1"/>
     </material>
 
-    <xacro:property name="chassis_mass" value="5.674"/>
+    <xacro:property name="base_underside_h" value="0.20213"/>
 
-    <xacro:property name="chassis_l" value="0.75"/>
-    <xacro:property name="chassis_w" value="0.42"/>
-    <xacro:property name="chassis_h" value="0.23042"/>
-    <xacro:property name="chassis_h_no_susp" value="0.14"/>
-    <xacro:property name="chassis_t" value="0.003"/>
-    <xacro:property name="chassis_ixx" value="0.16120241795"/>
-    <xacro:property name="chassis_ixy" value="0.00001185952"/>
-    <xacro:property name="chassis_ixz" value="0.00001811354"/>
-    <xacro:property name="chassis_iyy" value="0.32866531087"/>
-    <xacro:property name="chassis_iyz" value="-0.000092298"/>
-    <xacro:property name="chassis_izz" value="0.449900533"/>
-
-    <xacro:property name="body_mass" value="10.7832"/>
-    <xacro:property name="body_h" value="0.15"/>
-    <xacro:property name="body_ixx" value="0.28969954739"/>
-    <xacro:property name="body_ixy" value="0.00014451398"/>
-    <xacro:property name="body_ixz" value="-0.02490442357"/>
-    <xacro:property name="body_iyy" value="0.4846882478"/>
-    <xacro:property name="body_iyz" value="0.0000035777"/>
-    <xacro:property name="body_izz" value="0.72198943224"/>
+    <xacro:property name="base_mass" value="20.28"/>
+    <xacro:property name="base_l" value="0.76"/>
+    <xacro:property name="base_w" value="0.518"/>
+    <xacro:property name="base_h" value="0.387"/>
+    <xacro:property name="base_t" value="0.003"/>
+    <xacro:property name="base_ixx" value="1.25"/>
+    <xacro:property name="base_ixy" value="-0.00065"/>
+    <xacro:property name="base_ixz" value="0.064"/>
+    <xacro:property name="base_iyy" value="1.48"/>
+    <xacro:property name="base_iyz" value="-0.0167"/>
+    <xacro:property name="base_izz" value="1.15"/>
 
     <xacro:property name="wheel_width" value="0.1143" />
     <xacro:property name="wheel_radius" value="0.16938" />
-    <xacro:property name="wheel_joint_x_abs" value="0.28908" />
-    <xacro:property name="wheel_joint_y_abs" value="0.28858" />
-    <xacro:property name="wheel_joint_z_abs" value="0.04295" />
+    <xacro:property name="wheel_front_joint_x_abs" value="0.23337" />
+    <xacro:property name="wheel_joint_y_abs" value="0.259" />
+    <xacro:property name="wheel_joint_z_abs" value="0.03275" />
+    <xacro:property name="wheel_back_joint_x_abs" value="0.24988"/>
     <xacro:property name="wheel_ixx" value="0.036351442"/>
     <xacro:property name="wheel_ixy" value="0.000001230"/>
     <xacro:property name="wheel_ixz" value="0.0"/>
@@ -76,5 +68,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="wheel_iyz" value="0.0"/>
     <xacro:property name="wheel_izz" value="0.02162601213"/>
 
+    <xacro:property name="lidar_mount_l" value="0.537"/>
+    <xacro:property name="lidar_mount_w" value="0.075"/>
+    <xacro:property name="lidar_mount_t" value="0.075"/>
+    <xacro:property name="lidar_mount_mass" value="0.273"/>
+    <xacro:property name="lidar_mount_ixx" value="0.00693"/>
+    <xacro:property name="lidar_mount_ixy" value="0.0"/>
+    <xacro:property name="lidar_mount_ixz" value="0.0"/>
+    <xacro:property name="lidar_mount_iyy" value="0.000973"/>
+    <xacro:property name="lidar_mount_iyz" value="0.0"/>
+    <xacro:property name="lidar_mount_izz" value="0.00765"/>
+    <xacro:property name="lidar_mount_joint_x" value="0.38"/>
+    <xacro:property name="lidar_mount_joint_y" value="0.0"/>
+    <xacro:property name="lidar_mount_joint_z" value="0.025"/>
+
+    <xacro:property name="lidar_joint_x" value="0.04374"/>
     <xacro:property name="dummy_inertia" value="1e-09"/>
 </robot>

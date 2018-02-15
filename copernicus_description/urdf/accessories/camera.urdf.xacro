@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <joint name="base_to_camera" type="fixed">
             <parent link="base_link"/>
             <child link="${frame}"/>
-            <origin xyz="0 0 ${chassis_h}"/>
+            <origin xyz="0 0 ${base_h}"/>
         </joint>
 
         <link name="${frame}">

@@ -27,7 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
 
-<robot name="copernicus" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="copernicus_robot" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:include filename="$(find copernicus_description)/urdf/copernicus.urdf.xacro" />
   <xacro:copernicus_robot />
