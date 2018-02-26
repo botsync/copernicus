@@ -1,7 +1,5 @@
-footprint: [[-0.5, -0.35], [-0.5, 0.35], [0.5, 0.35], [0.5, -0.35]]
+footprint: [[-0.5, -0.5], [-0.5, 0.5], [0.6, 0.5], [0.6, -0.5]]
 footprint_padding: 0.05
-# footprint: [[-0.375, -0.3243], [-0.375, 0.3243], [0.375, 0.3243], [0.375, -0.3243]]
-# footprint_padding: 0.2
 robot_base_frame: base_link
 update_frequency: 5.0
 publish_frequency: 2.0
@@ -20,5 +18,5 @@ obstacles_laser:
     laser: {data_type: LaserScan, clearing: true, marking: true, topic: /scan_filtered, inf_is_valid: true}
 
 inflation:
-    inflation_radius: 0.1
-    # inflation_radius: 0.5
+  inflation_radius: 1.0
+  cost_scaling_factor: 3.0

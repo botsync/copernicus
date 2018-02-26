@@ -1,0 +1,141 @@
+controller_frequency: 3.0
+recovery_behaviour_enabled: True
+
+DWAPlannerROS:
+  # acc_lim_x: 1.9
+  # acc_lim_y: 0
+  # acc_lim_theta: 0.63
+
+  acc_lim_x: 0.5
+  acc_lim_trans: 0.5
+  acc_lim_y: 0.0
+  acc_lim_theta: 1.2
+
+  max_vel_x: 0.8
+  min_vel_x: 0.0
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+
+  max_trans_vel: 1.0
+  min_trans_vel: 0.05
+  max_rot_vel: 1.0
+  min_rot_vel: 0.1
+
+  yaw_goal_tolerance: 0.3
+  xy_goal_tolerance: 0.2
+  latch_xy_goal_tolerance: false
+
+  sim_time: 4.0
+  sim_granularity: 0.03
+  angular_sim_granularity: 0.05
+  vx_samples: 20
+  vy_samples: 0
+  vtheta_samples: 40
+
+  penalize_negative_x: true
+  path_distance_bias: 32.0
+  goal_distance_bias: 20.0
+  occdist_scale: 0.02
+  forward_point_distance: 0.4
+  stop_time_buffer: 0.2
+  scaling_speed: 0.2
+  max_scaling_factor: 0.1
+
+  oscillation_reset_dist: 1.0
+  oscillation_reset_angle: 1.0
+
+  prune_plan: true
+  use_dwa: true
+
+TebLocalPlannerROS:
+  odom_topic: odom
+
+  teb_autosize: True
+  dt_ref: 0.3
+  dt_hysteresis: 0.1
+  global_plan_overwrite_orientation: True
+  allow_init_with_backwards_motion: False
+  global_plan_viapoint_sep: -0.1
+  max_global_plan_lookahead_dist: 1.0
+  feasibility_check_no_poses: 5
+
+
+  acc_lim_x: 1.9
+  acc_lim_y: 0.0
+  acc_lim_theta: 0.63
+  max_vel_x: 1.0
+  max_vel_x_backwards: 0.2
+  max_vel_y: 0.0
+  max_vel_theta: 1.0
+  min_turning_radius: 0.0
+  
+  wheelbase: 1.3
+  cmd_angle_instead_rotvel: False
+
+  footprint_model:
+    # type: polygon
+    # vertices: [[-0.65, -0.5], [-0.65, 0.5], [0.75, 0.5], [0.75, -0.5]]
+    type: point
+    # radius: 0.55
+    # line_start: [-0.4, 0.0]
+    # line_end: [0.6, 0.0]
+
+  xy_goal_tolerance: 0.1
+  yaw_goal_tolerance: 0.1
+  free_goal_vel: False
+
+  min_obstacle_dist: 0.65
+  inflation_dist: 0.75
+
+  include_costmap_obstacles: True
+  costmap_obstacles_behind_robot_dist: 1.5
+  obstacle_poses_affected: 30
+  costmap_converter_plugin: ""
+  costmap_converter_spin_thread: True
+  costmap_converter_rate: 5
+
+  costmap_converter/CostmapToLinesDBSRANSAC:
+    cluster_max_distance: 0.4
+    cluster_min_pts: 2
+    ransac_inlier_distance: 0.15
+    ransac_min_inliers: 10
+    ransac_no_iterations: 1500
+    ransac_remainig_outliers: 3
+    ransac_convert_outlier_pts: True
+    ransac_filter_remaining_outlier_pts: False
+    convex_hull_min_pt_separation: 0.1
+
+  no_inner_iterations: 5
+  no_outer_iterations: 4
+  optimization_activate: True
+  optimization_verbose: False
+  penalty_epsilon: 0.1
+  weight_max_vel_x: 2
+  weight_max_vel_theta: 1.5
+  weight_acc_lim_x: 1
+  weight_acc_lim_theta: 1
+  weight_kinematics_nh: 1000
+  weight_kinematics_forward_drive: 5
+  weight_kinematics_turning_radius: 1
+  weight_optimaltime: 1
+  weight_obstacle: 50
+  weight_dynamic_obstacle: 10
+  weight_adapt_factor: 2
+
+  # Homotopy Class Planner
+
+  enable_homotopy_class_planning: True
+  enable_multithreading: True
+  simple_exploration: False
+  max_number_classes: 4
+  selection_cost_hysteresis: 1.0
+  selection_obst_cost_scale: 1.0
+  selection_alternative_time_cost: False
+
+  roadmap_graph_no_samples: 15
+  roadmap_graph_area_width: 5
+  h_signature_prescaler: 0.5
+  h_signature_threshold: 0.1
+  obstacle_keypoint_offset: 0.1
+  obstacle_heading_threshold: 0.45
+  visualize_hc_graph: False

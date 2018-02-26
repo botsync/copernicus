@@ -7,7 +7,7 @@
 #include "std_msgs/Bool.h"
 
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy);
-void pb_flags_callback(const copernicus_msgs::PBFlags pb_flags);
+void pb_flags_callback(const copernicus_msgs::PBFlags::ConstPtr& pb_flags);
 
 ros::Subscriber joy_sub;
 ros::Publisher cmd_vel_pub;

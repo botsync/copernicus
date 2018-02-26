@@ -32,9 +32,9 @@ int main(int argc, char** argv) {
 
     ros::Subscriber joy_subscriber = nh.subscribe(joy_topic, 1, joy_callback);
     ros::Subscriber pb_flags_subscriber;
-	
+
     if (enable_e_stop) {
-    	ROS_INFO("Enable e-stop: %d", enable_e_stop);
+	   ROS_INFO("Enable e-stop: %d", enable_e_stop);
         e_stop_pub = nh.advertise<copernicus_msgs::SubsPBFlags>(e_stop_pub_topic, 1);
         pb_flags_subscriber = nh.subscribe(e_stop_sub_topic, 1, pb_flags_callback);
     }
