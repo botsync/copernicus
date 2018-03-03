@@ -13,6 +13,7 @@ add_message_files(
   PID.msg
   PBFlags.msg
   SubsPBFlags.msg
+  BMS.msg
   )
 
 generate_messages(DEPENDENCIES std_msgs)
