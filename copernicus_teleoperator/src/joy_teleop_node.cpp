@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1); 
     stop_pub = nh.advertise<actionlib_msgs::GoalID>("/move_base/cancel", 1);
 
-    ros::Subscriber joy_subscriber = nh.subscribe(joy_topic, 1, joy_callback);
+    ros::Subscriber joy_subscriber = nh.subscribe(joy_topic, 10, joy_callback);
     ros::Subscriber pb_flags_subscriber;
 
     if (enable_e_stop) {
