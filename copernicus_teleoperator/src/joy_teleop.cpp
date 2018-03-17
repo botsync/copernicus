@@ -1,6 +1,6 @@
 #include <copernicus_teleoperator/joy_teleop.h>
 
-void pb_flags_callback(const copernicus_msgs::PBFlags::ConstPtr& pb_flags) {
+void pb_flags_callback(const copernicus_msgs::PBStatusFlags::ConstPtr& pb_flags) {
     software_e_stop_state = pb_flags->E_STOP_FLAG_SW;
     hardware_e_stop_state = pb_flags->E_STOP_FLAG_HW;
 }
@@ -8,11 +8,10 @@ void pb_flags_callback(const copernicus_msgs::PBFlags::ConstPtr& pb_flags) {
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
     geometry_msgs::Twist cmd;
 
-    if (enable_e_stop && joy->buttons[e_stop_button] && !software_e_stop_state && !hardware_e_stop_state) {
-        copernicus_msgs::SubsPBFlags e_stop_msg;
+    if (enable_e_stop && joy->buttons[e_stop_button] && !software_e_stop_state) {
+        std_msgs::Bool e_stop_msg;
 
-        e_stop_msg.E_STOP_FLAG_SW = true;
-        e_stop_msg.CHG_FLAG_SW = false;
+        e_stop_msg.data = true;
 
         // Publish 0 velocity
         cmd.linear.x = 0.0;
@@ -24,10 +23,9 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
 
         e_stop_pub.publish(e_stop_msg);
     } else if (enable_e_stop && joy->buttons[e_stop_button] && software_e_stop_state) {
-        copernicus_msgs::SubsPBFlags e_stop_msg;
+        std_msgs::Bool e_stop_msg;
 
-        e_stop_msg.E_STOP_FLAG_SW = false;
-        e_stop_msg.CHG_FLAG_SW = false;
+        e_stop_msg.data = true;
 
         // Publish 0 velocity
         cmd.linear.x = 0.0;

@@ -22,9 +22,9 @@ int main(int argc, char** argv) {
     std::string cmd_vel_topic, e_stop_pub_topic, joy_topic, e_stop_sub_topic;
 
     nh.param<std::string>("cmd_vel_topic", cmd_vel_topic, "/cmd_vel");
-    nh.param<std::string>("e_stop_pub_topic", e_stop_pub_topic, "/subsPBFlags");
+    nh.param<std::string>("e_stop_pub_topic", e_stop_pub_topic, "/e_stop_sw_flag");
 
-    nh.param<std::string>("e_stop_sub_topic", e_stop_sub_topic, "/PBFlags");
+    nh.param<std::string>("e_stop_sub_topic", e_stop_sub_topic, "/pb_status_flags");
     nh.param<std::string>("joy_topic", joy_topic, "/joy");
 
     cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1); 
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
     if (enable_e_stop) {
 	   ROS_INFO("Enable e-stop: %d", enable_e_stop);
-        e_stop_pub = nh.advertise<copernicus_msgs::SubsPBFlags>(e_stop_pub_topic, 1);
+        e_stop_pub = nh.advertise<std_msgs::Bool>(e_stop_pub_topic, 1);
         pb_flags_subscriber = nh.subscribe(e_stop_sub_topic, 1, pb_flags_callback);
     }
 

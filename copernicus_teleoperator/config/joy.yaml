@@ -13,7 +13,7 @@ sideways_speed_axis: -1
 enable_e_stop: 1
 
 cmd_vel_topic: /joy/cmd_vel
-e_stop_pub_topic: /subsPBFlags
+e_stop_pub_topic: /e_stop_sw_flag
 
-e_stop_sub_topic: /PBFlags
+e_stop_sub_topic: /pb_status_flags
 joy_topic: /joy
