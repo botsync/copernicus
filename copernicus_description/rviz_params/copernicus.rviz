@@ -7,9 +7,12 @@ Panels:
         - /Global Options1
         - /Status1
         - /Grid1
+        - /TF1
+        - /TF1/Frames1
+        - /Imu1
         - /Imu1/Axes properties1
       Splitter Ratio: 0.5
-    Tree Height: 786
+    Tree Height: 761
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -75,6 +78,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        dock:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         footprint:
           Alpha: 1
           Show Axes: false
@@ -117,12 +130,32 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
+        ar_marker_0:
+          Value: false
+        ar_marker_0_filtered:
+          Value: true
+        ar_marker_1:
+          Value: false
+        ar_marker_1_filtered:
+          Value: true
+        ar_marker_2:
+          Value: false
+        ar_marker_2_filtered:
+          Value: true
+        ar_marker_3:
+          Value: false
+        ar_marker_3_filtered:
+          Value: true
         back_left_wheel:
           Value: true
         back_right_wheel:
           Value: true
         base_link:
+          Value: true
+        camera:
+          Value: true
+        dock:
           Value: true
         footprint:
           Value: true
@@ -151,6 +184,25 @@ Visualization Manager:
             back_left_wheel:
               {}
             back_right_wheel:
+              {}
+            camera:
+              ar_marker_0:
+                {}
+              ar_marker_0_filtered:
+                {}
+              ar_marker_1:
+                {}
+              ar_marker_1_filtered:
+                {}
+              ar_marker_2:
+                {}
+              ar_marker_2_filtered:
+                {}
+              ar_marker_3:
+                {}
+              ar_marker_3_filtered:
+                {}
+            dock:
               {}
             footprint:
               {}
@@ -208,7 +260,7 @@ Visualization Manager:
         Derotate acceleration: true
         Enable acceleration: false
       Axes properties:
-        Axes scale: 1
+        Axes scale: 1.5
         Enable axes: true
       Box properties:
         Box alpha: 1
@@ -248,29 +300,34 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -1.56999016
-      Class: rviz/TopDownOrtho
+      Class: rviz/XYOrbit
+      Distance: 3.33571148
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
+      Focal Point:
+        X: -0.679255903
+        Y: -0.296206713
+        Z: 0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 149.798889
+      Pitch: 0.105397977
       Target Frame: <Fixed Frame>
-      Value: TopDownOrtho (rviz)
-      X: -0.143093556
-      Y: -0.310181767
+      Value: XYOrbit (rviz)
+      Yaw: 4.42858267
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1059
+  Height: 1034
   Hide Left Dock: false
-  Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd00000004000000000000016b000003a0fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000025000003a0000000d600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000037afc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007300000000280000037a000000ab00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007470000003efc0100000002fb0000000800540069006d0065010000000000000747000002a400fffffffb0000000800540069006d00650100000000000004500000000000000000000005d7000003a000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000016b00000387fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000002500000387000000d600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000387fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000002500000387000000ab00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000073f0000003efc0100000002fb0000000800540069006d006501000000000000073f000002a400fffffffb0000000800540069006d00650100000000000004500000000000000000000004bb0000038700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -278,7 +335,7 @@ Window Geometry:
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: true
-  Width: 1863
-  X: 57
-  Y: 21
+    collapsed: false
+  Width: 1855
+  X: 65
+  Y: 24

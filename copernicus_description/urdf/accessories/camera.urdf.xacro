@@ -33,20 +33,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <joint name="base_to_camera" type="fixed">
             <parent link="base_link"/>
             <child link="${frame}"/>
-            <origin xyz="0 0 ${base_h}"/>
+            <origin xyz="${dock_joint_x - dock_l + 0.024/2} ${dock_joint_y} ${ dock_joint_z+dock_h/2+0.029/2 }" rpy="0 0 ${-PI}"/>
         </joint>
 
         <link name="${frame}">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.07 0.09 0.07"/>
+                    <box size="0.024 0.094 0.029"/>
                 </geometry>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.07 0.09 0.07"/>
+                    <box size="0.024 0.094 0.029"/>
                 </geometry>
             </collision>
             <inertial>
@@ -62,7 +62,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <camera name="head">
                     <horizontal_fov>1.3962634</horizontal_fov>
                     <image>
-                        <width>1080</width>
+                        <width>1280</width>
                         <height>720</height>
                         <format>R8G8B8</format>
                     </image>

@@ -83,5 +83,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="lidar_mount_joint_z" value="0.025"/>
 
     <xacro:property name="lidar_joint_x" value="0.04374"/>
+
+    <xacro:property name="dock_joint_x" value="-0.38"/>
+    <xacro:property name="dock_joint_y" value="0.0"/>
+    <xacro:property name="dock_joint_z" value="0.025"/>
+    <xacro:property name="dock_l" value="0.125"/>
+    <xacro:property name="dock_w" value="0.459"/>
+    <xacro:property name="dock_h" value="0.144"/>
+
     <xacro:property name="dummy_inertia" value="1e-09"/>
 </robot>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+
+Copyright (c) 2017, Botsync Pte. Ltd.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Botsync Pte. Ltd. nor the 
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+
+<robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
+  <xacro:macro name="dock" params="frame:=dock robot_namespace:=/">
+      <joint name="dock_joint" type="fixed">
+          <origin xyz="${dock_joint_x} ${dock_joint_y} ${dock_joint_z}" rpy="${PI/2} 0 ${-PI/2}" />
+          <parent link="base_link" />
+          <child link="${frame}" />
+      </joint>
+      
+      <link name="${frame}">
+          <visual>
+              <origin/>
+              <geometry>
+                  <mesh filename="package://copernicus_description/meshes/dock.STL"/>
+              </geometry>
+              <material name="gray"/>
+          </visual>
+          <collision>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <geometry>
+                <mesh filename="package://copernicus_description/meshes/dock.STL"/>
+              </geometry>
+          </collision>
+          <inertial>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <mass value="1.8"/>
+              <inertia ixx="14.39" ixy="0.098" ixz="-2.092809"
+                iyx="0.098" iyy="48.66" iyz="-0.297"
+                izx="-2.092" izy="-0.297" izz="42.302"/>
+          </inertial>
+      </link>
+  </xacro:macro>
+</robot>

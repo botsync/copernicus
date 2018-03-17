@@ -40,6 +40,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:arg name="lidar_enabled" default="true"/>
     <xacro:arg name="imu_enabled" default="true"/>
     <xacro:arg name="gps_enabled" default="true"/>
+    <xacro:arg name="dock_enabled" default="true"/>
 
     <!-- TODO: Camera Mesh, Mount and Origin -->
     <xacro:arg name="camera_enabled" default="false"/>
@@ -93,6 +94,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <origin xyz="${-wheel_back_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
+        <!-- FIX: Gazebo differential drive plugin not working -->
         <!-- <gazebo>
             <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
                 <robotNamespace>/</robotNamespace>
@@ -132,6 +134,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <!-- TODO: Camera Mesh, Mount and Origin -->
         <xacro:if value="$(arg camera_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
+            <xacro:camera_></xacro:camera_>
+        </xacro:if>
+
+        <!-- Dock -->
+        <xacro:if value="$(arg dock_enabled)">
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/dock.urdf.xacro"/>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
+            <xacro:dock></xacro:dock>
             <xacro:camera_></xacro:camera_>
         </xacro:if>
     </xacro:macro>
