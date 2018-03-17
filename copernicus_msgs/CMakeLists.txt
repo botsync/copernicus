@@ -11,8 +11,9 @@ add_message_files(
   FILES
   Velocities.msg
   PID.msg
-  PBFlags.msg
+  PBStatusFlags.msg
   SubsPBFlags.msg
+  BMS.msg
   )
 
 generate_messages(DEPENDENCIES std_msgs)
