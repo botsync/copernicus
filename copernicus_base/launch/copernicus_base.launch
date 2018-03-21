@@ -69,6 +69,23 @@
           name="laser_filter">
             <rosparam command="load" file="$(find copernicus_base)/scan.yaml" />
         </node>
+
+        <!-- <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
+            <param name="ip_address" value="10.0.1.12"/>
+            <param name="serial_port" value=""/>
+            <param name="serial_baud" value=""/>
+            <param name="frame_id" value="lidar"/>
+            <param name="calibrate_time" value="true"/>
+            <param name="publish_intensity" value="true"/>
+            <param name="publish_multiecho" value="false"/>
+            <param name="angle_min" value="-2.35619"/>
+            <param name="angle_max" value="2.35619"/>
+        </node>
+
+        <node pkg="laser_filters" type="scan_to_scan_filter_chain"
+          name="laser_filter">
+            <rosparam command="load" file="$(find copernicus_base)/scan.yaml" />
+        </node> -->
     </group>
 
     <!-- <group>
