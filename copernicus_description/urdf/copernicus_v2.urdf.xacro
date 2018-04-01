@@ -51,8 +51,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
             <origin xyz="0 0 0.11457" rpy="0 0 0" />
-            <parent link="footprint" />
-            <child link="base_link" />
+            <parent link="base_link" />
+            <child link="footprint" />
         </joint>
 
         <!-- Chassis a.k.a base_link -->

@@ -21,11 +21,11 @@ DWAPlannerROS:
   max_rot_vel: 0.6
   min_rot_vel: 0.1
 
-  yaw_goal_tolerance: 0.3
-  xy_goal_tolerance: 0.2
+  yaw_goal_tolerance: 0.1
+  xy_goal_tolerance: 0.1
   latch_xy_goal_tolerance: false
 
-  sim_time: 4.0
+  sim_time: 2.0
   sim_granularity: 0.03
   angular_sim_granularity: 0.05
   vx_samples: 20
