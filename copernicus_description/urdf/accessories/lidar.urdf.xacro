@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                  min_angle:=-2.35619 max_angle:=2.35619 min_range:=0.5 max_range:=20.0 robot_namespace:=/">
 
       <joint name="lidar_mount_joint" type="fixed">
-          <origin xyz="${lidar_mount_joint_x} ${lidar_mount_joint_y} ${lidar_mount_joint_z}" rpy="0 0 0" />
+          <origin xyz="${lidar_mount_joint_x} ${lidar_mount_joint_y} ${lidar_mount_joint_z} " rpy="0 0 0" />
           <parent link="base_link" />
           <child link="lidar_mount" />
       </joint>
@@ -54,13 +54,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </collision>
           <inertial>
               <origin xyz="0 0 0" rpy="0 0 0"/>
-              <mass value="0.1"/>
+              <mass value="${lidar_mount_mass}"/>
               <inertia ixx="${lidar_mount_ixx}" ixy="${lidar_mount_ixy}" ixz="${lidar_mount_ixz}" iyy="${lidar_mount_iyy}" iyz="${lidar_mount_iyz}" izz="${lidar_mount_izz}" />
           </inertial>
       </link>
 
       <joint name="lidar_joint" type="fixed">
-          <origin xyz="${lidar_joint_x} 0 0" rpy="${PI} 0 0" />
+          <origin xyz="${lidar_joint_x} ${lidar_joint_y} ${lidar_joint_z}" rpy="${PI} 0 0" />
           <parent link="lidar_mount" />
           <child link="${frame}" />
       </joint>

@@ -26,34 +26,6 @@
             <remap from="imu" to="imu"/>
         </node>
 
-        <!-- <node pkg="tf" type="static_transform_publisher" name="tf_imu_ned_enu"
-        args="0 0 0 1.5708 0 3.1416 imu imu_link_ned 10" output="screen"/>
-
-        <node pkg="imu_transformer" type="imu_transformer_node" name="imu_data_transformer" output="screen">
-            <remap from="imu_in" to="imu/ned"/>
-            <remap from="imu_out" to="imu/enu"/>
-            <param name="target_frame" value="imu"/>
-        </node> -->
-
-        <!-- <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter">
-            <remap from="imu/data_raw" to="imu/ned/data"/>
-            <remap from="imu/mag" to="imu/ned/mag"/>
-            <rosparam>
-                use_mag: false
-                mag_bias_x: 0
-                mag_bias_y: 0
-                mag_bias_z: 0
-                orientation_stddev: 0.001
-                gain: 0.01
-                zeta: 0.001
-                publish_tf: false
-                world_frame: ned
-                use_magnetic_field_msg: false
-            </rosparam>
-        </node> -->
-
-        <!--<include file="$(find mavros_tests)/launch/mav.launch"/>-->
-
         <include file="$(find copernicus_localization)/launch/localization.launch"/>
 
     </group>

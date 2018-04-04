@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="model" default="$(find copernicus_description)/urdf/copernicus_v2.xacro"/>
+    <arg name="model" default="$(find copernicus_description)/urdf/copernicus.xacro"/>
     <arg name="viz_config" default="$(find copernicus_description)/rviz_params/copernicus.rviz"/>
 
     <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg model)"/>
