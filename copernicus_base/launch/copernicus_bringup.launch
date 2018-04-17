@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <group>
-        <node name="SerialComm" pkg="rosserial_python" type="serial_node.py">
+        <node name="SerialComm" pkg="rosserial_python" type="serial_node.py" output="screen">
           <param name="port" value="/dev/rdc" />
           <param name="baud" value="57600" />
         </node>

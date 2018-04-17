@@ -31,19 +31,14 @@
     </group>
 
     <group>
-        <node pkg="lms1xx" name="lms1xx" type="LMS1xx_node" output="screen">
+        <!--<node pkg="lms1xx" name="lms1xx" type="LMS1xx_node" output="screen">
             <param name="host" value="10.0.1.11" />
             <param name="frame_id" value="lidar" />
             <param name="publish_min_range_as_inf" value="true" />
-        </node>
+        </node>-->
 
-        <node pkg="laser_filters" type="scan_to_scan_filter_chain"
-          name="laser_filter">
-            <rosparam command="load" file="$(find copernicus_base)/scan.yaml" />
-        </node>
-
-        <!-- <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
-            <param name="ip_address" value="10.0.1.12"/>
+        <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
+            <param name="ip_address" value="192.168.0.10"/>
             <param name="serial_port" value=""/>
             <param name="serial_baud" value=""/>
             <param name="frame_id" value="lidar"/>
@@ -57,7 +52,7 @@
         <node pkg="laser_filters" type="scan_to_scan_filter_chain"
           name="laser_filter">
             <rosparam command="load" file="$(find copernicus_base)/scan.yaml" />
-        </node> -->
+        </node> 
     </group>
 
     <!-- <group>
