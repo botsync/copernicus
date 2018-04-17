@@ -82,9 +82,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="lidar_mount_joint_y" value="0.0"/>
     <xacro:property name="lidar_mount_joint_z" value="0.2195"/>
 
-    <xacro:property name="lidar_joint_x" value="0.075"/>
+    <xacro:property name="lidar_joint_x" value="0.093"/>
     <xacro:property name="lidar_joint_y" value="0.0"/>
-    <xacro:property name="lidar_joint_z" value="0.05"/>
+    <xacro:property name="lidar_joint_z" value="-0.05"/>
 
     <xacro:property name="dummy_inertia" value="1e-09"/>
 </robot>

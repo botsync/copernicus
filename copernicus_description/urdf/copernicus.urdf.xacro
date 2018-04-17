@@ -119,7 +119,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/hokuyo_ust20lx.urdf.xacro"/>
             <xacro:lidar></xacro:lidar>
         </xacro:if>
 
