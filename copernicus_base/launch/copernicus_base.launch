@@ -28,6 +28,8 @@
 
         <include file="$(find copernicus_localization)/launch/localization.launch"/>
 
+        <node name="robot_pose_publisher" pkg="robot_pose_publisher" type="robot_pose_publisher"/>
+
     </group>
 
     <group>
@@ -75,11 +77,11 @@
         </node> 
     </group>
 
-    <!-- <group>
+    <group>
         <node name="Camera" pkg="usb_cam" type="usb_cam_node">
             <remap from="/Camera/image_raw" to="/image_raw" />
 
-            <param name="video_device" value="/dev/video0" />
+            <param name="video_device" value="/dev/video1" />
             <param name="image_width" value="640" />
             <param name="image_height" value="480" />
             <param name="pixel_format" value="yuyv" />
@@ -96,6 +98,6 @@
 
         <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
         </include>
-    </group> -->
+    </group>
 
 </launch>
