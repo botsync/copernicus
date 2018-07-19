@@ -3,7 +3,7 @@
     <arg name="gmapping" default="true"/>
     <arg name="scan_topic" default="/scan_filtered" />
     <arg name="use_map_topic" default="true"/>
-    <arg name="map_file" default="$(find copernicus_navigation)/maps/0202.yaml"/>
+    <arg name="map_file" default="$(find copernicus_navigation)/maps/map1.yaml"/>
     <arg name="base_global" default="navfn/NavfnROS"/>
     <arg name="base_local" default="dwa_local_planner/DWAPlannerROS"/>
 
@@ -15,10 +15,10 @@
         <remap from="scan" to="$(arg scan_topic)"/>
     </node>
 
-    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
+    <!--<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/gmapping.yaml" command="load"/>
         <remap from="/scan" to="$(arg scan_topic)"/>
-    </node>
+    </node>-->
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <remap from="/odom" to="$(arg odom_topic)" />

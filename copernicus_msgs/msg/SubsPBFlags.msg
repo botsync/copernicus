@@ -1,2 +1,0 @@
-bool E_STOP_FLAG_SW
-bool CHG_FLAG_SW

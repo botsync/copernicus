@@ -146,25 +146,26 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          odom:
-            base_link:
-              back_left_wheel:
+          {}
+        odom:
+          base_link:
+            back_left_wheel:
+              {}
+            back_right_wheel:
+              {}
+            footprint:
+              {}
+            front_left_wheel:
+              {}
+            front_right_wheel:
+              {}
+            gps:
+              {}
+            imu:
+              {}
+            lidar_mount:
+              lidar:
                 {}
-              back_right_wheel:
-                {}
-              footprint:
-                {}
-              front_left_wheel:
-                {}
-              front_right_wheel:
-                {}
-              gps:
-                {}
-              imu:
-                {}
-              lidar_mount:
-                lidar:
-                  {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988
@@ -243,14 +244,6 @@ Visualization Manager:
       Unreliable: false
       Use Timestamp: false
       Value: true
-    - Class: rviz/Marker
-      Enabled: true
-      Marker Topic: visualization_marker
-      Name: Marker
-      Namespaces:
-        {}
-      Queue Size: 100
-      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -266,9 +259,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 999999
+      Max Intensity: 0
       Min Color: 0; 0; 0
-      Min Intensity: 999999
+      Min Intensity: 0
       Name: LaserScan
       Position Transformer: XYZ
       Queue Size: 10
@@ -280,6 +273,14 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /visualization_marker
+      Name: MarkerArray
+      Namespaces:
+        waypoints: true
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -315,11 +316,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 95.4411545
+      Scale: 70.1897659
       Target Frame: base_link
       Value: TopDownOrtho (rviz)
-      X: -0.0467982292
-      Y: 0.721238613
+      X: 0.38570407
+      Y: 0.158002287
     Saved: ~
 Window Geometry:
   Displays:

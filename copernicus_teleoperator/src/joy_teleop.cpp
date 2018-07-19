@@ -30,14 +30,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <copernicus_teleoperator/joy_teleop.h>
 
 void pb_flags_callback(const copernicus_msgs::PBStatusFlags::ConstPtr& pb_flags) {
-    software_e_stop_state = pb_flags->E_STOP_FLAG_SW;
-    hardware_e_stop_state = pb_flags->E_STOP_FLAG_HW;
+    e_stop_status = pb_flags->E_STOP_FLAG;
 }
 
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
     geometry_msgs::Twist cmd;
 
-    if (enable_e_stop && joy->buttons[e_stop_button] && !software_e_stop_state) {
+    if (enable_e_stop && joy->buttons[e_stop_button] && !e_stop_status) {
         std_msgs::Bool e_stop_msg;
 
         e_stop_msg.data = true;
@@ -51,10 +50,10 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
         cmd.angular.z = 0.0;
 
         e_stop_pub.publish(e_stop_msg);
-    } else if (enable_e_stop && joy->buttons[e_stop_button] && software_e_stop_state) {
+    } else if (enable_e_stop && joy->buttons[e_stop_button] && e_stop_status) {
         std_msgs::Bool e_stop_msg;
 
-        e_stop_msg.data = true;
+        e_stop_msg.data = false;
 
         // Publish 0 velocity
         cmd.linear.x = 0.0;

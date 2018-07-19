@@ -34,8 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <actionlib_msgs/GoalID.h>
 #include <std_msgs/Bool.h>
 
-bool software_e_stop_state = false;
-bool hardware_e_stop_state = true;
+bool e_stop_status = false;
 
 int enable_button;
 int stop_button;
