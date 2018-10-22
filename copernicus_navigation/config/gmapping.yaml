@@ -4,9 +4,9 @@ map_frame: map
 
 map_update_interval: 0.5
 
-maxUrange: 5.5
-maxRange: 6.1
-particles: 100
+maxUrange: 20.0
+maxRange: 49.0
+particles: 30
 
 linearUpdate: 0.3
 angularUpdate: 0.5

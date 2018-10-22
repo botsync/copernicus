@@ -78,23 +78,23 @@ ekf_se_map:
   transform_timeout: 0.0
   print_diagnostics: true
   debug: false
-  publish_tf: false
+  publish_tf: true
 
   map_frame: map
   odom_frame: odom
   base_link_frame: base_link
   world_frame: map
 
-  odom0: /odometry/wheel
-  odom0_config: [true,  true, false,
-                 false, false, true,
+  odom0: /odom
+  odom0_config: [false,  false, false,
+                 false, false, false,
                  true,  true,  false,
-                 false, false, true,
+                 false, false, false,
                  false, false, false]
   odom0_queue_size: 10
   odom0_nodelay: true
   odom0_differential: false
-  odom0_relative: false
+  odom0_relative: true
 
   odom1: /odometry/gps
   odom1_config: [true,  true,  false,
@@ -102,10 +102,11 @@ ekf_se_map:
                  false, false, false,
                  false, false, false,
                  false, false, false]
+                 
   odom1_queue_size: 10
   odom1_nodelay: true
   odom1_differential: false
-  odom1_relative: false
+  odom1_relative: true
 
   imu0: /imu/data
   imu0_config: [false, false, false,
@@ -115,7 +116,7 @@ ekf_se_map:
                 false,  false,  false]
   imu0_nodelay: true
   imu0_differential: false
-  imu0_relative: false
+  imu0_relative: true
   imu0_queue_size: 10
   imu0_remove_gravitational_acceleration: true
 
@@ -156,12 +157,12 @@ ekf_se_map:
 navsat_transform:
   frequency: 30
   delay: 3.0
-  # magnetic_declination_radians: 0.002268928
-  # yaw_offset: 0.0
-  # datum: [latitude, longitude, orientation in ENU format, map frame, robot frame]
-  datum: [1.355841, 103.692354, 0.0, 0.0, map, base_link]
+  magnetic_declination_radians: 0.002268928
+  yaw_offset: 0.0
+  #datum: [latitude, longitude, orientation in ENU format, map frame, robot frame]
+  #datum: [1.355841, 103.692354, 0.0, 0.0, map, base_link]
   zero_altitude: true
   broadcast_utm_transform: true
   publish_filtered_gps: true
-  use_odometry_yaw: true
-  wait_for_datum: true
+  use_odometry_yaw: false
+  wait_for_datum: false

@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <robot name="copernicus" xmlns:xacro="https://ros.org/wiki/xacro">
   <xacro:macro name="lidar" params="frame:=lidar topic:=scan_filtered sample_size:=720 update_rate:=50
-                 min_angle:=-1.57 max_angle:=1.57 min_range:=0.5 max_range:=20.0 robot_namespace:=/">
+                 min_angle:=-1.57 max_angle:=1.57 min_range:=0.5 max_range:=10.0 robot_namespace:=/">
 
       <joint name="lidar_mount_joint" type="fixed">
           <origin xyz="${lidar_mount_joint_x} ${lidar_mount_joint_y} ${lidar_mount_joint_z} " rpy="0 0 0" />

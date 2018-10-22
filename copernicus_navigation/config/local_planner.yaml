@@ -1,15 +1,28 @@
 controller_frequency: 5.0
-recovery_behaviour_enabled: false
+controller_patience: 10.0
+planner_frequency: 0.5
+planner_patience: 10.0
+shutdown_costmaps: false
+oscillation_distance: 0.2
+oscillation_timeout: 10.0
+conservative_reset_dist: 0.2
+cost_factor: 1.0
+neutral_cost: 55
+lethal_cost: 253
+
+recovery_behaviour_enabled: true
+recovery_behaviors: [{name: conservative_reset, type: clear_costmap_recovery/ClearCostmapRecovery}, {name: aggressive_reset, type: clear_costmap_recovery/ClearCostmapRecovery}] 
+
 
 DWAPlannerROS:
   # acc_lim_x: 1.9
   # acc_lim_y: 0
   # acc_lim_theta: 0.63
 
-  acc_lim_x: 0.8
-  acc_lim_trans: 0.8
+  acc_lim_x: 1.5
+  acc_lim_trans: 1.5
   acc_lim_y: 0.0
-  acc_lim_theta: 1.0
+  acc_lim_theta: 1.5
 
   max_vel_x: 0.7
   min_vel_x: 0.05
@@ -18,54 +31,57 @@ DWAPlannerROS:
 
   max_trans_vel: 0.7
   min_trans_vel: 0.05
-  max_rot_vel: 0.8
-  min_rot_vel: 0.05
+  max_rot_vel: 0.9
+  min_rot_vel: 0.2
+  trans_stopped_vel: 0.1
+  rot_stopped_vel: 0.1
+  yaw_goal_tolerance: 1.0
+  xy_goal_tolerance: 1.0
+  latch_xy_goal_tolerance: true
 
-  yaw_goal_tolerance: 0.3
-  xy_goal_tolerance: 0.3
-  latch_xy_goal_tolerance: false
-
-  sim_time: 4.0
+  sim_time: 1.5
   sim_granularity: 0.03
   angular_sim_granularity: 0.05
-  vx_samples: 20
+  vx_samples: 10
   vy_samples: 0
-  vtheta_samples: 30
+  vtheta_samples: 20
 
   penalize_negative_x: true
   #path_distance_bias: 32.0
-  path_distance_bias: 30.0
+  path_distance_bias: 32.0
   goal_distance_bias: 24.0
-  occdist_scale: 0.02
-  forward_point_distance: 0.4
+  occdist_scale: 0.1
+  forward_point_distance: 0.6
   stop_time_buffer: 0.2
-  scaling_speed: 0.2
+  scaling_speed: 0.1
+  control_frequency: 10.0
   max_scaling_factor: 0.1
 
-  oscillation_reset_dist: 1.0
-  oscillation_reset_angle: 1.0
+  oscillation_reset_dist: 0.1
+  oscillation_reset_angle: 0.1
 
   prune_plan: true
   use_dwa: true
 
 TebLocalPlannerROS:
-  odom_topic: odom
+  odom_topic: odometry/filtered
+  map_frame: map
 
   teb_autosize: True
   dt_ref: 0.3
   dt_hysteresis: 0.1
   global_plan_overwrite_orientation: True
   allow_init_with_backwards_motion: False
-  global_plan_viapoint_sep: -0.1
-  max_global_plan_lookahead_dist: 1.0
-  feasibility_check_no_poses: 5
+  global_plan_viapoint_sep: -0.5
+  max_global_plan_lookahead_dist: 3.0
+  feasibility_check_no_poses: 2
 
 
-  acc_lim_x: 1.9
+  acc_lim_x: 1.5
   acc_lim_y: 0.0
-  acc_lim_theta: 0.63
-  max_vel_x: 1.0
-  max_vel_x_backwards: 0.2
+  acc_lim_theta: 1.5
+  max_vel_x: 0.7
+  max_vel_x_backwards: 0.0
   max_vel_y: 0.0
   max_vel_theta: 1.0
   min_turning_radius: 0.0
@@ -74,22 +90,22 @@ TebLocalPlannerROS:
   cmd_angle_instead_rotvel: False
 
   footprint_model:
-    # type: polygon
-    # vertices: [[-0.65, -0.5], [-0.65, 0.5], [0.75, 0.5], [0.75, -0.5]]
-    type: point
+    type: polygon
+    vertices: [[-0.4, -0.4], [-0.4, 0.4], [0.5, 0.4], [0.5, -0.4]]
+    # type: point
     # radius: 0.55
     # line_start: [-0.4, 0.0]
     # line_end: [0.6, 0.0]
 
-  xy_goal_tolerance: 0.1
-  yaw_goal_tolerance: 0.1
+  xy_goal_tolerance: 0.3
+  yaw_goal_tolerance: 0.3
   free_goal_vel: False
 
-  min_obstacle_dist: 0.65
-  inflation_dist: 0.75
+  min_obstacle_dist: 0.4
+  inflation_dist: 0.4
 
   include_costmap_obstacles: True
-  costmap_obstacles_behind_robot_dist: 1.5
+  costmap_obstacles_behind_robot_dist: 2.0
   obstacle_poses_affected: 30
   costmap_converter_plugin: ""
   costmap_converter_spin_thread: True
@@ -116,12 +132,13 @@ TebLocalPlannerROS:
   weight_acc_lim_x: 1
   weight_acc_lim_theta: 1
   weight_kinematics_nh: 1000
-  weight_kinematics_forward_drive: 5
+  weight_kinematics_forward_drive: 2
   weight_kinematics_turning_radius: 1
   weight_optimaltime: 1
-  weight_obstacle: 50
-  weight_dynamic_obstacle: 10
+  weight_obstacle: 100
+  weight_dynamic_obstacle: 30
   weight_adapt_factor: 2
+  weight_viapoint: 1.0
 
   # Homotopy Class Planner
 

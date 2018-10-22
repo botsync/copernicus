@@ -1,0 +1,44 @@
+<launch>
+   
+   <!--
+      Demo of outdoor stereo mapping. 
+      From bag: 
+      $ rosbag record 
+            /stereo_camera/left/image_raw_throttle/compressed 
+            /stereo_camera/right/image_raw_throttle/compressed 
+            /stereo_camera/left/camera_info_throttle 
+            /stereo_camera/right/camera_info_throttle 
+            /tf
+    
+      $ roslaunch rtabmap demo_stereo_outdoor.launch
+      $ rosbag play -.-clock stereo_oudoorA.bag
+   -->
+   
+   <!-- Choose visualization -->
+   <arg name="rtabmapviz" default="false" />
+   <arg name="rviz" default="false" />
+   <arg name="rgb_topic" default="zed/rgb/image_rect_color" />
+   <arg name="depth_topic" default="zed/depth/depth_registered" />
+   <arg name="camera_info_topic" default="zed/rgb/camera_info" />
+   <arg name="depth_camera_info_topic" default="zed/depth/camera_info" />
+   <arg name="camera_frame" default="zed_camera_center" />
+    
+   <param name="use_sim_time" type="bool" value="false"/>
+
+   <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+      <arg name="namespace" value=""/>
+     <arg name="rtabmap_args" value="--delete_db_on_start" />
+     <arg name="rgb_topic" value="$(arg rgb_topic)" />
+     <arg name="depth_topic" value="$(arg depth_topic)" />
+     <arg name="camera_info_topic" value="$(arg camera_info_topic)" />
+     <arg name="depth_camera_info_topic" value="$(arg depth_camera_info_topic)" />
+     <arg name="frame_id" value="base_link" />
+     <arg name="visual_odometry" value="false"/>
+     <arg name="odom_topic" value="/odometry/filtered"/>
+     <arg name="odom_frame_id" value="odom"/>
+     <arg name="approx_sync" value="true"/>
+     <arg name="rtabmapviz" value="false"/>
+     <arg name="rviz" value="false"/>
+     <!-- <arg name="subscribe_depth" value="true"/> -->
+   </include>
+</launch>

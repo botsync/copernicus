@@ -41,8 +41,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:arg name="imu_enabled" default="true"/>
     <xacro:arg name="gps_enabled" default="true"/>
 
-    <!-- TODO: Camera Mesh, Mount and Origin -->
     <xacro:arg name="camera_enabled" default="false"/>
+    <xacro:arg name="zed_camera_enabled" default="true"/>
 
     <xacro:macro name="copernicus_robot">
         <!-- Footprint -->
@@ -119,7 +119,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/sick_tim_551.urdf.xacro"/>
+            <!-- <xacro:include filename="$(find copernicus_description)/urdf/accessories/hokuyo_ust20lx.urdf.xacro"/> -->
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
             <xacro:lidar></xacro:lidar>
         </xacro:if>
 
@@ -130,10 +131,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </xacro:if>
 
         <!-- Camera -->
-        <!-- TODO: Camera Mesh, Mount and Origin -->
         <xacro:if value="$(arg camera_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
             <xacro:camera_></xacro:camera_>
+        </xacro:if>
+
+        <!-- ZED camera -->
+        <xacro:if value="$(arg zed_camera_enabled)">
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
+            <xacro:camera_ frame="zed_camera_center"></xacro:camera_>
         </xacro:if>
     </xacro:macro>
 </robot>

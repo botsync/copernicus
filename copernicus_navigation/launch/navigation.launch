@@ -3,7 +3,7 @@
     <arg name="gmapping" default="true"/>
     <arg name="scan_topic" default="/scan_filtered" />
     <arg name="use_map_topic" default="true"/>
-    <arg name="map_file" default="$(find copernicus_navigation)/maps/map1.yaml"/>
+    <arg name="map_file" default="$(find copernicus_navigation)/maps/outdoor.yaml"/>
     <arg name="base_global" default="navfn/NavfnROS"/>
     <arg name="base_local" default="dwa_local_planner/DWAPlannerROS"/>
 
@@ -15,10 +15,10 @@
         <remap from="scan" to="$(arg scan_topic)"/>
     </node>
 
-    <!--<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/gmapping.yaml" command="load"/>
         <remap from="/scan" to="$(arg scan_topic)"/>
-    </node>-->
+    </node>
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <remap from="/odom" to="$(arg odom_topic)" />
@@ -29,7 +29,6 @@
 
         <rosparam file="$(find copernicus_navigation)/config/global_planner.yaml" command="load"/>
         <rosparam file="$(find copernicus_navigation)/config/local_planner.yaml" command="load"/>
-        <param name="recovery_behavior_enabled" value="false"/>
 
         <rosparam file="$(find copernicus_navigation)/config/costmap.yaml" command="load" ns="global_costmap" />
         <rosparam file="$(find copernicus_navigation)/config/costmap.yaml" command="load" ns="local_costmap" />
@@ -39,7 +38,7 @@
         <param name="local_costmap/height" value="5.0"/>
 
         <rosparam file="$(find copernicus_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap"/>
-        <param name="global_costmap/width" value="50.0" />
-        <param name="global_costmap/height" value="50.0" />
+        <param name="global_costmap/width" value="20.0" />
+        <param name="global_costmap/height" value="20.0" />
     </node>
 </launch>
