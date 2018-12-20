@@ -5,7 +5,7 @@ ekf_se_odom:
   transform_time_offset: 0.0
   transform_timeout: 0.0
   print_diagnostics: false
-  debug: true
+  debug: false
 
   # map_frame: map
   odom_frame: odom
@@ -13,7 +13,7 @@ ekf_se_odom:
   world_frame: odom
   publish_tf: true
 
-  odom0: /odom
+  odom0: odometry/wheel
   odom0_config: [false,  false, false,
                  false, false, false,
                  true,  true,  false,
@@ -24,7 +24,7 @@ ekf_se_odom:
   odom0_differential: false
   # odom0_relative: false
 
-  imu0: /imu/data
+  imu0: imu/data
   imu0_config: [false, false, false,
                 false,  false,  false,
                 false, false, false,
@@ -85,7 +85,7 @@ ekf_se_map:
   base_link_frame: base_link
   world_frame: map
 
-  odom0: /odom
+  odom0: odometry_wheel
   odom0_config: [false,  false, false,
                  false, false, false,
                  true,  true,  false,
@@ -96,7 +96,7 @@ ekf_se_map:
   odom0_differential: false
   odom0_relative: true
 
-  odom1: /odometry/gps
+  odom1: odometry/gps
   odom1_config: [true,  true,  false,
                  false, false, false,
                  false, false, false,
@@ -108,7 +108,7 @@ ekf_se_map:
   odom1_differential: false
   odom1_relative: true
 
-  imu0: /imu/data
+  imu0: imu/data
   imu0_config: [false, false, false,
                 false,  false,  true,
                 false, false, false,

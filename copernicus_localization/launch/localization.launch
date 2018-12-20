@@ -7,7 +7,7 @@
     <rosparam command="load" file="$(find copernicus_localization)/config/localization.yaml" />
     
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true" output="screen">
-        <remap from="/odometry/filtered" to="/odometry/filtered"/>
+        <remap from="odometry/filtered" to="odometry/filtered"/>
     </node>
 
     <!--<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true" if="$(arg gps)">

@@ -37,12 +37,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="PI" value="3.14159"/>
 
     <!-- xacro args -->
+    <xacro:arg name="robot_namespace" default="/" />
+    <xacro:arg name="tf_pre" default="" />
+    
     <xacro:arg name="lidar_enabled" default="true"/>
+    
     <xacro:arg name="imu_enabled" default="true"/>
+    
     <xacro:arg name="gps_enabled" default="true"/>
+    <xacro:arg name="ref_latitude" default="0.0"/>
+    <xacro:arg name="ref_longitude" default="0.0"/>
 
     <xacro:arg name="camera_enabled" default="false"/>
-    <xacro:arg name="zed_camera_enabled" default="true"/>
+    <xacro:arg name="zed_camera_enabled" default="false"/>
 
     <xacro:macro name="copernicus_robot">
         <!-- Footprint -->
@@ -50,7 +57,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 0.11457" rpy="0 0 0" />
+            <origin xyz="0 0 ${base_underside_h}" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="footprint" />
         </joint>
@@ -94,52 +101,42 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
         </xacro:copernicus_wheel>
 
-        <!-- <gazebo>
-            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-                <robotNamespace>/</robotNamespace>
-            </plugin>
-        </gazebo> -->
-
         <gazebo>
-            <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
-                <robotNamespace>/</robotNamespace>
-                <commandTopic>/cmd_vel</commandTopic>
-                <odometryTopic>odometry/wheel</odometryTopic>
-                <odometryFrame>odom</odometryFrame>
-                <odometryRate>30.0</odometryRate>
-                <robotBaseFrame>base_link</robotBaseFrame>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+                <robotNamespace>$(arg robot_namespace)</robotNamespace>
+                <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
             </plugin>
         </gazebo>
 
         <!-- IMU -->
         <xacro:if value="$(arg imu_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/imu.urdf.xacro"/>
-            <xacro:imu></xacro:imu>
+            <xacro:imu robot_namespace="$(arg robot_namespace)" tf_pre="$(arg tf_pre)"></xacro:imu>
         </xacro:if>
 
         <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
             <!-- <xacro:include filename="$(find copernicus_description)/urdf/accessories/hokuyo_ust20lx.urdf.xacro"/> -->
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
-            <xacro:lidar></xacro:lidar>
+            <xacro:lidar robot_namespace="$(arg robot_namespace)"></xacro:lidar>
         </xacro:if>
 
         <!-- GPS -->
         <xacro:if value="$(arg gps_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/gps.urdf.xacro"/>
-            <xacro:gps></xacro:gps>
+            <xacro:gps robot_namespace="$(arg robot_namespace)" ref_latitude="$(arg ref_latitude)" ref_longitude="$(arg ref_longitude)" tf_pre="$(arg tf_pre)"></xacro:gps>
         </xacro:if>
 
         <!-- Camera -->
         <xacro:if value="$(arg camera_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
-            <xacro:camera_></xacro:camera_>
+            <xacro:camera_ robot_namespace="$(arg robot_namespace)"></xacro:camera_>
         </xacro:if>
 
         <!-- ZED camera -->
         <xacro:if value="$(arg zed_camera_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
-            <xacro:camera_ frame="zed_camera_center"></xacro:camera_>
+            <xacro:camera_ frame="zed_camera_center" robot_namespace="$(arg robot_namespace)"></xacro:camera_>
         </xacro:if>
     </xacro:macro>
 </robot>

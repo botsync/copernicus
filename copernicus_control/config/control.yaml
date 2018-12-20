@@ -1,3 +1,7 @@
+copernicus_joint_publisher:
+  type: "joint_state_controller/JointStateController"
+  publish_rate: 50
+
 copernicus_base_controller:
   type: "diff_drive_controller/DiffDriveController"
   left_wheel: ['front_left_wheel_joint', 'back_left_wheel_joint']
@@ -5,21 +9,21 @@ copernicus_base_controller:
   publish_rate: 20
   pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
   twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
-  cmd_vel_timeout: 10.0
+  cmd_vel_timeout: 1000.0
   base_frame_id: base_link
-  enable_odom_tf: true
+  enable_odom_tf: false
   estimate_velocity_from_position: false
   wheel_separation_multiplier: 1.0
   wheel_radius_multiplier    : 1.0
   linear:
     x:
       has_velocity_limits    : true
-      max_velocity           : 1.0
+      max_velocity           : 1.5
       has_acceleration_limits: true
       max_acceleration       : 2.0
   angular:
     z:
       has_velocity_limits    : true
-      max_velocity           : 2.0
-      has_acceleration_limits: true
-      max_acceleration       : 6.0
+      max_velocity           : 1.5
+      has_acceleration_limits: false
+      max_acceleration       : 2.0
