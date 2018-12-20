@@ -57,8 +57,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <gazebo reference="${wheel_prefix}_wheel">
             <material>Gazebo/Black</material>
             <mu1 value="1.0"/>
-            <mu2 value="1.0"/><!-- 
-            <fdir1 value="1 0 0"/> -->
+            <mu2 value="1.0"/>
+            <kp value="10000000.0" />
+            <kd value="1.0" />
+            <fdir1 value="1 0 0"/>
         </gazebo>
 
         <!-- Wheel Joint -->
@@ -70,13 +72,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </joint>
 
         <!-- Wheel Transmission -->
-        <transmission name="${wheel_prefix}_wheel_transmission">
+        <transmission name="${wheel_prefix}_wheel_transmission" type="SimpleTransmission">
             <type>transmission_interface/SimpleTransmission</type>
             <joint name="${wheel_prefix}_wheel_joint">
                 <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
             </joint>
             <actuator name="${wheel_prefix}_motor">
-                <hardwareInterface>EffortJointInterface</hardwareInterface>
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
         </transmission>
