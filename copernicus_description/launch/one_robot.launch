@@ -1,12 +1,12 @@
 <launch>
-    <arg name="robot_namespace" default="copernicus1"/>
+    <arg name="robot_namespace" default="/"/>
     <arg name="initX" default="0"/>
     <arg name="initY" default="0"/>
     <arg name="initYaw" default="0"/>
     <arg name="ref_latitude" default="1.3558320252002594"/>
     <arg name="ref_longitude" default="103.6922425031662"/>
-    <arg name="tf_prefix" default="copernicus1_tf"/>
-    <arg name="tf_pre" default="copernicus1_tf/"/>
+    <arg name="tf_prefix" default=""/>
+    <arg name="tf_pre" default=""/>
 
     <arg name="map_file" default="$(find copernicus_navigation)/maps/gazebo.yaml"/>
     <arg name="gmapping" default="false"/>
