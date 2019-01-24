@@ -9,6 +9,7 @@
     <arg name="tf_pre" default=""/>
 
     <arg name="map_file" default="$(find copernicus_navigation)/maps/gazebo.yaml"/>
+    <arg name="map_no_go_zones_file" default="$(find copernicus_navigation)/maps/gazebo_no_go_zones.yaml"/>
     <arg name="gmapping" default="false"/>
 
     <arg name="viz_config" default="$(find copernicus_description)/rviz_params/copernicus.rviz"/>
@@ -32,6 +33,19 @@
         <include file="$(find copernicus_localization)/launch/localization.launch">
         </include>
 
+        <node name="pointcloud_to_laserscan" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node">
+            <param name="min_height" value="0.1"/>
+            <param name="max_height" value="5"/>
+            <param name="range_max" value="50"/>
+            <param name="angle_min" value="-1.57"/>
+            <param name="angle_max" value="1.57"/>
+            <param name="target_frame" value="base_link"/>
+            <param name="use_inf" value="true"/>
+
+            <remap from="cloud_in" to="velodyne_points"/>
+            <remap from="scan" to="scan_filtered"/>
+        </node>
+
         <include file="$(find copernicus_navigation)/launch/navigation.launch">
             <arg name="odom_frame" value="$(arg tf_pre)odom"/>
             <arg name="base_frame" value="$(arg tf_pre)base_link"/>
@@ -42,8 +56,13 @@
             <arg name="amcl_init_pose_x" value="0"/>
             <arg name="amcl_init_pose_y" value="0"/>
             <arg name="amcl_init_pose_yaw" value="0"/>
+
+            <arg name="amcl_tf_broadcast" value="true"/>
         </include>
     </group>
 
     <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" unless="$(arg gmapping)"/>
+    <node name="map_server_no_go" pkg="map_server" type="map_server" args="$(arg map_no_go_zones_file)" unless="$(arg gmapping)">
+        <remap from="map" to="map_no_go"/>
+    </node>
 </launch>

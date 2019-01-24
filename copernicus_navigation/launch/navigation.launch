@@ -58,5 +58,6 @@
         <rosparam file="$(find copernicus_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap"/>
         <param name="global_costmap/width" value="20.0" />
         <param name="global_costmap/height" value="20.0" />
+        <param name="global_costmap/obstacle_layer/enabled" value="true" />
     </node>
 </launch>

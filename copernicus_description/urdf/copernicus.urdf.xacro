@@ -40,7 +40,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:arg name="robot_namespace" default="/" />
     <xacro:arg name="tf_pre" default="" />
     
-    <xacro:arg name="lidar_enabled" default="true"/>
+    <xacro:arg name="lidar_enabled" default="false"/>
+    <xacro:arg name="velodyne_enabled" default="true"/>
     
     <xacro:arg name="imu_enabled" default="true"/>
     
@@ -137,6 +138,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <xacro:if value="$(arg zed_camera_enabled)">
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
             <xacro:camera_ frame="zed_camera_center" robot_namespace="$(arg robot_namespace)"></xacro:camera_>
+        </xacro:if>
+
+        <xacro:if value="$(arg velodyne_enabled)">
+            <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+            <VLP-16 parent="base_link" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false">
+                <origin xyz="0.35 0 0.35" rpy="0 0.3 0" />
+            </VLP-16>
         </xacro:if>
     </xacro:macro>
 </robot>

@@ -6,6 +6,7 @@ height: 50
 
 plugins:
   - {name: static,                  type: "costmap_2d::StaticLayer"}
+  - {name: no_go_zones,             type: "costmap_2d::StaticLayer"}
   - {name: inflation,               type: "costmap_2d::InflationLayer"}
   - {name: obstacles_laser,         type: "costmap_2d::ObstacleLayer"}
 
