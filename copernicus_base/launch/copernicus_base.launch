@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <launch>
 
-    <arg name="sick_lms151" default="true"/>
+    <arg name="sick_lms151" default="false"/>
     <arg name="sick_tim551" default="false"/>
     <arg name="hokuyo_ust_10lx" default="false"/>
-    <arg name="logitech_camera" default="false"/>
-    <arg name="zed_camera" default="true"/>
+    <arg name="robosense_lidar" default="true"/>
+    <arg name="logitech_camera" default="true"/>
+    <arg name="zed_camera" default="false"/>
 
     <group>
         <node name="copernicus_base_node" pkg="copernicus_base" type="copernicus_base_node">
@@ -77,10 +78,41 @@
             <param name="angle_max" value="1.5707963"/>
         </node>
 
-        <node pkg="laser_filters" type="scan_to_scan_filter_chain"
-          name="laser_filter">
+        <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" if="$(arg sick_lms151)">
             <rosparam command="load" file="$(find copernicus_base)/scan.yaml" />
         </node> 
+
+        <arg name="model" default="RS16" />
+        <arg name="device_ip" default="10.0.0.30" />
+        <arg name="msop_port" default="6699" />
+        <arg name="difop_port" default="7788" />
+        <arg name="lidar_param_path" default="$(find rslidar_pointcloud)/data/rs_lidar_16/"/>
+
+        <node name="rslidar_node" pkg="rslidar_driver" type="rslidar_node" output="screen" if="$(arg robosense_lidar)">
+            <param name="model" value="$(arg model)"/>
+            <param name="device_ip" value="$(arg device_ip)" />
+            <param name="msop_port" value="$(arg msop_port)" />
+            <param name="difop_port" value="$(arg difop_port)"/>
+            <param name="frame_id" value="velodyne"/>
+            <param name="cut_angle" value="30"/>
+            <!--param name="pcap" value="path_to_pcap"/-->
+        </node>
+
+        <node name="cloud_node" pkg="rslidar_pointcloud" type="cloud_node" output="screen" if="$(arg robosense_lidar)">
+            <param name="model" value="$(arg model)"/>
+            <param name="curves_path" value="$(arg lidar_param_path)/curves.csv" />
+            <param name="angle_path" value="$(arg lidar_param_path)/angle.csv" />
+            <param name="channel_path" value="$(arg lidar_param_path)/ChannelNum.csv" />
+        </node>
+
+        <node name="pointcloud_to_laserscan" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" if="$(arg robosense_lidar)">
+            <remap from="cloud_in" to="rslidar_points"/>
+            <remap from="scan" to="scan_filtered"/>
+            <param name="min_height" value="0.0"/>
+            <param name="max_height" value="2.0"/>
+            <!-- <param name="angle_min" value="0.0"/> -->
+            <param name="range_max" value="100"/>
+        </node>
     </group>
 
     <group>
