@@ -68,39 +68,28 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://copernicus_description/meshes/copernicus.STL"/>
+                    <mesh filename="package://copernicus_description/meshes/copernicus_v4.STL"/>
                 </geometry>
                 <material name="gray"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://copernicus_description/meshes/copernicus.STL"/>
+                    <mesh filename="package://copernicus_description/meshes/copernicus_v4.STL"/>
                 </geometry>
             </collision>
             <inertial>
-                <mass value="${base_mass }"/>
+                <mass value="${base_mass}"/>
                 <inertia ixx="${base_ixx}" ixy="${base_ixy}" ixz="${base_ixz}" iyy="${base_iyy}" iyz="${base_iyz}" izz="${base_izz}"/>
             </inertial>
         </link>
 
 
         <!-- Wheel -->
-        <xacro:copernicus_wheel wheel_prefix="front_right">
-            <origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
-        </xacro:copernicus_wheel>
-
-        <xacro:copernicus_wheel wheel_prefix="back_right">
-            <origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
-        </xacro:copernicus_wheel>
-
-        <xacro:copernicus_wheel wheel_prefix="front_left">
-            <origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
-        </xacro:copernicus_wheel>
-
-        <xacro:copernicus_wheel wheel_prefix="back_left">
-            <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0" />
-        </xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="front_right"><origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="back_right"><origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="front_left"><origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="back_left"><origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
 
         <gazebo>
             <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -143,7 +132,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <xacro:if value="$(arg velodyne_enabled)">
             <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
             <VLP-16 parent="base_link" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false">
-                <origin xyz="0.35 0 0.35" rpy="0 0.3 0" />
+                <origin xyz="0.38685 0 0.41478" rpy="0.0 0.20944 0" />
             </VLP-16>
         </xacro:if>
     </xacro:macro>

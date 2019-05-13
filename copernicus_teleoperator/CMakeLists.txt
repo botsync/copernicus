@@ -23,9 +23,9 @@ include_directories(
 )
 
 add_library(joy_teleop src/joy_teleop.cpp)
-
 add_dependencies(joy_teleop copernicus_teleoperator_gencpp)
-
 add_executable(joy_teleop_node src/joy_teleop_node.cpp)
-
 target_link_libraries(joy_teleop_node joy_teleop ${catkin_LIBRARIES})
+
+add_executable(ackermann_joy_teleop src/ackermann_joy_teleop.cpp)
+target_link_libraries(ackermann_joy_teleop ${catkin_LIBRARIES})

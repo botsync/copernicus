@@ -14,6 +14,8 @@ add_message_files(
   PBStatusFlags.msg
   BMS.msg
   Sonar.msg
+  SysDiagnostics.msg
+  MotorDiagnostics.msg
   )
 
 generate_messages(DEPENDENCIES std_msgs)

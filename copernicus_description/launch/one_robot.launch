@@ -34,9 +34,9 @@
         </include>
 
         <node name="pointcloud_to_laserscan" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node">
-            <param name="min_height" value="0.1"/>
+            <param name="min_height" value="-0.05"/>
             <param name="max_height" value="5"/>
-            <param name="range_max" value="50"/>
+            <param name="range_max" value="100"/>
             <param name="angle_min" value="-1.57"/>
             <param name="angle_max" value="1.57"/>
             <param name="target_frame" value="base_link"/>

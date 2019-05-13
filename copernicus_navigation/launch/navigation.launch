@@ -1,9 +1,11 @@
 <launch>
     <arg name="odom_topic" default="odometry/filtered"/>
-    <arg name="gmapping" default="true"/>
+    <arg name="gmapping" default="false"/>
     <arg name="scan_topic" default="scan_filtered" />
-    <arg name="base_global" default="navfn/NavfnROS"/>
+    <arg name="base_global" default="global_planner/GlobalPlanner"/>
+    <!-- <arg name="base_global" default="patrolling_planner/PatrollingPlanner"/> -->
     <arg name="base_local" default="dwa_local_planner/DWAPlannerROS"/>
+    <!-- <arg name="base_local" default="teb_local_planner/TebLocalPlannerROS"/> -->
 
     <arg name="amcl_use_map_topic" default="true"/>
     <arg name="odom_frame" default="odom"/>
@@ -43,6 +45,8 @@
         <remap from="cmd_vel" to="nav/cmd_vel" />
 
         <param name="base_global_planner" value="$(arg base_global)"/>
+
+    <!-- <param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" />     -->
         <param name="base_local_planner" value="$(arg base_local)"/>
 
         <rosparam file="$(find copernicus_navigation)/config/global_planner.yaml" command="load"/>
