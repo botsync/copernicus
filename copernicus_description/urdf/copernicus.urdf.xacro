@@ -52,6 +52,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:arg name="camera_enabled" default="false"/>
     <xacro:arg name="zed_camera_enabled" default="false"/>
 
+    <xacro:arg name="guide_sensor_enabled" default="true"/>
+
     <xacro:macro name="copernicus_robot">
         <!-- Footprint -->
         <link name="footprint"/>
@@ -131,9 +133,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <xacro:if value="$(arg velodyne_enabled)">
             <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
-            <VLP-16 parent="base_link" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false">
+            <VLP-16 parent="base_link" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false" min_range="0.2">
                 <origin xyz="0.38685 0 0.41478" rpy="0.0 0.20944 0" />
             </VLP-16>
         </xacro:if>
+
+        <!-- Guide Sensor -->
+        <xacro:if value="$(arg guide_sensor_enabled)">
+            <xacro:include filename="$(find line_following_description)/urdf/guide_sensor.urdf.xacro"/>
+            <xacro:guide_sensor robot_namespace="$(arg robot_namespace)" frame="guide_sensor" topic="guide_sensor" x="0.415" y="0.0" z="-0.01457"></xacro:guide_sensor>
+       </xacro:if>
+
     </xacro:macro>
 </robot>
