@@ -19,6 +19,9 @@
   <build_depend>imu_transformer</build_depend>
   <build_depend>imu_filter_madgwick</build_depend>
   <build_depend>laser_filters</build_depend>
+  <build_depend>hardware_interface</build_depend>
+  <build_depend>copernicus_msgs</build_depend>
+  <build_depend>diagnostic_updater</build_depend>
   <run_depend>um7</run_depend>
   <run_depend>imu_transformer</run_depend>
   <run_depend>imu_filter_madgwick</run_depend>
@@ -31,6 +34,9 @@
   <run_depend>std_msgs</run_depend>
   <run_depend>tf</run_depend>
   <run_depend>laser_filters</run_depend>
+  <run_depend>hardware_interface</run_depend>
+  <run_depend>copernicus_msgs</run_depend>
+  <run_depend>diagnostic_updater</run_depend>
   <export>
   </export>
 </package>
