@@ -1,12 +1,12 @@
 copernicus_joint_publisher:
   type: "joint_state_controller/JointStateController"
-  publish_rate: 50
+  publish_rate: 10
 
 copernicus_base_controller:
   type: "diff_drive_controller/DiffDriveController"
   left_wheel: ['front_left_wheel_joint', 'back_left_wheel_joint']
   right_wheel: ['front_right_wheel_joint', 'back_right_wheel_joint']
-  publish_rate: 20
+  publish_rate: 10
   pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
   twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
   cmd_vel_timeout: 1000.0
@@ -18,12 +18,12 @@ copernicus_base_controller:
   linear:
     x:
       has_velocity_limits    : true
-      max_velocity           : 1.5
+      max_velocity           : 1.0
       has_acceleration_limits: true
-      max_acceleration       : 2.0
+      max_acceleration       : 1.0
   angular:
     z:
       has_velocity_limits    : true
-      max_velocity           : 1.5
-      has_acceleration_limits: false
-      max_acceleration       : 2.0
+      max_velocity           : 1.0
+      has_acceleration_limits: true
+      max_acceleration       : 1.0

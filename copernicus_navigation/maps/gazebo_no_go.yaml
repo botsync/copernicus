@@ -1,4 +1,4 @@
-image: map_no_go.pgm
+image: gazebo_no_go.pgm
 resolution: 0.050000
 origin: [-7.231481, -5.685007, 0.0]
 negate: 0

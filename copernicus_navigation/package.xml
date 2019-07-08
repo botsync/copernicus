@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package>
   <name>copernicus_navigation</name>
-  <version>0.0.0</version>
+  <version>6.0.0</version>
   <description>The copernicus_navigation package</description>
 
-  <maintainer email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</maintainer>
-  <author email="nikhil.venkatesh@botsync.me">Nikhil Venkatesh</author>
+  <maintainer email="nikhil@botsync.sg">Nikhil Venkatesh</maintainer>
+  <author email="nikhil@botsync.sg">Nikhil Venkatesh</author>
 
   <url type="repository">https://bitbucket.org/botsync/copernicus</url>
   

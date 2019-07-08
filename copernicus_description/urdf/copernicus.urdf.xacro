@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 
-Copyright (c) 2017, Botsync Pte. Ltd.
+Copyright (c) 2019, Botsync Pte. Ltd.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -52,7 +52,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:arg name="camera_enabled" default="false"/>
     <xacro:arg name="zed_camera_enabled" default="false"/>
 
-    <xacro:arg name="guide_sensor_enabled" default="true"/>
+    <xacro:arg name="guide_sensor_enabled" default="false"/>
 
     <xacro:macro name="copernicus_robot">
         <!-- Footprint -->
@@ -60,7 +60,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${base_underside_h}" rpy="0 0 0" />
+            <origin xyz="0 0 ${ground_clearance}" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="footprint" />
         </joint>
@@ -70,14 +70,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://copernicus_description/meshes/copernicus_v4.STL"/>
+                    <mesh filename="package://copernicus_description/meshes/copernicus.STL"/>
                 </geometry>
                 <material name="gray"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://copernicus_description/meshes/copernicus_v4.STL"/>
+                    <mesh filename="package://copernicus_description/meshes/copernicus.STL"/>
                 </geometry>
             </collision>
             <inertial>
@@ -86,12 +86,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </inertial>
         </link>
 
-
         <!-- Wheel -->
-        <xacro:copernicus_wheel wheel_prefix="front_right"><origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
-        <xacro:copernicus_wheel wheel_prefix="back_right"><origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
-        <xacro:copernicus_wheel wheel_prefix="front_left"><origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
-        <xacro:copernicus_wheel wheel_prefix="back_left"><origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${-wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="front_right"><origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="back_right"><origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="front_left"><origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="back_left"><origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
 
         <gazebo>
             <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -106,11 +105,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <xacro:imu robot_namespace="$(arg robot_namespace)" tf_pre="$(arg tf_pre)"></xacro:imu>
         </xacro:if>
 
-        <!-- LIDAR -->
+        <!-- LMS151 -->
         <xacro:if value="$(arg lidar_enabled)">
-            <!-- <xacro:include filename="$(find copernicus_description)/urdf/accessories/hokuyo_ust20lx.urdf.xacro"/> -->
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar.urdf.xacro"/>
-            <xacro:lidar robot_namespace="$(arg robot_namespace)"></xacro:lidar>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lms151.urdf.xacro"/>
+            <xacro:lms151 robot_namespace="$(arg robot_namespace)"></xacro:lms151>
         </xacro:if>
 
         <!-- GPS -->
@@ -131,10 +129,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <xacro:camera_ frame="zed_camera_center" robot_namespace="$(arg robot_namespace)"></xacro:camera_>
         </xacro:if>
 
+        <!-- Velodyne -->
         <xacro:if value="$(arg velodyne_enabled)">
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/velodyne_mount.urdf.xacro"/>
+            <xacro:velodyne_mount></xacro:velodyne_mount>
             <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
-            <VLP-16 parent="base_link" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false" min_range="0.2">
-                <origin xyz="0.38685 0 0.41478" rpy="0.0 0.20944 0" />
+            <VLP-16 parent="velodyne_mount" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false" min_range="0.2">
+                <origin xyz="${velodyne_joint_x} ${velodyne_joint_y} ${velodyne_joint_z}" rpy="0 ${-velodyne_joint_pitch} 0" />
             </VLP-16>
         </xacro:if>
 

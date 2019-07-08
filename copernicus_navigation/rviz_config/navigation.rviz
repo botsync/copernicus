@@ -25,6 +25,8 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: LaserScan
+Toolbars:
+  toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
@@ -93,12 +95,17 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        lidar:
+        velodyne:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        lidar_mount:
+        velodyne_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_mount:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -130,13 +137,15 @@ Visualization Manager:
           Value: true
         imu:
           Value: true
-        lidar:
-          Value: true
-        lidar_mount:
-          Value: true
         map:
           Value: true
         odom:
+          Value: true
+        velodyne:
+          Value: true
+        velodyne_base_link:
+          Value: true
+        velodyne_mount:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -161,9 +170,10 @@ Visualization Manager:
                 {}
               imu:
                 {}
-              lidar_mount:
-                lidar:
-                  {}
+              velodyne_mount:
+                velodyne_base_link:
+                  velodyne:
+                    {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988
@@ -206,7 +216,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /move_base/NavfnROS/plan
+      Topic: /move_base/GlobalPlanner/plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -314,11 +324,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 98.6115723
+      Scale: 23.7553539
       Target Frame: base_link
       Value: TopDownOrtho (rviz)
-      X: 0.38570407
-      Y: 0.158002287
+      X: 6.98912191
+      Y: 8.19719887
     Saved: ~
 Window Geometry:
   Displays:

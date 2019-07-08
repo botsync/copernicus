@@ -35,7 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <!-- Wheel Link -->
         <link name="${wheel_prefix}_wheel">
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
                     <mesh filename="package://copernicus_description/meshes/wheel.STL"/>
                 </geometry>

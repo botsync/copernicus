@@ -43,48 +43,69 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <xacro:property name="base_mass" value="5.674"/>
 
-    <xacro:property name="base_l" value="0.788"/>
-    <xacro:property name="base_w" value="0.715"/>
-    <xacro:property name="base_h" value="0.3795"/>
-    <xacro:property name="base_t" value="0.003"/>
-    <xacro:property name="base_ixx" value="1.729"/>
-    <xacro:property name="base_ixy" value="0.0051"/>
-    <xacro:property name="base_ixz" value="0.0435"/>
-    <xacro:property name="base_iyy" value="2.014"/>
-    <xacro:property name="base_iyz" value="0.0695"/>
-    <xacro:property name="base_izz" value="2.21"/>
+    <xacro:property name="base_l" value="0.646"/>
+    <xacro:property name="base_w" value="0.456"/>
+    <xacro:property name="base_h" value="0.323"/>
+    <xacro:property name="base_ixx" value="3.28"/>
+    <xacro:property name="base_ixy" value="0.00"/>
+    <xacro:property name="base_ixz" value="0.00"/>
+    <xacro:property name="base_iyy" value="3.69"/>
+    <xacro:property name="base_iyz" value="0.00"/>
+    <xacro:property name="base_izz" value="2.26"/>
 
-    <xacro:property name="base_underside_h" value="0.11457"/>
+    <xacro:property name="ground_clearance" value="0.11457"/>
 
-    <xacro:property name="wheel_width" value="0.1143" />
-    <xacro:property name="wheel_radius" value="0.16938" />
-    <xacro:property name="wheel_joint_x_abs" value="0.21" />
-    <xacro:property name="wheel_joint_y_abs" value="0.3575" />
-    <xacro:property name="wheel_joint_z_abs" value="-0.05481" />
-    <xacro:property name="wheel_ixx" value="0.036351442"/>
-    <xacro:property name="wheel_ixy" value="0.000001230"/>
-    <xacro:property name="wheel_ixz" value="0.0"/>
-    <xacro:property name="wheel_iyy" value="0.021626014"/>
-    <xacro:property name="wheel_iyz" value="0.0"/>
-    <xacro:property name="wheel_izz" value="0.02162601213"/>
+    <xacro:property name="wheel_width" value="0.120" />
+    <xacro:property name="wheel_radius" value="0.18" />
+    <xacro:property name="wheel_joint_x_abs" value="0.22030" />
+    <xacro:property name="wheel_joint_y_abs" value="0.29490" />
+    <xacro:property name="wheel_joint_z_abs" value="0.07300" />
+    <xacro:property name="wheel_ixx" value="0.739"/>
+    <xacro:property name="wheel_ixy" value="0.170"/>
+    <xacro:property name="wheel_ixz" value="0.236"/>
+    <xacro:property name="wheel_iyy" value="0.741"/>
+    <xacro:property name="wheel_iyz" value="0.299"/>
+    <xacro:property name="wheel_izz" value="0.460"/>
 
-    <xacro:property name="lidar_mount_l" value="0.537"/>
-    <xacro:property name="lidar_mount_w" value="0.075"/>
-    <xacro:property name="lidar_mount_t" value="0.075"/>
-    <xacro:property name="lidar_mount_mass" value="0.273"/>
-    <xacro:property name="lidar_mount_ixx" value="0.00693"/>
-    <xacro:property name="lidar_mount_ixy" value="0.0"/>
-    <xacro:property name="lidar_mount_ixz" value="0.0"/>
-    <xacro:property name="lidar_mount_iyy" value="0.000973"/>
-    <xacro:property name="lidar_mount_iyz" value="0.0"/>
-    <xacro:property name="lidar_mount_izz" value="0.00765"/>
-    <xacro:property name="lidar_mount_joint_x" value="0.394"/>
-    <xacro:property name="lidar_mount_joint_y" value="0.0"/>
-    <xacro:property name="lidar_mount_joint_z" value="0.2195"/>
+    <xacro:property name="lms151_mount_l" value="0.156"/>
+    <xacro:property name="lms151_mount_h" value="0.094"/>
+    <xacro:property name="lms151_mount_w" value="0.1102"/>
+    <xacro:property name="lms151_mount_mass" value="0.229"/>
+    <xacro:property name="lms151_mount_ixx" value="0.002"/>
+    <xacro:property name="lms151_mount_ixy" value="0.000"/>
+    <xacro:property name="lms151_mount_ixz" value="0.000"/>
+    <xacro:property name="lms151_mount_iyy" value="0.005"/>
+    <xacro:property name="lms151_mount_iyz" value="0.000"/>
+    <xacro:property name="lms151_mount_izz" value="0.002"/>
 
-    <xacro:property name="lidar_joint_x" value="0.075"/>
-    <xacro:property name="lidar_joint_y" value="0.0"/>
-    <xacro:property name="lidar_joint_z" value="0.05"/>
+    <xacro:property name="lms151_mount_joint_x" value="0.099"/>
+    <xacro:property name="lms151_mount_joint_y" value="0"/>
+    <xacro:property name="lms151_mount_joint_z" value="0.042"/>
 
+    <xacro:property name="lms151_joint_x" value="0.027"/>
+    <xacro:property name="lms151_joint_y" value="0.0625"/>
+    <xacro:property name="lms151_joint_z" value="0.03"/>
+
+    <xacro:property name="velodyne_mount_l" value="0.112"/>
+    <xacro:property name="velodyne_mount_h" value="0.039"/>
+    <xacro:property name="velodyne_mount_w" value="0.125"/>
+    <xacro:property name="velodyne_mount_mass" value="0.300"/>
+    <xacro:property name="velodyne_mount_ixx" value="0.002"/>
+    <xacro:property name="velodyne_mount_ixy" value="0.000"/>
+    <xacro:property name="velodyne_mount_ixz" value="0.000"/>
+    <xacro:property name="velodyne_mount_iyy" value="0.005"/>
+    <xacro:property name="velodyne_mount_iyz" value="0.000"/>
+    <xacro:property name="velodyne_mount_izz" value="0.002"/>
+
+    <xacro:property name="velodyne_mount_joint_x" value="0.259"/>
+    <xacro:property name="velodyne_mount_joint_y" value="-0.0625"/>
+    <xacro:property name="velodyne_mount_joint_z" value="0.296"/>
+    <xacro:property name="velodyne_mount_joint_pitch" value="0.415"/>
+
+    <xacro:property name="velodyne_joint_x" value="0.027"/>
+    <xacro:property name="velodyne_joint_y" value="0.0625"/>
+    <xacro:property name="velodyne_joint_z" value="0.03"/>
+    <xacro:property name="velodyne_joint_pitch" value="0.262"/>
     <xacro:property name="dummy_inertia" value="1e-09"/>
+    
 </robot>

@@ -1,6 +1,6 @@
 image: gazebo.pgm
-resolution: 0.100000
-origin: [-3.924217, -4.412080, 0.0]
+resolution: 0.050000
+origin: [-7.231481, -5.685007, 0.0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196

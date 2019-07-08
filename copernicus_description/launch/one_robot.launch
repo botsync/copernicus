@@ -9,7 +9,7 @@
     <arg name="tf_pre" default=""/>
 
     <arg name="map_file" default="$(find copernicus_navigation)/maps/gazebo.yaml"/>
-    <arg name="map_no_go_zones_file" default="$(find copernicus_navigation)/maps/gazebo_no_go_zones.yaml"/>
+    <arg name="map_no_go_zones_file" default="$(find copernicus_navigation)/maps/gazebo_no_go.yaml"/>
     <arg name="gmapping" default="false"/>
 
     <arg name="viz_config" default="$(find copernicus_description)/rviz_params/copernicus.rviz"/>

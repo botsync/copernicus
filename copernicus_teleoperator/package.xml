@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>copernicus_teleoperator</name>
-  <version>0.0.0</version>
+  <version>7.0.0</version>
   <description>The copernicus_teleoperator package</description>
 
   <maintainer email="nikhil@botsync.sg">nikhil</maintainer>

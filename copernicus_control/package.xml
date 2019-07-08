@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package>
   <name>copernicus_control</name>
-  <version>0.0.0</version>
+  <version>6.0.0</version>
   <description>The copernicus_control package</description>
 
   <maintainer email="nikhil@botsync.sg">Nikhil Venkatesh</maintainer>
 
-  <license>TODO</license>
+  <license>BSD2</license>
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>controller_manager</build_depend>
   <build_depend>diff_drive_controller</build_depend>

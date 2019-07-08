@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   urdf
   xacro
   hector_gazebo_plugins
+  velodyne_description
 )
 
 catkin_package()
