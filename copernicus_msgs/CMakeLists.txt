@@ -10,12 +10,10 @@ add_message_files(
   DIRECTORY msg
   FILES
   Velocities.msg
-  PBStatusFlags.msg
   BMS.msg
-  Sonar.msg
-  SysDiagnostics.msg
-  MotorDiagnostics.msg
   RPM.msg
+  Diagnostics.msg
+  SonarSensor.msg
   )
 
 generate_messages(DEPENDENCIES std_msgs)

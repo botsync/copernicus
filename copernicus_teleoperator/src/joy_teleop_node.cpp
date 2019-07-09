@@ -50,10 +50,9 @@ int main(int argc, char** argv) {
 
     std::string cmd_vel_topic, e_stop_pub_topic, joy_topic, e_stop_sub_topic;
 
-    nh.param<std::string>("cmd_vel_topic", cmd_vel_topic, "/cmd_vel");
-    nh.param<std::string>("e_stop_pub_topic", e_stop_pub_topic, "/e_stop_sw_flag");
+    nh.param<std::string>("cmd_vel_topic", cmd_vel_topic, "joy/cmd_vel");
+    nh.param<std::string>("e_stop_pub_topic", e_stop_pub_topic, "/e_stop_sw_enable");
 
-    nh.param<std::string>("e_stop_sub_topic", e_stop_sub_topic, "/pb_status_flags");
     nh.param<std::string>("joy_topic", joy_topic, "/joy");
 
     cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1); 

@@ -20,7 +20,8 @@ find_package(catkin REQUIRED COMPONENTS
   controller_manager
   hardware_interface
   diagnostic_updater
-  diff_drive_controller)
+  diff_drive_controller
+  robot_pose_publisher)
 
 catkin_package(
 INCLUDE_DIRS include
