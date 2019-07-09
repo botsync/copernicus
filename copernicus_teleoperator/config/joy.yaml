@@ -4,7 +4,7 @@ e_stop_button: 3
 linear_speed_axis: 1
 angular_speed_axis: 0
 
-max_linear_speed: 1.5
+max_linear_speed: 1.0
 max_angular_speed: 1.0
 
 enable_holonomic_movement: 0
@@ -15,5 +15,4 @@ enable_e_stop: 1
 cmd_vel_topic: /joy/cmd_vel
 e_stop_pub_topic: /e_stop_sw_flag
 
-e_stop_sub_topic: /pb_status_flags
 joy_topic: /joy
