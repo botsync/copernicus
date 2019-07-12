@@ -5,8 +5,9 @@
     <arg name="sick_tim551" default="false"/>
     <arg name="hokuyo_ust_10lx" default="false"/>
     <arg name="robosense_lidar" default="true"/>
-    <arg name="logitech_camera" default="true"/>
+    <arg name="logitech_camera" default="false"/>
     <arg name="zed_camera" default="false"/>
+    <arg name="ros_web_streaming" default="false"/>
 
     <group>
         <node name="copernicus_base_node" pkg="copernicus_base" type="copernicus_base_node">
@@ -25,8 +26,8 @@
 
     <group>
         <node pkg="um7" type="um7_driver" name="imu_driver">
-            <param name="port" value="/dev/ttyUSB0"/>
-            <param name="mag_updates" value="true"/>
+            <param name="port" value="/dev/ttyUSB1"/>
+            <param name="mag_updates" value="false"/>
             <param name="tf_ned_to_enu" value="false"/>
             <param name="frame_id" value="imu"/>
 
@@ -169,7 +170,7 @@
             </include>
         </group>
 
-    	<node name="Streamer" pkg="web_video_server" type="web_video_server" >
+    	<node name="Streamer" pkg="web_video_server" type="web_video_server" if="$(arg ros_web_streaming)">
             <param name="address" value="0.0.0.0" />
             <param name="port" value="8080" />
             <param name="quality" value="20" />
