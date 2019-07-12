@@ -42,9 +42,15 @@ double vel_x = 0.0;
 double vel_y = 0.0;
 double ang_z = 0.0;
 double vel_dt = 0.0;
+ros::Publisher odom_pub;
+tf::TransformBroadcaster odom_broadcaster;
 
 ros::Time last_loop_time(0.0);
 ros::Time last_vel_time(0.0);
+
+double x_pos = 0.0;
+double y_pos = 0.0;
+double theta = 0.0;
 
 void velCallback( const copernicus_msgs::Velocities& vel) {
   //callback every time the robot's linear velocity is received
@@ -55,6 +61,63 @@ void velCallback( const copernicus_msgs::Velocities& vel) {
   ang_z = vel.angular_z;
   vel_dt = (current_time - last_vel_time).toSec();
   last_vel_time = current_time;
+
+  //linear velocity is the linear velocity published from the Teensy board in x axis
+  double linear_velocity_x = vel_x;
+
+  //linear velocity is the linear velocity published from the Teensy board in y axis
+  double linear_velocity_y = vel_y;
+
+  double angular_velocity_z = ang_z;
+
+  //calculate angular displacement  Î¸ = Ï‰ * t
+  double delta_theta = angular_velocity_z * vel_dt; //radians
+  double delta_x = (linear_velocity_x * cos(theta) - linear_velocity_y * sin(theta)) * vel_dt; //m
+  double delta_y = (linear_velocity_x * sin(theta) + linear_velocity_y * cos(theta)) * vel_dt; //m
+
+  //calculate current position of the robot
+  x_pos += delta_x;
+  y_pos += delta_y;
+  theta += delta_theta;
+
+  //calculate robot's heading in quarternion angle
+  //ROS has a function to calculate yaw in quaternion angle
+  geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(theta);
+
+  geometry_msgs::TransformStamped odom_trans;
+  odom_trans.header.frame_id = "odom";
+  odom_trans.child_frame_id = "base_link";
+  //robot's position in x,y, and z
+  odom_trans.transform.translation.x = x_pos;
+  odom_trans.transform.translation.y = y_pos;
+  odom_trans.transform.translation.z = 0.0;
+  //robot's heading in quaternion
+  odom_trans.transform.rotation = odom_quat;
+  odom_trans.header.stamp = current_time;
+  //publish robot's tf using odom_trans object
+  odom_broadcaster.sendTransform(odom_trans);
+
+  nav_msgs::Odometry odom;
+  odom.header.stamp = current_time;
+  odom.header.frame_id = "odom";
+  //robot's position in x,y, and z
+  odom.pose.pose.position.x = x_pos;
+  odom.pose.pose.position.y = y_pos;
+  odom.pose.pose.position.z = 0.0;
+  //robot's heading in quaternion
+  odom.pose.pose.orientation = odom_quat;
+
+  odom.child_frame_id = "base_link";
+  //linear speed from encoders
+  odom.twist.twist.linear.x = linear_velocity_x;
+  odom.twist.twist.linear.y = linear_velocity_y;
+  odom.twist.twist.linear.z = 0.0;
+
+  odom.twist.twist.angular.x = 0.0;
+  odom.twist.twist.angular.y = 0.0;
+  odom.twist.twist.angular.z = angular_velocity_z;
+
+  odom_pub.publish(odom);
 }
 
 
@@ -62,80 +125,8 @@ int main(int argc, char** argv){
   ros::init(argc, argv, "base_controller");
   ros::NodeHandle n;
   ros::NodeHandle nh_private_("~");
-  ros::Subscriber sub = n.subscribe("raw_vel", 50, velCallback);
-  ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("odom", 50);
-  tf::TransformBroadcaster odom_broadcaster;
+  ros::Subscriber sub = n.subscribe("raw_vel", 1, velCallback);
+  odom_pub = n.advertise<nav_msgs::Odometry>("odom", 1);
 
-  double rate = 10.0;
-  double x_pos = 0.0;
-  double y_pos = 0.0;
-  double theta = 0.0;
-
-  ros::Rate r(rate);
-  while(n.ok()){
-    ros::spinOnce();
-    ros::Time current_time = ros::Time::now();
-
-    //linear velocity is the linear velocity published from the Teensy board in x axis
-    double linear_velocity_x = vel_x;
-
-    //linear velocity is the linear velocity published from the Teensy board in y axis
-    double linear_velocity_y = vel_y;
-
-    double angular_velocity_z = ang_z;
-
-    //calculate angular displacement  Î¸ = Ï‰ * t
-    double delta_theta = angular_velocity_z * vel_dt; //radians
-    double delta_x = (linear_velocity_x * cos(theta) - linear_velocity_y * sin(theta)) * vel_dt; //m
-    double delta_y = (linear_velocity_x * sin(theta) + linear_velocity_y * cos(theta)) * vel_dt; //m
-
-    //calculate current position of the robot
-    x_pos += delta_x;
-    y_pos += delta_y;
-    theta += delta_theta;
-
-    //calculate robot's heading in quarternion angle
-    //ROS has a function to calculate yaw in quaternion angle
-    geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(theta);
-
-    geometry_msgs::TransformStamped odom_trans;
-    odom_trans.header.frame_id = "odom";
-    odom_trans.child_frame_id = "base_link";
-    //robot's position in x,y, and z
-    odom_trans.transform.translation.x = x_pos;
-    odom_trans.transform.translation.y = y_pos;
-    odom_trans.transform.translation.z = 0.0;
-    //robot's heading in quaternion
-    odom_trans.transform.rotation = odom_quat;
-    odom_trans.header.stamp = current_time;
-    //publish robot's tf using odom_trans object
-    odom_broadcaster.sendTransform(odom_trans);
-
-    nav_msgs::Odometry odom;
-    odom.header.stamp = current_time;
-    odom.header.frame_id = "odom";
-    //robot's position in x,y, and z
-    odom.pose.pose.position.x = x_pos;
-    odom.pose.pose.position.y = y_pos;
-    odom.pose.pose.position.z = 0.0;
-    //robot's heading in quaternion
-    odom.pose.pose.orientation = odom_quat;
-
-    odom.child_frame_id = "base_link";
-    //linear speed from encoders
-    odom.twist.twist.linear.x = linear_velocity_x;
-    odom.twist.twist.linear.y = linear_velocity_y;
-    odom.twist.twist.linear.z = 0.0;
-
-    odom.twist.twist.angular.x = 0.0;
-    odom.twist.twist.angular.y = 0.0;
-    odom.twist.twist.angular.z = angular_velocity_z;
-
-    //TODO: include covariance matrix here
-
-    odom_pub.publish(odom);
-
-    last_loop_time = current_time;
-    r.sleep();
-  }
+  ros::spin();
 }
