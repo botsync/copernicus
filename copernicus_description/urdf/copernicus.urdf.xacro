@@ -107,7 +107,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <!-- LMS151 -->
         <xacro:if value="$(arg lidar_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lms151.urdf.xacro"/>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lms_151.urdf.xacro"/>
             <xacro:lms151 robot_namespace="$(arg robot_namespace)"></xacro:lms151>
         </xacro:if>
 

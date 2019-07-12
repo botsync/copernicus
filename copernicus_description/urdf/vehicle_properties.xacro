@@ -78,13 +78,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="lms151_mount_iyz" value="0.000"/>
     <xacro:property name="lms151_mount_izz" value="0.002"/>
 
-    <xacro:property name="lms151_mount_joint_x" value="0.099"/>
+    <xacro:property name="lms151_mount_joint_x" value="0.0177"/>
     <xacro:property name="lms151_mount_joint_y" value="0"/>
-    <xacro:property name="lms151_mount_joint_z" value="0.042"/>
+    <xacro:property name="lms151_mount_joint_z" value="0.356"/>
 
-    <xacro:property name="lms151_joint_x" value="0.027"/>
-    <xacro:property name="lms151_joint_y" value="0.0625"/>
-    <xacro:property name="lms151_joint_z" value="0.03"/>
+    <xacro:property name="lms151_joint_x" value="0.0453"/>
+    <xacro:property name="lms151_joint_y" value="0.0"/>
+    <xacro:property name="lms151_joint_z" value="0.158"/>
 
     <xacro:property name="velodyne_mount_l" value="0.112"/>
     <xacro:property name="velodyne_mount_h" value="0.039"/>
@@ -104,7 +104,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <xacro:property name="velodyne_joint_x" value="0.027"/>
     <xacro:property name="velodyne_joint_y" value="0.0625"/>
-    <xacro:property name="velodyne_joint_z" value="0.03"/>
+    <xacro:property name="velodyne_joint_z" value="0.0295"/>
     <xacro:property name="velodyne_joint_pitch" value="0.262"/>
     <xacro:property name="dummy_inertia" value="1e-09"/>
     
