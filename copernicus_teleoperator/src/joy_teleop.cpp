@@ -29,10 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <copernicus_teleoperator/joy_teleop.h>
 
-void pb_flags_callback(const copernicus_msgs::PBStatusFlags::ConstPtr& pb_flags) {
-    e_stop_status = pb_flags->E_STOP_FLAG;
-}
-
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
     geometry_msgs::Twist cmd;
 

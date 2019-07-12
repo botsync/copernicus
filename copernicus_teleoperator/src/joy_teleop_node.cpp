@@ -63,7 +63,6 @@ int main(int argc, char** argv) {
     if (enable_e_stop) {
         ROS_INFO("Enable e-stop: %d", enable_e_stop);
         e_stop_pub = nh.advertise<std_msgs::Bool>(e_stop_pub_topic, 1);
-        pb_flags_subscriber = nh.subscribe(e_stop_sub_topic, 1, pb_flags_callback);
     }
 
     ros::spin();
