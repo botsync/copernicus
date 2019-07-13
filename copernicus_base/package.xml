@@ -6,8 +6,7 @@
 
   <maintainer email="nikhil@botsync.sg">Nikhil</maintainer>
   <license>BSD</license>
-  <buildtool_depend>catkin</buildtool_depend> 
-  <build_depend>ros_arduino_bridge</build_depend>
+  <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>rosserial_python</build_depend>
@@ -27,7 +26,6 @@
   <run_depend>imu_transformer</run_depend>
   <run_depend>imu_filter_madgwick</run_depend>
   <run_depend>geometry_msgs</run_depend>
-  <run_depend>ros_arduino_bridge</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>rosserial_python</run_depend>

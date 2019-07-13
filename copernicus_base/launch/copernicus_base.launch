@@ -1,12 +1,9 @@
 <?xml version="1.0"?>
 <launch>
 
-    <arg name="sick_lms151" default="false"/>
-    <arg name="sick_tim551" default="false"/>
-    <arg name="hokuyo_ust_10lx" default="false"/>
-    <arg name="robosense_lidar" default="true"/>
+    <arg name="sick_lms151" default="true"/>
+    <arg name="robosense_lidar" default="false"/>
     <arg name="logitech_camera" default="false"/>
-    <arg name="zed_camera" default="false"/>
     <arg name="ros_web_streaming" default="false"/>
 
     <group>
@@ -40,49 +37,18 @@
 
     </group>
 
-    <group>
+    <group if="$(arg sick_lms151)">
         <node pkg="lms1xx" name="lms1xx" type="LMS1xx_node" output="screen" if="$(arg sick_lms151)">
-            <param name="host" value="10.0.0.11" />
+            <param name="host" value="10.0.0.50" />
             <param name="frame_id" value="lidar" />
             <param name="publish_min_range_as_inf" value="false" />
         </node>
-
-        <node name="sick_tim551_2050001" pkg="sick_tim" type="sick_tim551_2050001" respawn="false" output="screen" if="$(arg sick_tim551)">
-            <param name="min_ang" type="double" value="-2.35619449019" />
-            <param name="max_ang" type="double" value="2.35619449019" />
-            <param name="intensity" type="bool" value="true" />
-            <param name="skip" type="int" value="0" />
-            <param name="frame_id" type="str" value="lidar" />
-            <param name="time_offset" type="double" value="-0.001" />
-            <param name="publish_datagram" type="bool" value="false" />
-            <param name="subscribe_datagram" type="bool" value="false" />
-            <param name="device_number" type="int" value="0" />
-            <param name="time_increment" type="double" value="0.000185185" />
-            <param name="range_min" type="double" value="0.05" />
-            <param name="range_max" type="double" value="10.0" />
-            <param name="hostname" type="string" value="10.0.1.10" />
-            <param name="port" type="string" value="2112" />
-            <param name="timelimit" type="int" value="5" />
-
-            <remap from="/scan" to="scan"/>
-        </node>
-
-        <node name="urg_node" pkg="urg_node" type="urg_node" output="screen" if="$(arg hokuyo_ust_10lx)">
-            <param name="ip_address" value="10.0.0.20"/>
-            <param name="serial_port" value="/dev/ttyACM0"/>
-            <param name="serial_baud" value="115200"/>
-            <param name="frame_id" value="lidar"/>
-            <param name="calibrate_time" value="true"/>
-            <param name="publish_intensity" value="false"/>
-            <param name="publish_multiecho" value="false"/>
-            <param name="angle_min" value="-1.5707963"/>
-            <param name="angle_max" value="1.5707963"/>
-        </node>
-
         <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" if="$(arg sick_lms151)">
             <rosparam command="load" file="$(find copernicus_base)/scan.yaml" />
         </node> 
+    </group>
 
+    <group if="$(arg robosense_lidar)">
         <arg name="model" default="RS16" />
         <arg name="device_ip" default="10.0.0.30" />
         <arg name="msop_port" default="6699" />
@@ -116,7 +82,7 @@
         </node>
     </group>
 
-    <group>
+    <group if="$(arg logitech_camera)">
         <node name="camera" pkg="usb_cam" type="usb_cam_node" if="$(arg logitech_camera)">
             <remap from="/Camera/image_raw" to="/image_raw" />
 
@@ -127,49 +93,8 @@
             <param name="camera_frame_id" value="usb_cam" />
             <param name="io_method" value="mmap"/>
         </node>
-
-        <arg name="zed_namespace" default="zed" />
-
-        <arg name="svo_file" default="" /> <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
-
-        <arg name="camera_model" default="0" /> <!-- 0=ZED, 1=ZEDM-->
-        <arg name="serial_number" default="0" />
-        <arg name="verbose" default="true" />
-        <arg name="resolution" default="2" /> <!--0=RESOLUTION_HD2K, 1=RESOLUTION_HD1080, 2=RESOLUTION_HD720, 3=RESOLUTION_VGA -->
-        <arg name="frame_rate" default="30" />
-        <!-- RESOLUTION_HD2K   -> 2208*1242, available framerates: 15 fps.
-           RESOLUTION_HD1080 -> 1920*1080, available framerates: 15, 30 fps.
-           RESOLUTION_HD720  -> 1280*720,  available framerates: 15, 30, 60 fps.
-           RESOLUTION_VGA    -> 672*376,   available framerates: 15, 30, 60, 100 fps. -->
-
-        <arg name="rgb_topic" default="rgb/image_rect_color" />
-        <arg name="depth_topic" default="depth/depth_registered" />
-        <arg name="camera_info_topic" default="rgb/camera_info" />
-        <arg name="depth_camera_info_topic" default="depth/camera_info" />
-        <arg name="camera_frame" default="zed_camera_center" />
-
-        <group ns="$(arg zed_namespace)" if="$(arg zed_camera)">
-            <!-- ZED Wrapper Node-->
-            <include file="$(find zed_wrapper)/launch/zed_camera.launch">
-                <arg name="svo_file" value="$(arg svo_file)" />
-                <arg name="camera_model" value="$(arg camera_model)" />
-                <arg name="serial_number" value="$(arg serial_number)" /> 
-                <arg name="resolution" value="$(arg resolution)" />
-                <arg name="frame_rate" value="$(arg frame_rate)" />
-                <arg name="verbose" value="$(arg verbose)" />
-
-                <arg name="rgb_topic" value="$(arg rgb_topic)" />
-                <arg name="depth_topic" value="$(arg depth_topic)" />
-                <arg name="rgb_info_topic" value="$(arg camera_info_topic)" />
-                <arg name="depth_cam_info_topic" value="$(arg depth_camera_info_topic)" />
-                <arg name="base_frame" value="$(arg camera_frame)" />
-
-                <arg name="publish_tf" value="false"/>
-                <param name="publish_map_tf" value="false"/>
-                <arg name="publish_urdf" value="true"/>
-            </include>
-        </group>
-
+    </group>
+    <group if="$(arg ros_web_streaming)">
     	<node name="Streamer" pkg="web_video_server" type="web_video_server" if="$(arg ros_web_streaming)">
             <param name="address" value="0.0.0.0" />
             <param name="port" value="8080" />
