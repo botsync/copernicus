@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-    <arg name="sick_lms151" default="true"/>
-    <arg name="robosense_lidar" default="false"/>
+    <arg name="sick_lms151" default="false"/>
+    <arg name="robosense_lidar" default="true"/>
     <arg name="logitech_camera" default="false"/>
     <arg name="ros_web_streaming" default="false"/>
 
@@ -61,7 +61,7 @@
             <param name="msop_port" value="$(arg msop_port)" />
             <param name="difop_port" value="$(arg difop_port)"/>
             <param name="frame_id" value="velodyne"/>
-            <param name="cut_angle" value="30"/>
+            <!--<param name="cut_angle" value="30"/>-->
             <!--param name="pcap" value="path_to_pcap"/-->
         </node>
 
@@ -77,6 +77,7 @@
             <remap from="scan" to="scan_filtered"/>
             <param name="min_height" value="0.0"/>
             <param name="max_height" value="2.0"/>
+            <param name="target_frame" value="base_link"/>
             <!-- <param name="angle_min" value="0.0"/> -->
             <param name="range_max" value="100"/>
         </node>

@@ -3,9 +3,7 @@
     <arg name="gmapping" default="false"/>
     <arg name="scan_topic" default="scan_filtered" />
     <arg name="base_global" default="global_planner/GlobalPlanner"/>
-    <!-- <arg name="base_global" default="patrolling_planner/PatrollingPlanner"/> -->
     <arg name="base_local" default="dwa_local_planner/DWAPlannerROS"/>
-    <!-- <arg name="base_local" default="teb_local_planner/TebLocalPlannerROS"/> -->
 
     <arg name="amcl_use_map_topic" default="true"/>
     <arg name="odom_frame" default="odom"/>
@@ -16,7 +14,14 @@
     <arg name="amcl_init_pose_y" default="0"/>
     <arg name="amcl_init_pose_yaw" default="0"/>
 
-    <node pkg="amcl" type="amcl" name="amcl" unless="$(arg gmapping)">
+    <arg name="map_file" default="$(find copernicus_navigation)/maps/section2.yaml"/>
+    <arg name="map_no_go_zones_file" default="$(find copernicus_navigation)/maps/section2-no-go.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" unless="$(arg gmapping)"/>
+    <node name="map_server_no_go" pkg="map_server" type="map_server" args="$(arg map_no_go_zones_file)" unless="$(arg gmapping)">
+        <remap from="map" to="map_no_go"/>
+    </node>
+
+    <!--<node pkg="amcl" type="amcl" name="amcl" unless="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/amcl.yaml" command="load"/>
         <param name="use_map_topic" value="$(arg amcl_use_map_topic)"/>
         <param name="global_frame_id" value="$(arg map_frame)"/>
@@ -28,7 +33,7 @@
         <param name="tf_broadcast" value="$(arg amcl_tf_broadcast)"/>
         <remap from="scan" to="$(arg scan_topic)"/>
         <remap from="map" to="/map"/>
-    </node>
+    </node>-->
 
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/gmapping.yaml" command="load"/>
@@ -45,8 +50,6 @@
         <remap from="cmd_vel" to="nav/cmd_vel" />
 
         <param name="base_global_planner" value="$(arg base_global)"/>
-
-    <!-- <param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" />     -->
         <param name="base_local_planner" value="$(arg base_local)"/>
 
         <rosparam file="$(find copernicus_navigation)/config/global_planner.yaml" command="load"/>
@@ -56,12 +59,9 @@
         <rosparam file="$(find copernicus_navigation)/config/costmap.yaml" command="load" ns="local_costmap" />
 
         <rosparam file="$(find copernicus_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
-        <param name="local_costmap/width" value="5.0"/>
-        <param name="local_costmap/height" value="5.0"/>
+        <param name="local_costmap/obstacle_layer/enabled" value="true" />
 
         <rosparam file="$(find copernicus_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap"/>
-        <param name="global_costmap/width" value="20.0" />
-        <param name="global_costmap/height" value="20.0" />
         <param name="global_costmap/obstacle_layer/enabled" value="true" />
     </node>
 </launch>

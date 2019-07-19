@@ -8,15 +8,15 @@ def mover():
   pub = rospy.Publisher('/cmd_vel',Twist,queue_size=1)
   rospy.init_node('mover', anonymous=True)
   twist = Twist()
-  twist.linear.x = -1.0
+  twist.linear.x = 0
   twist.linear.y = 0
   twist.linear.z = 0
   twist.angular.x = 0
   twist.angular.y = 0
-  twist.angular.z = 0
+  twist.angular.z = -0.314
   pub.publish(twist)
 
-  time.sleep(2)
+  time.sleep(10)
 
   twist = Twist()
   twist.linear.x = 0

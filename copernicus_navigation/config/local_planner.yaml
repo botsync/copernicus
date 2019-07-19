@@ -5,10 +5,11 @@ planner_patience: 10.0
 shutdown_costmaps: false
 oscillation_distance: 0.2
 oscillation_timeout: 10.0
+
 conservative_reset_dist: 0.2
 cost_factor: 1.0
 neutral_cost: 55
-lethal_cost: 253
+lethal_cost: 253 
 
 recovery_behaviour_enabled: true
 recovery_behaviors: [{name: conservative_reset, type: clear_costmap_recovery/ClearCostmapRecovery}, {name: aggressive_reset, type: clear_costmap_recovery/ClearCostmapRecovery}] 
@@ -17,20 +18,20 @@ DWAPlannerROS:
   acc_lim_x: 0.5
   acc_limit_trans: 0.5
   acc_lim_y: 0.0
-  acc_lim_theta: 0.5
+  acc_lim_theta: 0.8
 
-  max_vel_x: 0.5
-  min_vel_x: 0.0
+  max_vel_x: 0.8
+  min_vel_x: 0.1
   max_vel_y: 0.0
   min_vel_y: 0.0
 
-  max_trans_vel: 0.5
-  min_trans_vel: 0.0
+  max_trans_vel: 0.8
+  min_trans_vel: 0.1
   max_rot_vel: 0.6
-  min_rot_vel: 0.2
+  min_rot_vel: 0.1
   trans_stopped_vel: 0.1
   rot_stopped_vel: 0.2
-  yaw_goal_tolerance: 1.0
+  yaw_goal_tolerance: 0.2
   xy_goal_tolerance: 1.0
   latch_xy_goal_tolerance: true
 
@@ -46,7 +47,7 @@ DWAPlannerROS:
   goal_distance_bias: 24.0
   occdist_scale: 0.1
   forward_point_distance: 0.6
-  stop_time_buffer: 0.2
+  stop_time_buffer: 0.5
   scaling_speed: 0.1
   control_frequency: 10.0
   max_scaling_factor: 0.1

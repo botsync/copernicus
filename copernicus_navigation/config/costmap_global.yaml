@@ -1,13 +1,13 @@
-global_frame: /map
+global_frame: map
 rolling_window: false
-track_unknown_space: false
+track_unknown_space: true
 width: 50
 height: 50
 
 plugins:
   - {name: static,                  type: "costmap_2d::StaticLayer"}
   - {name: no_go_zones,             type: "costmap_2d::StaticLayer"}
-  - {name: inflation,               type: "costmap_2d::InflationLayer"}
   - {name: obstacles_laser,         type: "costmap_2d::ObstacleLayer"}
+  - {name: inflation,               type: "costmap_2d::InflationLayer"}
 
 

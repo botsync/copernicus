@@ -43,7 +43,7 @@ double vel_y = 0.0;
 double ang_z = 0.0;
 double vel_dt = 0.0;
 ros::Publisher odom_pub;
-tf::TransformBroadcaster odom_broadcaster;
+tf::TransformBroadcaster* odom_broadcaster;
 
 ros::Time last_loop_time(0.0);
 ros::Time last_vel_time(0.0);
@@ -95,7 +95,7 @@ void velCallback( const copernicus_msgs::Velocities& vel) {
   odom_trans.transform.rotation = odom_quat;
   odom_trans.header.stamp = current_time;
   //publish robot's tf using odom_trans object
-  odom_broadcaster.sendTransform(odom_trans);
+  odom_broadcaster->sendTransform(odom_trans);
 
   nav_msgs::Odometry odom;
   odom.header.stamp = current_time;
@@ -127,6 +127,7 @@ int main(int argc, char** argv){
   ros::NodeHandle nh_private_("~");
   ros::Subscriber sub = n.subscribe("raw_vel", 1, velCallback);
   odom_pub = n.advertise<nav_msgs::Odometry>("odom", 1);
+  odom_broadcaster = new tf::TransformBroadcaster();
 
   ros::spin();
 }

@@ -1,6 +1,8 @@
 global_frame: odom
 rolling_window: true
-track_unknown_space: false
+track_unknown_space: true
+width: 10
+height: 10
 
 plugins:
   - {name: no_go_zones,               type: "costmap_2d::StaticLayer"}
