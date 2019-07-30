@@ -1,7 +1,7 @@
 <launch>
 	<node pkg="cartographer_ros" type="cartographer_node" name="cartographer_node" args="
         -configuration_directory
-            $(find cartographer_ros)/configuration_files
+            $(find copernicus_navigation)/config
         -configuration_basename mapping.lua"
     output="screen">
       <remap from="points2" to="rslidar_points" />

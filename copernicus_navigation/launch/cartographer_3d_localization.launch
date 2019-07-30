@@ -1,9 +1,9 @@
 <launch>
 	<node pkg="cartographer_ros" type="cartographer_node" name="cartographer_node" args="
         -configuration_directory
-            $(find cartographer_ros)/configuration_files
+            $(find copernicus_navigation)/config
         -configuration_basename localization.lua
-        -load_state_filename /home/copernicus/cartographer_ws/cartographer_maps/section2-17-7-19.2.pbstream"
+        -load_state_filename /home/nikhil/catkin_copernicus/src/copernicus/copernicus_navigation/maps/gazebo.pbstream"
     output="screen">
       <remap from="points2" to="rslidar_points" />
       <remap from="odom" to="odometry/filtered" />

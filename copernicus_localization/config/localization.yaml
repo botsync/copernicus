@@ -13,7 +13,7 @@ ekf_se_odom:
   world_frame: odom
   publish_tf: false
 
-  odom0: odom
+  odom0: odometry/wheel
   odom0_config: [false,  false, false,
                  false, false, false,
                  true,  true,  false,

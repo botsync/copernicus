@@ -42,7 +42,7 @@
             <param name="target_frame" value="base_link"/>
             <param name="use_inf" value="true"/>
 
-            <remap from="cloud_in" to="velodyne_points"/>
+            <remap from="cloud_in" to="rslidar_points"/>
             <remap from="scan" to="scan_filtered"/>
         </node>
 

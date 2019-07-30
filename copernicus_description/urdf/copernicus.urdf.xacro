@@ -134,7 +134,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/velodyne_mount.urdf.xacro"/>
             <xacro:velodyne_mount></xacro:velodyne_mount>
             <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
-            <VLP-16 parent="velodyne_mount" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false" min_range="0.2">
+            <VLP-16 parent="velodyne_mount" name="velodyne" topic="rslidar_points" hz="10" samples="440" gpu="false" min_range="0.2">
                 <origin xyz="${velodyne_joint_x} ${velodyne_joint_y} ${velodyne_joint_z}" rpy="0 ${-velodyne_joint_pitch} 0" />
             </VLP-16>
         </xacro:if>

@@ -16,12 +16,11 @@
 
     <arg name="map_file" default="$(find copernicus_navigation)/maps/section2.yaml"/>
     <arg name="map_no_go_zones_file" default="$(find copernicus_navigation)/maps/section2-no-go.yaml"/>
-    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" unless="$(arg gmapping)"/>
-    <node name="map_server_no_go" pkg="map_server" type="map_server" args="$(arg map_no_go_zones_file)" unless="$(arg gmapping)">
-        <remap from="map" to="map_no_go"/>
-    </node>
 
-    <!--<node pkg="amcl" type="amcl" name="amcl" unless="$(arg gmapping)">
+    <include file="$(find copernicus_navigation)/launch/cartographer_3d_localization.launch">
+    </include>
+
+    <!-- <node pkg="amcl" type="amcl" name="amcl" unless="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/amcl.yaml" command="load"/>
         <param name="use_map_topic" value="$(arg amcl_use_map_topic)"/>
         <param name="global_frame_id" value="$(arg map_frame)"/>
@@ -33,7 +32,7 @@
         <param name="tf_broadcast" value="$(arg amcl_tf_broadcast)"/>
         <remap from="scan" to="$(arg scan_topic)"/>
         <remap from="map" to="/map"/>
-    </node>-->
+    </node> -->
 
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/gmapping.yaml" command="load"/>
@@ -43,6 +42,9 @@
         <param name="base_frame" value="$(arg base_frame)"/>
         <remap from="scan" to="$(arg scan_topic)"/>
         <remap from="map" to="/map"/>
+    </node>
+
+    <node pkg="copernicus_navigation" type="emergency_safety_planner.py" name="emergency_planner">
     </node>
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">

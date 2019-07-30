@@ -58,7 +58,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <gaussianNoise>0.0</gaussianNoise>
                     <xyzOffset>0 0 0</xyzOffset>
                     <rpyOffset>0 0 0</rpyOffset>
-                    <frameName>base_link</frameName>
+                    <frameName>${frame}</frameName>
                 </plugin>
                 <pose>0 0 0 0 0 0</pose>
             </sensor>

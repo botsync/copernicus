@@ -5,6 +5,7 @@
     <arg name="robosense_lidar" default="true"/>
     <arg name="logitech_camera" default="false"/>
     <arg name="ros_web_streaming" default="false"/>
+    <arg name="navigation" default="true"/>
 
     <group>
         <node name="copernicus_base_node" pkg="copernicus_base" type="copernicus_base_node">
@@ -34,7 +35,6 @@
         <include file="$(find copernicus_localization)/launch/localization.launch"/>
 
         <node name="robot_pose_publisher" pkg="robot_pose_publisher" type="robot_pose_publisher"/>
-
     </group>
 
     <group if="$(arg sick_lms151)">
@@ -104,6 +104,10 @@
         </node>
 
         <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+        </include>
+    </group>
+    <group if="$(arg navigation)">
+        <include file="$(find copernicus_navigation)/launch/navigation.launch">
         </include>
     </group>
 
