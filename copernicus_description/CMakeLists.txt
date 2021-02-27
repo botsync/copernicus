@@ -5,15 +5,18 @@ find_package(catkin REQUIRED COMPONENTS
   roslaunch
   urdf
   xacro
-  hector_gazebo_plugins
   velodyne_description
 )
 
 catkin_package()
 
+include_directories(
+ ${catkin_INCLUDE_DIRS}
+)
+
 roslaunch_add_file_check(launch)
 
 install(
-  DIRECTORY launch meshes urdf
+  DIRECTORY launch meshes rviz_params urdf
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

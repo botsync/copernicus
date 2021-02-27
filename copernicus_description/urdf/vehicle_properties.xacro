@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 
-Copyright (c) 2017, Botsync Pte. Ltd.
+Copyright (c) 2021, Botsync Pte. Ltd.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -79,13 +79,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="lms151_mount_izz" value="0.002"/>
 
     <xacro:property name="lms151_mount_joint_x" value="0.0177"/>
-    <xacro:property name="lms151_mount_joint_y" value="0"/>
+    <xacro:property name="lms151_mount_joint_y" value="0.0"/>
     <xacro:property name="lms151_mount_joint_z" value="0.356"/>
 
     <xacro:property name="lms151_joint_x" value="0.0453"/>
     <xacro:property name="lms151_joint_y" value="0.0"/>
     <xacro:property name="lms151_joint_z" value="0.158"/>
-
+    
     <xacro:property name="velodyne_mount_l" value="0.112"/>
     <xacro:property name="velodyne_mount_h" value="0.039"/>
     <xacro:property name="velodyne_mount_w" value="0.125"/>
@@ -106,6 +106,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="velodyne_joint_y" value="0.0625"/>
     <xacro:property name="velodyne_joint_z" value="0.0295"/>
     <xacro:property name="velodyne_joint_pitch" value="0.262"/>
+    <xacro:property name="dummy_inertia" value="1e-09"/>
+    
     <xacro:property name="dummy_inertia" value="1e-09"/>
     
 </robot>

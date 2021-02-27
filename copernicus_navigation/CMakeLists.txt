@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(copernicus_navigation)
 
-find_package(catkin REQUIRED COMPONENTS
-  amcl
-  move_base
-  gmapping
-  map_server
-  dwa_local_planner
-  global_planner
+find_package(catkin REQUIRED)
+
+catkin_package()
+
+install(
+	DIRECTORY config launch maps
+	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

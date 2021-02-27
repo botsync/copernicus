@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018, Botsync Pte. Ltd.
+Copyright (c) 2021, Botsync Pte. Ltd.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,6 @@ int e_stop_button;
 int linear_speed_axis;
 int angular_speed_axis;
 
-int enable_holonomic_movement;
 int sideways_speed_axis;
 int enable_e_stop;
 
@@ -53,6 +52,5 @@ ros::Subscriber pb_flags_subscriber;
 
 ros::Publisher cmd_vel_pub;
 ros::Publisher e_stop_pub;
-ros::Publisher stop_pub;
 
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy);

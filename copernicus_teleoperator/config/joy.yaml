@@ -7,12 +7,9 @@ angular_speed_axis: 0
 max_linear_speed: 1.0
 max_angular_speed: 1.0
 
-enable_holonomic_movement: 0
-sideways_speed_axis: -1
-
 enable_e_stop: 1
 
-cmd_vel_topic: /joy/cmd_vel
-e_stop_pub_topic: /e_stop_sw_enable
+cmd_vel_topic: joy/cmd_vel
+e_stop_pub_topic: e_stop_sw_enable
 
-joy_topic: /joy
+joy_topic: joy

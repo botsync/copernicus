@@ -1,29 +1,25 @@
 #!/bin/bash
-rossetup=/opt/ros/kinetic/setup.bash
-rossetup2=/home/copernicus/ros_workspace/devel/setup.bash
-launcher="roslaunch copernicus_base copernicus_bringup.launch"
+rossetup=/opt/ros/melodic/setup.bash
+catkin_ws_setup=/home/copernicus/catkin_ws/devel/setup.bash
+launcher="roslaunch copernicus_base bringup.launch"
 pathfile=/home/copernicus
 pathfile2=/lib/systemd/system
-cat <<EOF >$pathfile/vehiclestart.sh
+cat <<EOF >$pathfile/robotstart.sh
 #!/bin/bash
-bash -c "source $rossetup && source $rossetup2 && $launcher"
+bash -c "source $rossetup && source $catkin_ws_setup && $launcher"
 EOF
-
-sudo chmod u+x $pathfile/vehiclestart.sh
-
-cat <<EOF >$pathfile2/vehiclestart.service
+sudo chmod u+x $pathfile/robotstart.sh
+cat <<EOF >$pathfile2/robotstart.service
 [Unit]
-Description=Vehicle Auto Start
+Description=robot Auto Start
 After=multi-user.target
-
 [Service]
 Type=idle
-ExecStart=$pathfile/vehiclestart.sh
-
+ExecStart=$pathfile/robotstart.sh
 [Install]
 WantedBy=multi-user.target
 EOF
-sudo chmod 644 $pathfile2/vehiclestart.service
+sudo chmod 644 $pathfile2/robotstart.service
 sudo systemctl daemon-reload
-sudo systemctl enable vehiclestart.service
-sudo systemctl start vehiclestart.service
+sudo systemctl enable robotstart.service
+sudo systemctl start robotstart.service

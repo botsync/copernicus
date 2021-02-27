@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 
-Copyright (c) 2019, Botsync Pte. Ltd.
+Copyright (c) 2021, Botsync Pte. Ltd.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -38,29 +38,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- xacro args -->
     <xacro:arg name="robot_namespace" default="/" />
-    <xacro:arg name="tf_pre" default="" />
+    <xacro:arg name="lidar_enabled" default="true"/>
+    <xacro:arg name="sick_lms151_enabled" default="false"/>
+    <xacro:arg name="velodyne_enabled" default="false"/>
+    <xacro:arg name="imu_enabled" default="false"/>
+    <!--<xacro:arg name="camera_enabled" default="false"/>
+    <xacro:arg name="intel_d435i_enabled" default="false"/>-->
     
-    <xacro:arg name="lidar_enabled" default="false"/>
-    <xacro:arg name="velodyne_enabled" default="true"/>
-    
-    <xacro:arg name="imu_enabled" default="true"/>
-    
-    <xacro:arg name="gps_enabled" default="true"/>
-    <xacro:arg name="ref_latitude" default="0.0"/>
-    <xacro:arg name="ref_longitude" default="0.0"/>
-
-    <xacro:arg name="camera_enabled" default="false"/>
-    <xacro:arg name="zed_camera_enabled" default="false"/>
-
-    <xacro:arg name="guide_sensor_enabled" default="true"/>
-
     <xacro:macro name="copernicus_robot">
         <!-- Footprint -->
         <link name="footprint"/>
 
         <!-- Joint from footprint to base link(chassis) -->
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${ground_clearance}" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="footprint" />
         </joint>
@@ -70,14 +61,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://copernicus_description/meshes/copernicus.STL"/>
+                    <mesh filename="package://copernicus_description/meshes/copernicus.dae" scale="0.1 0.1 0.1"/>
                 </geometry>
                 <material name="gray"/>
             </visual>
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://copernicus_description/meshes/copernicus.STL"/>
+                    <mesh filename="package://copernicus_description/meshes/copernicus.dae" scale="0.1 0.1 0.1"/>
                 </geometry>
             </collision>
             <inertial>
@@ -87,46 +78,33 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </link>
 
         <!-- Wheel -->
-        <xacro:copernicus_wheel wheel_prefix="front_right"><origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
-        <xacro:copernicus_wheel wheel_prefix="back_right"><origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
-        <xacro:copernicus_wheel wheel_prefix="front_left"><origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
-        <xacro:copernicus_wheel wheel_prefix="back_left"><origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/></xacro:copernicus_wheel>
+        <xacro:copernicus_wheel wheel_prefix="front_right">
+            <origin xyz="${wheel_joint_x_abs} ${-wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/>
+        </xacro:copernicus_wheel>
 
-        <gazebo>
-            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-                <robotNamespace>$(arg robot_namespace)</robotNamespace>
-                <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-            </plugin>
-        </gazebo>
+        <xacro:copernicus_wheel wheel_prefix="back_right">
+            <origin xyz="${-wheel_joint_x_abs} ${-wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/>
+        </xacro:copernicus_wheel>
+
+        <xacro:copernicus_wheel wheel_prefix="front_left">
+            <origin xyz="${wheel_joint_x_abs} ${wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/>
+        </xacro:copernicus_wheel>
+
+        <xacro:copernicus_wheel wheel_prefix="back_left">
+            <origin xyz="${-wheel_joint_x_abs} ${wheel_joint_y_abs} ${wheel_joint_z_abs}" rpy="0 0 0"/>
+        </xacro:copernicus_wheel>
 
         <!-- IMU -->
         <xacro:if value="$(arg imu_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/imu.urdf.xacro"/>
-            <xacro:imu robot_namespace="$(arg robot_namespace)" tf_pre="$(arg tf_pre)"></xacro:imu>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/imu_copernicus.urdf.xacro"/>
+            <xacro:imu robot_namespace="$(arg robot_namespace)"></xacro:imu>
         </xacro:if>
 
-        <!-- LMS151 -->
+        <!-- LIDAR -->
         <xacro:if value="$(arg lidar_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lms_151.urdf.xacro"/>
-            <xacro:lms151 robot_namespace="$(arg robot_namespace)"></xacro:lms151>
-        </xacro:if>
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lms_151_copernicus.urdf.xacro"/>
+            <xacro:lidar sick_lms151_enabled="$(arg sick_lms151_enabled)" robot_namespace="$(arg robot_namespace)"></xacro:lidar>
 
-        <!-- GPS -->
-        <xacro:if value="$(arg gps_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/gps.urdf.xacro"/>
-            <xacro:gps robot_namespace="$(arg robot_namespace)" ref_latitude="$(arg ref_latitude)" ref_longitude="$(arg ref_longitude)" tf_pre="$(arg tf_pre)"></xacro:gps>
-        </xacro:if>
-
-        <!-- Camera -->
-        <xacro:if value="$(arg camera_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
-            <xacro:camera_ robot_namespace="$(arg robot_namespace)"></xacro:camera_>
-        </xacro:if>
-
-        <!-- ZED camera -->
-        <xacro:if value="$(arg zed_camera_enabled)">
-            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera.urdf.xacro"/>
-            <xacro:camera_ frame="zed_camera_center" robot_namespace="$(arg robot_namespace)"></xacro:camera_>
         </xacro:if>
 
         <!-- Velodyne -->
@@ -134,16 +112,26 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <xacro:include filename="$(find copernicus_description)/urdf/accessories/velodyne_mount.urdf.xacro"/>
             <xacro:velodyne_mount></xacro:velodyne_mount>
             <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
-            <VLP-16 parent="velodyne_mount" name="velodyne" topic="rslidar_points" hz="10" samples="440" gpu="false" min_range="0.2">
+            <VLP-16 parent="velodyne_mount" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false" min_range="0.2">
                 <origin xyz="${velodyne_joint_x} ${velodyne_joint_y} ${velodyne_joint_z}" rpy="0 ${-velodyne_joint_pitch} 0" />
             </VLP-16>
         </xacro:if>
 
-        <!-- Guide Sensor -->
-        <xacro:if value="$(arg guide_sensor_enabled)">
-            <xacro:include filename="$(find line_following_description)/urdf/guide_sensor.urdf.xacro"/>
-            <xacro:guide_sensor robot_namespace="$(arg robot_namespace)" frame="guide_sensor" topic="guide_sensor" x="0.2005" y="0.0" z="-0.092"></xacro:guide_sensor>
-       </xacro:if>
+        <!-- CAMERA -->
+        <!--<xacro:if value="$(arg camera_enabled)">
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/camera_copernicus.urdf.xacro"/>
+            <xacro:camera_ intel_d435i_enabled="$(arg intel_d435i_enabled)" robot_namespace="$(arg robot_namespace)"></xacro:camera_>
+        </xacro:if>-->
+
+
+        <!--ROBOT GAZEBO TAG-->
+        <gazebo>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+                <robotNamespace>$(arg robot_namespace)</robotNamespace>
+                <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+            </plugin>
+        </gazebo>
 
     </xacro:macro>
+
 </robot>

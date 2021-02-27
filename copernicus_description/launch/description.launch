@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="um7_imu" default="false"/>
+    <arg name="sick_lms151" default="false"/>
+
     <arg name="model" default="$(find copernicus_description)/urdf/copernicus.xacro"/>
     <arg name="viz_config" default="$(find copernicus_description)/rviz_params/copernicus.rviz"/>
 
-    <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg model)"/>
+    <!-- LOAD ROBOT DESCRIPTION PARAM -->
+    <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg model) um7_imu:=$(arg um7_imu) sick_lms151:=$(arg sick_lms151)"/>
     
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />

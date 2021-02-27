@@ -14,16 +14,6 @@ topics:
   topic   : keyboard/cmd_vel
   timeout : 0.5
   priority: 80
--
-  name    : website
-  topic   : website/cmd_vel
-  timeout : 0.5
-  priority: 60
--
-  name    : voice
-  topic   : voice/cmd_vel
-  timeout : 0.5
-  priority: 30
 locks:
 -
   name    : estop

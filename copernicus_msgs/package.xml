@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <package>
   <name>copernicus_msgs</name>
-  <version>6.0.0</version>
+  <version>1.1.0</version>
   <description>The copernicus_msgs package</description>
 
-  <maintainer email="nikhil@botsync.sg">Nikhil Venkatesh</maintainer>
+  <author email="nikhil@botsync.co">Nikhil Venkatesh</author>
+  <maintainer email="sachindevadiga894@gmail.com">Sachin Devadiga</maintainer>
 
-  <license>BSD2</license>
-
+  <license>BSD-3-Clause</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>message_generation</build_depend>
   <build_depend>std_msgs</build_depend>
-  <run_depend>message_generation</run_depend>
+  <run_depend>message_runtime</run_depend>
   <run_depend>std_msgs</run_depend>
 
   <export>

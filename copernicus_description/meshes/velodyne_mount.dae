@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.83.12 commit date:2021-01-26, commit time:15:41, hash:ad0da4275159</authoring_tool>
+    </contributor>
+    <created>2021-02-26T07:48:10</created>
+    <modified>2021-02-26T07:48:10</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_cameras>
+    <camera id="Camera-camera" name="Camera">
+      <optics>
+        <technique_common>
+          <perspective>
+            <xfov sid="xfov">39.59775</xfov>
+            <aspect_ratio>1.777778</aspect_ratio>
+            <znear sid="znear">0.1</znear>
+            <zfar sid="zfar">100</zfar>
+          </perspective>
+        </technique_common>
+      </optics>
+      <extra>
+        <technique profile="blender">
+          <shiftx sid="shiftx" type="float">0</shiftx>
+          <shifty sid="shifty" type="float">0</shifty>
+          <dof_distance sid="dof_distance" type="float">10</dof_distance>
+        </technique>
+      </extra>
+    </camera>
+  </library_cameras>
+  <library_lights>
+    <light id="Light-light" name="Light">
+      <technique_common>
+        <point>
+          <color sid="color">1000 1000 1000</color>
+          <constant_attenuation>1</constant_attenuation>
+          <linear_attenuation>0</linear_attenuation>
+          <quadratic_attenuation>0.00111109</quadratic_attenuation>
+        </point>
+      </technique_common>
+      <extra>
+        <technique profile="blender">
+          <type sid="type" type="int">0</type>
+          <flag sid="flag" type="int">0</flag>
+          <mode sid="mode" type="int">1</mode>
+          <gamma sid="blender_gamma" type="float">1</gamma>
+          <red sid="red" type="float">1</red>
+          <green sid="green" type="float">1</green>
+          <blue sid="blue" type="float">1</blue>
+          <shadow_r sid="blender_shadow_r" type="float">0</shadow_r>
+          <shadow_g sid="blender_shadow_g" type="float">0</shadow_g>
+          <shadow_b sid="blender_shadow_b" type="float">0</shadow_b>
+          <energy sid="blender_energy" type="float">1000</energy>
+          <dist sid="blender_dist" type="float">29.99998</dist>
+          <spotsize sid="spotsize" type="float">75</spotsize>
+          <spotblend sid="spotblend" type="float">0.15</spotblend>
+          <att1 sid="att1" type="float">0</att1>
+          <att2 sid="att2" type="float">1</att2>
+          <falloff_type sid="falloff_type" type="int">2</falloff_type>
+          <clipsta sid="clipsta" type="float">0.04999995</clipsta>
+          <clipend sid="clipend" type="float">30.002</clipend>
+          <bias sid="bias" type="float">1</bias>
+          <soft sid="soft" type="float">3</soft>
+          <bufsize sid="bufsize" type="int">2880</bufsize>
+          <samp sid="samp" type="int">3</samp>
+          <buffers sid="buffers" type="int">1</buffers>
+          <area_shape sid="area_shape" type="int">1</area_shape>
+          <area_size sid="area_size" type="float">0.1</area_size>
+          <area_sizey sid="area_sizey" type="float">0.1</area_sizey>
+          <area_sizez sid="area_sizez" type="float">1</area_sizez>
+        </technique>
+      </extra>
+    </light>
+  </library_lights>
+  <library_effects>
+    <effect id="Material_002-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.02842603 0.03189604 0.03433982 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">1</float>
+            </reflectivity>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images/>
+  <library_materials>
+    <material id="Material_002-material" name="Material.002">
+      <instance_effect url="#Material_002-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Velodyne_Mount_001-mesh" name="Velodyne Mount.001">
+      <mesh>
+        <source id="Velodyne_Mount_001-mesh-positions">
+          <float_array id="Velodyne_Mount_001-mesh-positions-array" count="192">0 -0.05612707 0 -0.06033492 0.001277089 0 0 0.05612707 0 -0.06 0.002527058 0 -0.06033492 0.003777086 0 -0.06124997 0.004692137 0 -0.0625 0.005027055 0 -0.125 0.05612707 0 -0.06374996 0.004692137 0 -0.06466501 0.003777086 0 -0.06499999 0.002527058 0 -0.125 -0.05612707 0 -0.125 0.05612707 0.03923302 0 0.05612707 0.03923302 0 0.05212706 0.003999948 0 0.05212706 0.03359776 -0.125 0.05212706 0.003999948 -0.125 -0.05816704 0.003999948 -0.06124997 0.004692137 0.003999948 -0.06033492 0.003777086 0.003999948 -0.06 0.002527058 0.003999948 0 -0.05816704 0.003999948 -0.06374996 0.004692137 0.003999948 -0.0625 0.005027055 0.003999948 -0.06466501 0.001277029 0.003999948 -0.06499999 0.002527058 0.003999948 -0.06466501 0.003777086 0.003999948 -0.125 0.05212706 0.03359776 -0.06033492 0.001277029 0.003999948 -0.06466501 0.001277089 0 -0.06124997 3.62025e-4 0 -0.06124997 3.62025e-4 0.003999948 -0.06374996 3.62025e-4 0 -0.0625 2.70887e-5 0 -0.0625 2.70887e-5 0.003999948 -0.06374996 3.62025e-4 0.003999948 0 -0.01470476 0.0156632 -0.05924999 0.01162379 0.02272856 -0.0596854 0.01319324 0.02314972 -0.06087499 0.01434218 0.02345806 -0.0625 0.01476275 0.02357089 -0.064125 0.01434218 0.02345806 -0.06531459 0.01319324 0.02314972 -0.125 -0.01470476 0.0156632 -0.125 -0.01584672 0.01991862 -0.064125 0.01320028 0.02771347 -0.0625 0.01362079 0.0278263 -0.06087499 0.01320028 0.02771347 -0.0596854 0.01205134 0.02740514 0 -0.01584672 0.01991862 -0.06575 0.01048183 0.02698397 -0.06531459 0.01205134 0.02740514 -0.05924999 0.01048183 0.02698397 -0.06575 0.01162379 0.02272856 -0.0596854 0.01005434 0.02230739 -0.0596854 0.008912384 0.0265628 -0.06531459 0.01005434 0.02230739 -0.06087499 0.00890541 0.02199906 -0.06087499 0.007763445 0.02625447 -0.064125 0.00890541 0.02199906 -0.06531459 0.008912384 0.0265628 -0.0625 0.00848484 0.02188622 -0.0625 0.007342934 0.02614164 -0.064125 0.007763445 0.02625447</float_array>
+          <technique_common>
+            <accessor source="#Velodyne_Mount_001-mesh-positions-array" count="64" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Velodyne_Mount_001-mesh-normals">
+          <float_array id="Velodyne_Mount_001-mesh-normals-array" count="369">0 0 -1 1.13414e-6 -1.25966e-6 -1 -2.79906e-7 3.23234e-7 -1 -3.5352e-7 4.08076e-7 -1 0 -1.53589e-7 -1 0 0 -1 0 -1.53588e-7 -1 3.5352e-7 4.08076e-7 -1 2.79907e-7 3.23235e-7 -1 0 0 -1 0 1 0 0 1 -1.89906e-7 1 0 0 1 0 0 1 0 0 -1 0 0 -2.92637e-7 -2.91069e-7 1 0 6.09951e-7 1 0 0 1 0 0 1 -7.67074e-7 0 1 3.64671e-7 0 1 0 -1 0 -4.98461e-7 -4.78522e-7 1 0 0 1 0 6.09953e-7 1 2.92637e-7 -2.91069e-7 1 0.2588192 -0.9659258 0 -0.2588204 -0.9659255 3.51403e-7 -0.2588201 -0.9659256 1.75702e-7 -0.7071051 -0.7071085 0 -0.7071024 -0.7071112 3.51399e-7 0.2588201 -0.9659256 5.27105e-7 0.7071081 -0.7071055 1.75701e-7 -0.9659249 -0.2588224 0 -0.9659264 -0.2588171 0 0.7071052 -0.7071084 1.757e-7 0.9659253 -0.2588214 0 -0.9659247 0.2588232 1.97664e-7 -0.965925 0.2588225 0 7.53541e-7 -7.53857e-7 -1 0.9659278 -0.2588118 0 0.9659295 0.2588057 0 3.52716e-7 4.08879e-7 -1 -0.7071081 0.7071055 0 -0.7071067 0.707107 6.14955e-7 -3.52716e-7 4.08879e-7 -1 0.965925 0.2588226 2.19626e-7 0.7071021 0.7071115 6.14949e-7 -1.28922e-7 0 -1 -0.2588202 0.9659255 0 -0.2588174 0.9659262 0 1.28922e-7 0 -1 0.7071096 0.707104 0 0.2588186 0.9659259 0 0 0 -1 0.2588202 0.9659255 0 -6.10599e-7 -2.99632e-7 1 1.06213e-6 5.01006e-7 1 -1.05383e-6 5.01006e-7 1 0 0 1 5.6175e-7 -6.2916e-7 1 -2.23306e-7 2.73404e-7 1 0 0.2591828 -0.9658283 0 0.259184 -0.965828 0 0.2591825 -0.9658284 -2.58475e-6 0.2591827 -0.9658284 0 0.2591828 -0.9658284 1 0 0 2.58475e-6 0.2591833 -0.9658282 0 0.2591828 -0.9658283 5.25546e-6 -0.2591849 0.9658277 0 -0.2591829 0.9658284 -2.35826e-6 -0.2591823 0.9658284 1.85837e-6 -0.259184 0.9658281 0 -0.2591828 0.9658283 1 0 0 0 -0.2591828 0.9658283 0 -0.2591834 0.9658282 -1.85837e-6 -0.2591831 0.9658283 0.258819 -0.9329184 -0.2503519 -0.2588182 -0.9329187 -0.2503513 -0.2588178 -0.932919 -0.250351 -0.7071065 -0.6829442 -0.1832697 -0.7071084 -0.6829421 -0.1832702 0.2588163 -0.9329198 -0.2503495 0.7071051 -0.6829458 -0.1832692 -0.9659246 -0.2499799 -0.06708091 -0.9659264 -0.2499727 -0.06708121 1.37914e-6 0.2591843 -0.965828 0.7071117 -0.6829384 -0.1832713 0.9659237 -0.2499828 -0.06708151 1.81646e-6 0.2591819 -0.9658286 -0.9659265 0.2499725 0.06708115 -0.9659245 0.2499801 0.06708109 -2.15283e-6 0.2591808 -0.9658288 0.9659284 -0.2499651 -0.06708192 0.9659259 0.2499746 0.06708168 -5.73498e-7 0.2591844 -0.9658279 -0.7071112 0.682939 0.1832706 -0.7071081 0.6829423 0.1832705 5.73497e-7 0.2591853 -0.9658277 0.9659245 0.2499801 0.06708168 0.7071118 0.6829382 0.1832711 -8.51405e-7 0.2591805 -0.965829 -0.2588192 0.932918 0.2503532 -0.2588187 0.9329189 0.2503506 8.7887e-7 0.2591804 -0.965829 0.7071045 0.6829462 0.1832694 0.2588167 0.9329196 0.2503501 0 0.2591829 -0.9658282 0.2588205 0.9329177 0.2503529 0 -0.2591823 0.9658284 1.07642e-6 -0.2591819 0.9658285 -1.4128e-6 -0.259181 0.9658288 -1.147e-6 -0.2591845 0.9658278 6.09341e-7 -0.2591853 0.9658277 -1.75774e-6 -0.2591838 0.9658281 1.4007e-6 -0.2591833 0.9658282 0 -0.2591828 0.9658284 0 -0.9658281 -0.2591834 0 -0.9658282 -0.2591831 0 -0.8908357 -0.4543259</float_array>
+          <technique_common>
+            <accessor source="#Velodyne_Mount_001-mesh-normals-array" count="123" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Velodyne_Mount_001-mesh-vertices">
+          <input semantic="POSITION" source="#Velodyne_Mount_001-mesh-positions"/>
+        </vertices>
+        <triangles material="Material_002-material" count="132">
+          <input semantic="VERTEX" source="#Velodyne_Mount_001-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Velodyne_Mount_001-mesh-normals" offset="1"/>
+          <p>0 0 1 0 2 0 1 1 3 1 2 1 3 2 4 2 2 2 4 3 5 3 2 3 5 4 6 4 2 4 6 5 7 5 2 5 6 6 8 6 7 6 8 7 9 7 7 7 9 8 10 8 7 8 10 9 11 9 7 9 7 10 12 10 2 10 12 11 13 11 2 11 14 12 0 12 2 12 15 13 14 13 2 13 13 14 15 14 2 14 16 15 12 15 7 15 17 15 16 15 7 15 11 15 17 15 7 15 18 16 19 16 14 16 19 17 20 17 14 17 20 18 21 18 14 18 16 19 22 19 14 19 22 20 23 20 14 20 23 21 18 21 14 21 15 22 16 22 14 22 21 12 0 12 14 12 24 23 25 23 16 23 17 24 24 24 16 24 25 25 26 25 16 25 26 26 22 26 16 26 15 22 27 22 16 22 27 15 12 15 16 15 23 27 8 27 6 27 5 28 18 28 6 28 18 29 23 29 6 29 4 30 19 30 5 30 19 31 18 31 5 31 23 32 22 32 8 32 22 33 9 33 8 33 3 34 20 34 4 34 20 35 19 35 4 35 22 36 26 36 9 36 26 37 10 37 9 37 1 38 28 38 3 38 28 39 20 39 3 39 29 40 11 40 10 40 26 41 25 41 10 41 25 42 29 42 10 42 0 43 30 43 1 43 30 44 31 44 1 44 31 45 28 45 1 45 32 46 11 46 29 46 25 47 24 47 29 47 24 48 32 48 29 48 0 49 33 49 30 49 33 50 34 50 30 50 34 51 31 51 30 51 33 52 11 52 32 52 24 53 35 53 32 53 35 54 33 54 32 54 0 55 11 55 33 55 35 56 34 56 33 56 28 57 21 57 20 57 31 58 21 58 28 58 17 59 35 59 24 59 17 60 21 60 31 60 34 61 17 61 31 61 17 62 34 62 35 62 36 63 37 63 15 63 37 64 38 64 15 64 38 65 39 65 15 65 39 66 40 66 15 66 40 67 27 67 15 67 13 68 36 68 15 68 40 69 41 69 27 69 41 65 42 65 27 65 42 70 43 70 27 70 43 15 44 15 27 15 44 15 12 15 27 15 45 71 46 71 13 71 12 72 45 72 13 72 46 73 47 73 13 73 47 74 48 74 13 74 48 75 49 75 13 75 49 76 36 76 13 76 44 77 50 77 12 77 50 78 51 78 12 78 51 79 45 79 12 79 46 80 41 80 40 80 39 81 47 81 40 81 47 82 46 82 40 82 38 83 48 83 39 83 48 84 47 84 39 84 46 85 45 85 41 85 45 86 42 86 41 86 37 87 52 87 38 87 52 88 48 88 38 88 53 89 43 89 42 89 45 90 51 90 42 90 51 91 53 91 42 91 36 92 54 92 37 92 54 93 55 93 37 93 55 94 52 94 37 94 56 95 43 95 53 95 51 96 50 96 53 96 50 97 56 97 53 97 36 98 57 98 54 98 57 99 58 99 54 99 58 100 55 100 54 100 59 101 43 101 56 101 50 102 60 102 56 102 60 103 59 103 56 103 36 104 61 104 57 104 61 105 62 105 57 105 62 106 58 106 57 106 61 107 43 107 59 107 60 108 63 108 59 108 63 109 61 109 59 109 36 110 43 110 61 110 63 111 62 111 61 111 52 112 49 112 48 112 55 113 49 113 52 113 44 114 60 114 50 114 58 115 49 115 55 115 44 116 63 116 60 116 62 117 49 117 58 117 44 118 62 118 63 118 44 119 49 119 62 119 49 120 43 120 36 120 49 121 44 121 43 121 21 122 11 122 0 122 21 122 17 122 11 122</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Velodyne_Mount" name="Velodyne Mount" type="NODE">
+        <matrix sid="transform">0 1 0 0 -1 0 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Velodyne_Mount_001-mesh" name="Velodyne Mount">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material_002-material" target="#Material_002-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="Camera" name="Camera" type="NODE">
+        <matrix sid="transform">0.7276763 0.3054208 -0.6141704 -6.925791 -0.6859207 0.3240135 -0.6515582 -7.358891 0 0.8953956 0.4452714 4.958309 0 0 0 1</matrix>
+        <instance_camera url="#Camera-camera"/>
+      </node>
+      <node id="Light" name="Light" type="NODE">
+        <matrix sid="transform">0.9551712 -0.1998834 0.2183912 1.005454 0.2908646 0.7711008 -0.5663932 -4.076245 -0.05518906 0.6045247 0.7946723 5.903862 0 0 0 1</matrix>
+        <instance_light url="#Light-light"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

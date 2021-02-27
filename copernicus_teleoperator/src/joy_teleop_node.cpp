@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018, Botsync Pte. Ltd.
+Copyright (c) 2021, Botsync Pte. Ltd.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <copernicus_teleoperator/joy_teleop.h>
 
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "joy_teleop_node");
+    ros::init(argc, argv, "copernicus_joy_teleop_node");
 
     ros::NodeHandle nh;
 
@@ -40,28 +40,23 @@ int main(int argc, char** argv) {
     nh.param<int>("linear_speed_axis", linear_speed_axis, 1);
     nh.param<int>("angular_speed_axis", angular_speed_axis, 0);
 
-    nh.param<double>("max_linear_speed", max_linear_speed, 0.3);
-    nh.param<double>("max_angular_speed", max_angular_speed, 0.3);
+    nh.param<double>("max_linear_speed", max_linear_speed, 1.0);
+    nh.param<double>("max_angular_speed", max_angular_speed, 1.0);
 
     nh.param<int>("enable_e_stop", enable_e_stop, 0);
-
-    nh.param<int>("enable_holonomic_movement", enable_holonomic_movement, 0);
-    nh.param<int>("sideways_speed_axis", sideways_speed_axis, -1);
 
     std::string cmd_vel_topic, e_stop_pub_topic, joy_topic, e_stop_sub_topic;
 
     nh.param<std::string>("cmd_vel_topic", cmd_vel_topic, "joy/cmd_vel");
-    nh.param<std::string>("e_stop_pub_topic", e_stop_pub_topic, "/e_stop_sw_enable");
+    nh.param<std::string>("e_stop_pub_topic", e_stop_pub_topic, "e_stop_sw_enable");
 
-    nh.param<std::string>("joy_topic", joy_topic, "/joy");
+    nh.param<std::string>("joy_topic", joy_topic, "joy");
 
-    cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1); 
-    stop_pub = nh.advertise<actionlib_msgs::GoalID>("/move_base/cancel", 1);
+    cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1);
 
     joy_subscriber = nh.subscribe(joy_topic, 1, joy_callback);
 
     if (enable_e_stop) {
-        ROS_INFO("Enable e-stop: %d", enable_e_stop);
         e_stop_pub = nh.advertise<std_msgs::Bool>(e_stop_pub_topic, 1);
     }
 

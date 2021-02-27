@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
     <arg name="odom_topic" default="odometry/filtered"/>
     <arg name="gmapping" default="false"/>
@@ -14,13 +15,9 @@
     <arg name="amcl_init_pose_y" default="0"/>
     <arg name="amcl_init_pose_yaw" default="0"/>
 
-    <arg name="map_file" default="$(find copernicus_navigation)/maps/section2.yaml"/>
-    <arg name="map_no_go_zones_file" default="$(find copernicus_navigation)/maps/section2-no-go.yaml"/>
+    <arg name="map_file" default="$(find copernicus_navigation)/maps/gazebo.yaml"/>
 
-    <include file="$(find copernicus_navigation)/launch/cartographer_3d_localization.launch">
-    </include>
-
-    <!-- <node pkg="amcl" type="amcl" name="amcl" unless="$(arg gmapping)">
+    <node pkg="amcl" type="amcl" name="amcl" unless="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/amcl.yaml" command="load"/>
         <param name="use_map_topic" value="$(arg amcl_use_map_topic)"/>
         <param name="global_frame_id" value="$(arg map_frame)"/>
@@ -31,8 +28,7 @@
         <param name="initial_pose_a" value="$(arg amcl_init_pose_yaw)"/>
         <param name="tf_broadcast" value="$(arg amcl_tf_broadcast)"/>
         <remap from="scan" to="$(arg scan_topic)"/>
-        <remap from="map" to="/map"/>
-    </node> -->
+    </node>
 
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" if="$(arg gmapping)">
         <rosparam file="$(find copernicus_navigation)/config/gmapping.yaml" command="load"/>
@@ -41,10 +37,6 @@
         <param name="odom_frame" value="$(arg odom_frame)"/>
         <param name="base_frame" value="$(arg base_frame)"/>
         <remap from="scan" to="$(arg scan_topic)"/>
-        <remap from="map" to="/map"/>
-    </node>
-
-    <node pkg="copernicus_navigation" type="emergency_safety_planner.py" name="emergency_planner">
     </node>
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
@@ -61,9 +53,9 @@
         <rosparam file="$(find copernicus_navigation)/config/costmap.yaml" command="load" ns="local_costmap" />
 
         <rosparam file="$(find copernicus_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
-        <param name="local_costmap/obstacle_layer/enabled" value="true" />
 
-        <rosparam file="$(find copernicus_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap"/>
-        <param name="global_costmap/obstacle_layer/enabled" value="true" />
+        <rosparam file="$(find copernicus_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap" />
     </node>
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" unless="$(arg gmapping)"/>
 </launch>

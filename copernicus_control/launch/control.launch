@@ -1,16 +1,18 @@
 <?xml version="1.0"?>
 <launch>
-	<arg name="tf_pre" default=""/>
-	<rosparam command="load" file="$(find copernicus_control)/config/control.yaml" />
-	<rosparam param="copernicus_base_controller/base_frame_id" subst_value="True">$(arg tf_pre)base_link</rosparam>
-	<rosparam param="copernicus_base_controller/odom_frame_id" subst_value="True">$(arg tf_pre)odom</rosparam>
-	<node name="base_controller_spawner" pkg="controller_manager" type="spawner"
-        args="copernicus_joint_publisher copernicus_base_controller">
+
+    <!-- Load Control Params -->
+    <rosparam command="load" file="$(find copernicus_control)/config/control.yaml" />
+
+    <!-- Controller manager -->
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="copernicus_joint_publisher copernicus_base_controller">
     </node>
 
+    <!-- Odometry and Cmd Vel Relays -->
     <node name="relay_odom" pkg="topic_tools" type="relay" output="screen" args="copernicus_base_controller/odom odometry/wheel" />
     <node name="relay_cmd_vel" pkg="topic_tools" type="relay" output="screen" args="cmd_vel copernicus_base_controller/cmd_vel" />
 
+    <!-- Twist multiplexer -->
     <node pkg="twist_mux" type="twist_mux" name="twist_mux" output="screen">
         <remap from="cmd_vel_out" to="cmd_vel" />
         <rosparam command="load" file="$(find copernicus_control)/config/twist_mux.yaml" />

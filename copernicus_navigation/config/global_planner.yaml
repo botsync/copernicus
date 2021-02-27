@@ -5,7 +5,3 @@ GlobalPlanner:
   orientation_mode: 2
   publish_potential: true
   use_dijkstra: true
-
-NavfnROS:
-  allow_unknown: true
-  default_tolerance: 0.1

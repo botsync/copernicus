@@ -21,9 +21,29 @@ uint16[2] M_Voltage
 uint16[2] M_Current
 uint8[2] M_Comm
 
-float32 Board_Temp
+float32 Relay_Temp
 float32 PowerConn_Temp
 float32 PreCharge_Temp
-float32 MotorConn_Temp
+float32 Power_Supply_Temp
+float32 Battery_In_Volt
+float32 PRE_CHARGE_Volt
+float32 HW_ESTOP_Volt
+float32 SW_ESTOP_Volt
 
+uint16[2] Motor_Alarm_Code
+uint32[2] Motor_Fun_Fail
+uint16[2] M_INIT
+uint16[2] M_CW
+uint16[2] M_CCW
+uint16[2] M_STOP
+uint16[2] M_BREAK
+uint16[2] M_SETRPM
+uint16[2] M_GETRPM
+uint16[2] M_PARAM
+uint16[2] M_ALARM
+
+uint8 PRECHARGE_FUSE
+uint8 MOTOR_FUSE
+
+uint8 LED_STATE
 

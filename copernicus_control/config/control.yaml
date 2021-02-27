@@ -13,8 +13,8 @@ copernicus_base_controller:
   base_frame_id: base_link
   enable_odom_tf: false
   estimate_velocity_from_position: false
-  wheel_separation_multiplier: 1.0
-  wheel_radius_multiplier    : 1.0
+  #wheel_separation: 0.86 #Uncomment when running on physical robot
+  #wheel_radius: 0.155    #Uncomment when running on physical robot
   linear:
     x:
       has_velocity_limits    : true

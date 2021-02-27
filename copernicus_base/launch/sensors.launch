@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="um7_imu" default="false"/>
+    <arg name="wit_wt901c_imu" default="true"/>
+    <arg name="sick_lms151" default="true"/>
+    <arg name="velodyne_vlp16" default="false"/>
+    
+        
+    <group if="$(arg um7_imu)">
+        <node pkg="um7" type="um7_driver" name="imu_driver">
+            <param name="port" value="/dev/imu"/>
+            <param name="mag_updates" value="false"/>
+            <param name="tf_ned_to_enu" value="false"/>
+            <param name="frame_id" value="imu"/>
+            <remap from="imu" to="imu"/>
+        </node>
+    </group>
+
+    <group if="$(arg wit_wt901c_imu)">
+      <node pkg="wit_imu_driver" type="wit_imu_driver" name="wit_imu_driver">
+        <param name="device" value="/dev/imu"/>
+        <param name="frame_id" value="imu"/>
+        <param name="baud" value="115200"/>
+        <remap from="data_raw" to="imu/data"/>
+      </node>
+    </group>
+
+    <group if="$(arg sick_lms151)">
+        <node pkg="lms1xx" name="lms1xx" type="LMS1xx_node" output="screen" if="$(arg sick_lms151)">
+            <param name="host" value="10.0.0.50" />
+            <param name="frame_id" value="lidar" />
+            <param name="publish_min_range_as_inf" value="false" />
+        </node>
+        <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" if="$(arg sick_lms151)">
+            <rosparam command="load" file="$(find copernicus_base)/config/scan.yaml" />
+        </node> 
+    </group>
+
+
+    <group if="$(arg velodyne_vlp16)">
+        <node pkg="velodyne_driver" name="velodyne_driver" type="velodyne_node" output="screen" if="$(arg velodyne_vlp16)">
+            <param name="frame_id" value="velodyne" />
+            <param name="model" value="VLP16" />
+            <param name="device_ip" value="10.0.0.10" />
+        </node>
+
+        <node name="cloud_node" pkg="velodyne_pointcloud" type="cloud_node" output="screen" if="$(arg velodyne_vlp16)">
+            <param name="model" value="VLP16"/>
+            <param name="calibration" value="$(find velodyne_pointcloud)/VLP16db.yaml" />
+        </node>
+
+        <node name="pointcloud_to_laserscan" pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" if="$(arg velodyne_vlp16)">
+            <remap from="cloud_in" to="velodyne_points"/>
+            <remap from="scan" to="scan_filtered"/>
+            <param name="min_height" value="0.2"/>
+            <param name="max_height" value="2.0"/>
+            <param name="target_frame" value="base_link"/>
+            <param name="range_max" value="100"/>
+        </node>
+    </group>
+
+</launch>

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018, Botsync Pte. Ltd.
+Copyright (c) 2021, Botsync Pte. Ltd.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -36,8 +36,8 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
         std_msgs::Bool e_stop_msg;
 
         e_stop_msg.data = true;
+        e_stop_status = true;
 
-        // Publish 0 velocity
         cmd.linear.x = 0.0;
         cmd.linear.y = 0.0;
         cmd.linear.z = 0.0;
@@ -50,8 +50,8 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
         std_msgs::Bool e_stop_msg;
 
         e_stop_msg.data = false;
+        e_stop_status = false;
 
-        // Publish 0 velocity
         cmd.linear.x = 0.0;
         cmd.linear.y = 0.0;
         cmd.linear.z = 0.0;
@@ -61,17 +61,12 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
 
         e_stop_pub.publish(e_stop_msg);
     } else if (joy->buttons[stop_button]) {
-        // Publish 0 velocity
         cmd.linear.x = 0.0;
         cmd.linear.y = 0.0;
         cmd.linear.z = 0.0;
         cmd.angular.x = 0.0;
         cmd.angular.y = 0.0;
         cmd.angular.z = 0.0;
-
-        // Actionlib_msg to publish cancel message to move_base node. This cancels all navigation goals and stops the robot.
-        actionlib_msgs::GoalID goal_id = actionlib_msgs::GoalID();
-        stop_pub.publish(goal_id);
     } else if (joy->buttons[enable_button]) {
         cmd.linear.x = max_linear_speed * joy->axes[linear_speed_axis];
         cmd.linear.y = 0.0;
@@ -79,10 +74,6 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
         cmd.angular.x = 0.0;
         cmd.angular.y = 0.0;
         cmd.angular.z = max_angular_speed * joy->axes[angular_speed_axis];
-
-        if (enable_holonomic_movement && sideways_speed_axis >= 0.0) {
-            cmd.linear.y = max_linear_speed * joy->axes[sideways_speed_axis];
-        }
     } else {
         cmd.linear.x = 0.0;
         cmd.linear.y = 0.0;

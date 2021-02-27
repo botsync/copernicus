@@ -11,3 +11,14 @@ find_package(catkin REQUIRED COMPONENTS
   twist_mux
   gazebo_ros_control
 )
+
+catkin_package()
+
+include_directories(
+		${catkin_INCLUDE_DIRS}
+)
+
+install(
+        DIRECTORY launch config
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
