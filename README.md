@@ -1,5 +1,5 @@
 # Copernicus
-Version: 1.1.0
+Version: 1.0.0
 ROS packages used to to run copernicus with hardware
 
 * copernicus_base - Package contains files to connect to the robot and run the sensor driver.
