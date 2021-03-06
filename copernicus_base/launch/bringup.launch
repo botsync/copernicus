@@ -28,7 +28,7 @@
         <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
         <!-- TELEOPERATOR NODE -->
-        <include file="$(find copernicus_teleoperator)/launch/copernicus_teleoperator.launch">
+        <include file="$(find copernicus_teleoperator)/launch/teleoperator.launch">
         </include>
 
         <!-- EKF NODE -->
