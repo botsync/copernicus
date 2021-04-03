@@ -11,7 +11,7 @@
         <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg model) imu_enabled:=$(arg wit_wt901c_imu) sick_lms151_enabled:=$(arg sick_lms151) velodyne_enabled:=$(arg velodyne_vlp16)"/>
 
         <!-- COPERNICUS ROS CONTROL NODE -->
-        <node name="copernicus_base" pkg="copernicus_base" type="copernicus_base" output="screen" />
+        <node name="copernicus_base" pkg="copernicus_hardware" type="copernicus_base" output="screen" />
 
         <!-- SERIAL COMMUNICATION FOR LOWER LEVEL -->
         <node name="SerialComm" pkg="rosserial_python" type="serial_node.py" output="screen">
