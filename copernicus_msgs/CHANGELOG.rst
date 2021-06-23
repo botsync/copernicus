@@ -2,6 +2,6 @@
 Changelog for package copernicus_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2021-06-23)
+------------------
 * First Release
