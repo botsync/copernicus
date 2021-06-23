@@ -42,14 +42,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <visual>
               <origin xyz="0 0 0" rpy="0 0 0"/>
               <geometry>
-                  <mesh filename="package://copernicus_description/meshes/lms_151_mount.dae"/>
+                  <mesh filename="package://copernicus_description/meshes/lms_151_mount.dae" scale="0.1 0.1 0.1"/>
                   <material name="gray"/>
               </geometry>
           </visual>
           <collision>
               <origin xyz="0 0 0" rpy="0 0 0"/>
               <geometry>
-                <mesh filename="package://copernicus_description/meshes/lms_151_mount.dae"/>
+                <mesh filename="package://copernicus_description/meshes/lms_151_mount.dae" scale="0.1 0.1 0.1"/>
               </geometry>
           </collision>
           <inertial>
@@ -60,7 +60,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </link>
 
       <joint name="lms151_joint" type="fixed">
-          <origin xyz="${lms151_joint_x} ${lms151_joint_y} ${lms151_joint_z}" rpy="${PI} 0 0" />
+          <origin xyz="${lms151_joint_x} ${lms151_joint_y} ${lms151_joint_z}" rpy="0 0 0" />
           <parent link="lms151_mount" />
           <child link="${frame}" />
       </joint>
@@ -70,14 +70,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <visual>
               <origin xyz="0 0 0" rpy="0 0 0"/>-->
               <geometry>
-                  <mesh filename="package://copernicus_description/meshes/lms_151.dae"/>
+                  <mesh filename="package://copernicus_description/meshes/lms_151.dae" scale="0.1 0.1 0.1"/>
               </geometry>
               <material name="gray"/>
           </visual>
           <collision>
               <origin xyz="0 0 0" rpy="0 0 0"/>
               <geometry>
-                <mesh filename="package://copernicus_description/meshes/lms_151.dae"/>
+                <mesh filename="package://copernicus_description/meshes/lms_151.dae" scale="0.1 0.1 0.1"/>
               </geometry>
           </collision>
           <inertial>

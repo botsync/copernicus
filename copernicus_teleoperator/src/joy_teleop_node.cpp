@@ -57,8 +57,18 @@ int main(int argc, char** argv) {
     joy_subscriber = nh.subscribe(joy_topic, 1, joy_callback);
 
     if (enable_e_stop) {
+	ROS_INFO("Enable e-stop: %d", enable_e_stop);
         e_stop_pub = nh.advertise<std_msgs::Bool>(e_stop_pub_topic, 1);
     }
 
-    ros::spin();
+    ros::Rate r(5);
+    while (ros::ok()) {
+        if (dead_man) {
+            cmd_vel_pub.publish(cmd_to_send);
+        }
+        r.sleep();
+        ros::spinOnce();
+    }
+
+    return 0;
 }

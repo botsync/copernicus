@@ -1,5 +1,5 @@
 # Copernicus
-Version: 1.1.0
+Version:1.1.0
 ROS packages used to to run copernicus with hardware
 
 * copernicus_base - Package contains files to connect to the robot and run the sensor driver.
@@ -9,7 +9,7 @@ ROS packages used to to run copernicus with hardware
 * copernicus_msgs - contains ROS messages specific to copernicus such as the power board messages,..etc
 * copernicus_navigation - Contains files required for running gmapping, amcl and move_base ROS packages.
 * copernicus_teleoperation - Control the robot using keyboard or Joystick.
-* copernicus_rules - Contains rules that ensures the USB peripherals are bound correctly
+* copernicus_rules - Contains rules that ensures the USB peripherals are binded correctly
 
 ## Steps to Launch copernicus :
 
@@ -42,23 +42,6 @@ $ roslaunch copernicus_teleoperator teleoperator.launch keyboard:=true
 $ rosrun map_server map_saver –f <filename>
 ```
 
-### 3. Navigation with copernicus
-* Launch the move_base node by running:   
-```
-$ roslaunch copernicus_base copernicus_bringup.launch   
-```
-* Launch the sensors node by running:    
-```
-$ roslaunch copernicus_base copernicus_bringup.launch   
-```
-* To perform the Autonomous navigation, launch the navigation package by running   
-```
-$ roslaunch copernicus_navigation navigation.launch  
-```
-* Launch the rviz visualization tool by running:   
-```
-$ rosrun rviz rviz  
-```
 You can then open the copernicus configured rviz environment by opening the copernicus rviz config file, located under copernicus_navigation->rviz_config->navigation.rviz, from the rviz tool
 
 Use the 2D Nav Goal tool in the top toolbar to select a navigation goal in the visualizer. Ensure that the nav goal is given in a mapped section of the map

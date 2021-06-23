@@ -6,6 +6,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   geometry_msgs
   copernicus_msgs
+  teleop_twist_joy
+  teleop_twist_keyboard
 )
 
 catkin_package(

@@ -29,6 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
 <robot name="copernicus_wheel" xmlns:xacro="https://ros.org/wiki/xacro">
+
     <!-- Wheel Macro -->
     <xacro:macro name="copernicus_wheel" params="wheel_prefix *joint_origin">
 

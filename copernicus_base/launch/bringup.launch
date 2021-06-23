@@ -1,14 +1,18 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="um7_imu" default="false"/>
     <arg name="wit_wt901c_imu" default="true"/>
-    <arg name="sick_lms151" default="true"/>
+    <arg name="sick_lms151" default="false"/>
     <arg name="velodyne_vlp16" default="false"/>
+    <arg name="hokuyo_ust-10lx" default="false"/>
+    <arg name="rplidar" default="true"/>
+
     <group>
         <!-- MODEL DESCRIPTION PATH -->
         <arg name="model" default="$(find copernicus_description)/urdf/copernicus.xacro"/>
 
         <!-- LOAD ROBOT DESCRIPTION PARAM -->
-        <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg model) imu_enabled:=$(arg wit_wt901c_imu) sick_lms151_enabled:=$(arg sick_lms151) velodyne_enabled:=$(arg velodyne_vlp16)"/>
+        <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg model) um7_imu:=$(arg um7_imu) imu_enabled:=$(arg wit_wt901c_imu) sick_lms151_enabled:=$(arg sick_lms151) velodyne_enabled:=$(arg velodyne_vlp16) hokuyo_ust-10lx_enabled:=$(arg hokuyo_ust-10lx) rplidar_enabled:=$(arg rplidar)"/>
 
         <!-- COPERNICUS ROS CONTROL NODE -->
         <node name="copernicus_base" pkg="copernicus_hardware" type="copernicus_base" output="screen" />

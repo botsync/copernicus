@@ -38,10 +38,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- xacro args -->
     <xacro:arg name="robot_namespace" default="/" />
-    <xacro:arg name="lidar_enabled" default="true"/>
+    <xacro:arg name="lidar_enabled" default="false"/>
+    <xacro:arg name="test_lidar_enabled" default="true"/>
     <xacro:arg name="sick_lms151_enabled" default="false"/>
     <xacro:arg name="velodyne_enabled" default="false"/>
-    <xacro:arg name="imu_enabled" default="false"/>
+    <xacro:arg name="imu_enabled" default="true"/>
     <!--<xacro:arg name="camera_enabled" default="false"/>
     <xacro:arg name="intel_d435i_enabled" default="false"/>-->
     
@@ -106,6 +107,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <xacro:lidar sick_lms151_enabled="$(arg sick_lms151_enabled)" robot_namespace="$(arg robot_namespace)"></xacro:lidar>
 
         </xacro:if>
+
+        <!-- TEST LIDAR -->
+        <xacro:if value="$(arg test_lidar_enabled)">
+            <xacro:include filename="$(find copernicus_description)/urdf/accessories/lidar_copernicus.urdf.xacro"/>
+            <xacro:lidar robot_namespace="$(arg robot_namespace)"></xacro:lidar>
+        </xacro:if>
+
 
         <!-- Velodyne -->
         <xacro:if value="$(arg velodyne_enabled)">

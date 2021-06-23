@@ -78,13 +78,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:property name="lms151_mount_iyz" value="0.000"/>
     <xacro:property name="lms151_mount_izz" value="0.002"/>
 
-    <xacro:property name="lms151_mount_joint_x" value="0.0177"/>
+    <xacro:property name="lms151_mount_joint_x" value="0.0"/>
     <xacro:property name="lms151_mount_joint_y" value="0.0"/>
-    <xacro:property name="lms151_mount_joint_z" value="0.356"/>
+    <xacro:property name="lms151_mount_joint_z" value="0.4155"/>
 
-    <xacro:property name="lms151_joint_x" value="0.0453"/>
+    <xacro:property name="lms151_joint_x" value="0.0"/>
     <xacro:property name="lms151_joint_y" value="0.0"/>
-    <xacro:property name="lms151_joint_z" value="0.158"/>
+    <xacro:property name="lms151_joint_z" value="0.0"/>
+
+    <!-- base of lidar mopunt, x position in lidar_copernicus.urdf.xacro -->
+    <xacro:property name="lidar_joint_y" value="0.0"/>
+    <xacro:property name="lidar_joint_z" value="0.395"/>
     
     <xacro:property name="velodyne_mount_l" value="0.112"/>
     <xacro:property name="velodyne_mount_h" value="0.039"/>

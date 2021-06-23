@@ -1,6 +1,6 @@
 #!/bin/bash
 rossetup=/opt/ros/melodic/setup.bash
-catkin_ws_setup=/home/copernicus/catkin_ws/devel/setup.bash
+catkin_ws_setup=/home/copernicus/copernicus_ws/devel/setup.bash
 launcher="roslaunch copernicus_base bringup.launch"
 pathfile=/home/copernicus
 pathfile2=/lib/systemd/system
@@ -19,7 +19,9 @@ ExecStart=$pathfile/robotstart.sh
 [Install]
 WantedBy=multi-user.target
 EOF
-sudo chmod 644 $pathfile2/robotstart.service
+sudo chmod 777 $pathfile2/robotstart.service
 sudo systemctl daemon-reload
 sudo systemctl enable robotstart.service
+echo "line25"
 sudo systemctl start robotstart.service
+echo "line27"

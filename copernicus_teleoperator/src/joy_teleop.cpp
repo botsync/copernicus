@@ -74,6 +74,8 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
         cmd.angular.x = 0.0;
         cmd.angular.y = 0.0;
         cmd.angular.z = max_angular_speed * joy->axes[angular_speed_axis];
+	dead_man = true;
+	cmd_to_send = cmd;
     } else {
         cmd.linear.x = 0.0;
         cmd.linear.y = 0.0;
@@ -81,6 +83,7 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy) {
         cmd.angular.x = 0.0;
         cmd.angular.y = 0.0;
         cmd.angular.z = 0.0;
+	dead_man = false;
     }
 
     cmd_vel_pub.publish(cmd);

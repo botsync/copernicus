@@ -12,6 +12,8 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>
   <depend>sensor_msgs</depend>
+  <depend>teleop_twist_keyboard</depend>
+  <depend>teleop_twist_joy</depend>
   <depend>geometry_msgs</depend>
   <depend>copernicus_msgs</depend>
   <depend>actionlib_msgs</depend>
